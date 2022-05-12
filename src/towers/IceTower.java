@@ -5,6 +5,7 @@ import entities.Tower;
 import gameFolder.GamePanel;
 import entities.Entity;
 import gameFolder.GamePanel;
+import objects.OBJ_Fireball;
 
 import java.util.Random;
 
@@ -18,6 +19,8 @@ public class IceTower extends Tower {
         attack = 4;
         defence = 0;
         getImage();
+        projectile = new OBJ_Fireball(gp);
+
     }
     public void getImage() {
         up1 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
@@ -30,6 +33,33 @@ public class IceTower extends Tower {
         right2 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
     }
     public void setAction() {
+
+        if(shotAvailableCounter < 60){
+            shotAvailableCounter++;
+        }
+
+        int i = new Random().nextInt(100)+1;
+
+        if (i<= 25){
+            direction = "up";
+        }
+        if (i > 25 && i<= 50){
+            direction = "down";
+        }
+        if (i > 50 && i<= 75){
+            direction = "left";
+        }
+        if (i > 75 && i<= 100){
+            direction = "right";
+        }
+
+        if(shotAvailableCounter == 60){
+
+            projectile.set(worldX,worldY,direction,true,this);
+            gp.projectileList.add(projectile);
+            shotAvailableCounter = 0;
+
+        }
     }
 }
 

@@ -40,8 +40,8 @@ public class TileManager {
         setup(9, "grass00", false);
 
         //ACTUALLY USED
-        setup(10, "grass00", true);
-        setup(11, "grass01", true);
+        setup(10, "grass00", false);
+        setup(11, "grass01", false);
         setup(12, "water00", true);
         setup(13, "water01", true);
         setup(14, "water02", true);
@@ -57,18 +57,18 @@ public class TileManager {
         setup(24, "water12", true);
         setup(25, "water13", true);
         setup(26, "road00", true);
-        setup(27, "road01", true);
-        setup(28, "road02", true);
-        setup(29, "road03", true);
-        setup(30, "road04", true);
-        setup(31, "road05", true);
-        setup(32, "road06", true);
-        setup(33, "road07", true);
-        setup(34, "road08", true);
-        setup(35, "road09", true);
-        setup(36, "road10", true);
-        setup(37, "road11", true);
-        setup(38, "road12", true);
+        setup(27, "road01", false);
+        setup(28, "road02", false);
+        setup(29, "road03", false);
+        setup(30, "road04", false);
+        setup(31, "road05", false);
+        setup(32, "road06", false);
+        setup(33, "road07", false);
+        setup(34, "road08", false);
+        setup(35, "road09", false);
+        setup(36, "road10", false);
+        setup(37, "road11", false);
+        setup(38, "road12", false);
         setup(39, "earth", true);
         setup(40, "wall", true);
         setup(41, "tree", true);

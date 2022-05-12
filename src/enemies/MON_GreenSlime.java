@@ -21,10 +21,10 @@ public class MON_GreenSlime extends Entity {
         defence = 0;
         exp = 2;
 
-        solidArea.x = 23;
-        solidArea.y = 23;
-        solidArea.width = 2;
-        solidArea.height = 2;
+        solidArea.x = 3;
+        solidArea.y = 18;
+        solidArea.width = 42;
+        solidArea.height = 30;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

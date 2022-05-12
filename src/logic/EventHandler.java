@@ -19,9 +19,9 @@ public class EventHandler {
         int row = 0;
         while (col< gp.maxScreenCol && row < gp.maxScreenRow){
 
-            eventRect[col][row]  = new EventRect();
-            eventRect[col][row].x = 23;
-            eventRect[col][row].y = 23;
+            eventRect[col][row] = new EventRect();
+            eventRect[col][row].x = 31;
+            eventRect[col][row].y = 31;
             eventRect[col][row].width = 2;
             eventRect[col][row].height = 2;
             eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
@@ -65,12 +65,12 @@ public class EventHandler {
     public boolean hit(Entity entity, int col, int row, String reqDirection){
         boolean hit = false;
 
-        entity.solidArea.x = entity.worldX + entity.solidArea.x;
-        entity.solidArea.y = entity.worldY + entity.solidArea.y;
+        entity.solidAreaDirectionChanger.x = entity.worldX + entity.solidAreaDirectionChanger.x;
+        entity.solidAreaDirectionChanger.y = entity.worldY + entity.solidAreaDirectionChanger.y;
         eventRect[col][row].x = col*gp.tileSize + eventRect[col][row].x;
         eventRect[col][row].y = row*gp.tileSize + eventRect[col][row].y;
 
-        if (entity.solidArea.intersects(eventRect[col][row]) && !eventRect[col][row].eventDone){
+        if (entity.solidAreaDirectionChanger.intersects(eventRect[col][row]) && !eventRect[col][row].eventDone){
             if(entity.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
                 hit = true;
 
@@ -79,8 +79,8 @@ public class EventHandler {
             }
         }
 
-        entity.solidArea.x = entity.solidAreaDefaultX;
-        entity.solidArea.y = entity.solidAreaDefaultY;
+        entity.solidAreaDirectionChanger.x = entity.solidAreaDefaultDirectionX;
+        entity.solidAreaDirectionChanger.y = entity.solidAreaDefaultDirectionY;
         eventRect[col][row].x = eventRect[col][row].eventRectDefaultX;
         eventRect[col][row].y = eventRect[col][row].eventRectDefaultY;
 

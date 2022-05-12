@@ -13,12 +13,15 @@ public class Tower extends Entity {
         super(gp);
         this.gp = gp;
 
-        solidArea = new Rectangle(12, 16, 24, 28);
+        solidArea = new Rectangle(0, 0, 64, 64);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }
 
     public void update() {
+
+        setAction();
+
         if(attacking){
             attack();
         }

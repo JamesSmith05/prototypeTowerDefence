@@ -14,9 +14,12 @@ public class Entity {
     public BufferedImage upR1,upR2,upL1,upL2,downR1,downR2,downL1,downL2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public BufferedImage image, image2, image3;
-    public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+    public Rectangle solidArea = new Rectangle(0, 0, 64, 64);
+    public Rectangle solidAreaDirectionChanger = new Rectangle(31, 31, 2, 2);
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
+    public int solidAreaDefaultDirectionX = 31, solidAreaDefaultDirectionY = 31;
+
     public boolean collision = false;
     String dialogues[] = new String[20];
 
@@ -44,7 +47,7 @@ public class Entity {
 
     //CHARACTER STATS
     public String name;
-    public int speed;
+    public int speed = 0;
     public int maxLife;
     public int life;
     public int attack;
@@ -52,8 +55,6 @@ public class Entity {
     public int exp;
     public int nextLevelExp;
     public int coin;
-    public Entity currentWeapon;
-    public Entity currentShield;
     public Projectile projectile;
 
     //ITEM ATTRIBUTES
