@@ -5,7 +5,7 @@ import entities.Tower;
 import logic.*;
 import tile.TileManager;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,8 +16,14 @@ import java.util.Comparator;
 
 
 public class GamePanel extends JPanel implements Runnable {
+
+    JFrame window;
+
     final int originalTileSize = 32;
     final int scale = 2;
+    public int mouseX = 0, mouseY = 0;
+
+    public boolean leftClick = false;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 23; // 20 map tiles plus 3 tower tiles
@@ -35,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
     //SYSTEM
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
+    public CheckMouse keyM = new CheckMouse(this);
     Sound music = new Sound();
     Sound sEffect = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -45,10 +52,10 @@ public class GamePanel extends JPanel implements Runnable {
     public Thread gameThread;
 
     //ENTITY AND OBJECT
-    public Tower tower = new Tower(this,keyH);
-    public Entity obj[] = new Entity[10];  //increase number to increase max number of object on screen
-    public Entity npc[] = new Entity[10];
-    public Entity monster[] = new Entity[20];
+    public Entity[] tower = new Entity[100];
+    public Entity[] obj = new Entity[10];  //increase number to increase max number of object on screen
+    public Entity[] npc = new Entity[10];
+    public Entity[] monster = new Entity[100];
     ArrayList<Entity> entityList = new ArrayList<>();
     public ArrayList<Entity> projectileList = new ArrayList<>();
 
@@ -59,6 +66,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 3;
     public final int characterState = 4;
 
+    public int maxEnemies;
+    public int spawnerCounter = 0;
 
     public GamePanel() {
 
@@ -66,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
+        this.addMouseListener(keyM);
         this.setFocusable(true);
 
 
@@ -75,6 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        aSetter.setObject();
 //        aSetter.setNPC();
         aSetter.setEnemy();
+        maxEnemies = 40;
         //playMusic(0);
         gameState = titleState;
 
@@ -126,20 +137,37 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-//        if(tower.life<= 0){
-//            gameState = dialogueState;
-//            ui.currentDialogue = "YOU DIED \nPRESS [ENTER] TO RESTART";
-//            tower.setDefaultValues();
-////            aSetter.setObject();
-////            aSetter.setNPC();
-////            aSetter.setMonster();
-//        }
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+        int tempX = frame.getLocation().x;
+        int tempY = frame.getLocation().y;
+        int tempMouseX = MouseInfo.getPointerInfo().getLocation().x;
+        int tempMouseY = MouseInfo.getPointerInfo().getLocation().y;
+
+        mouseX = tempMouseX - tempX - 10 - (tileSize/2);
+        mouseY = tempMouseY - tempY - 45 - (tileSize/2);
+
 
         if(gameState == playState){
-            tower.update();
-            for (int i = 0; i < npc.length; i++) {
-                if(npc[i] != null) {
-                    npc[i].update();
+
+            if (leftClick){
+                aSetter.setTower((mouseX),(mouseY));
+            }
+
+
+            spawnerCounter++;
+            if (spawnerCounter > 40) {
+                if (aSetter.i < maxEnemies){
+                    aSetter.setEnemy();
+                }
+
+                spawnerCounter = 0;
+            }
+
+
+            for (int i = 0; i < tower.length; i++) {
+                if(tower[i] != null) {
+                    tower[i].update();
                 }
             }
             for (int i = 0; i < monster.length; i++) {
@@ -164,12 +192,16 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
+        leftClick = false;
+
     }
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
+
 
         if (gameState == titleState) {
             ui.draw(g2);
@@ -180,26 +212,29 @@ public class GamePanel extends JPanel implements Runnable {
             tileM.draw(g2);
 
             //add entity to list
-            entityList.add(tower);
-
-            for (int i = 0; i < npc.length; i++) {
-                if (npc[i] != null){
-                    entityList.add(npc[i]);
+            for (Entity element : tower) {
+                if (element != null) {
+                    entityList.add(element);
                 }
             }
-            for (int i = 0; i < obj.length; i++) {
-                if (obj[i] != null){
-                    entityList.add(obj[i]);
+            for (Entity item : npc) {
+                if (item != null) {
+                    entityList.add(item);
                 }
             }
-            for (int i = 0; i < monster.length; i++) {
-                if (monster[i] != null){
-                    entityList.add(monster[i]);
+            for (Entity value : obj) {
+                if (value != null) {
+                    entityList.add(value);
                 }
             }
-            for (int i = 0; i < projectileList.size(); i++) {
-                if (projectileList.get(i) != null){
-                    entityList.add(projectileList.get(i));
+            for (Entity entity : monster) {
+                if (entity != null) {
+                    entityList.add(entity);
+                }
+            }
+            for (Entity entity : projectileList) {
+                if (entity != null) {
+                    entityList.add(entity);
                 }
             }
 
@@ -213,8 +248,8 @@ public class GamePanel extends JPanel implements Runnable {
             });
 
             //Draw entities
-            for (int i = 0; i < entityList.size(); i++) {
-                entityList.get(i).draw(g2);
+            for (Entity entity : entityList) {
+                entity.draw(g2);
             }
             entityList.clear();
 

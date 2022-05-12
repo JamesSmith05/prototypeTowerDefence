@@ -27,14 +27,13 @@ public class Projectile extends Entity{
     }
     public void update(){
 
-        if(user == gp.tower){
-            int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
-            if(monsterIndex != 999){
-                gp.tower.damageMonster(monsterIndex, attack);
-                alive = false;
-            }
-
+        int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
+        if(monsterIndex != 999){
+            user.damageMonster(monsterIndex, attack);
+            alive = false;
         }
+
+
 
         switch (direction) {
             case "up":
@@ -86,50 +85,9 @@ public class Projectile extends Entity{
 
     public void draw(Graphics2D g2){
         BufferedImage image = null;
-        int screenX = worldX - gp.tower.worldX + gp.tower.screenX;
-        int screenY = worldY - gp.tower.worldY + gp.tower.screenY;
 
-        if(worldX+ gp.tileSize>gp.tower.worldX - gp.tower.screenX &&
-            worldX- gp.tileSize<gp.tower.worldX + gp.tower.screenX &&
-            worldY+ gp.tileSize>gp.tower.worldY - gp.tower.screenY &&
-            worldY- gp.tileSize<gp.tower.worldY + gp.tower.screenY) {
 
-            switch (direction) {
-                case "up":
-                    if (spriteNum == 1) {image = up1;}
-                    if (spriteNum == 2) {image = up2;}
-                    break;
-                case "upR":
-                    if (spriteNum == 1) {image = upR1;}
-                    if (spriteNum == 2) {image = upR2;}
-                    break;
-                case "upL":
-                    if (spriteNum == 1) {image = upL1;}
-                    if (spriteNum == 2) {image = upL2;}
-                    break;
-                case "down":
-                    if (spriteNum == 1) {image = down1;}
-                    if (spriteNum == 2) {image = down2;}
-                    break;
-                case "downR":
-                    if (spriteNum == 1) {image = downR1;}
-                    if (spriteNum == 2) {image = downR2;}
-                    break;
-                case "downL":
-                    if (spriteNum == 1) {image = downL1;}
-                    if (spriteNum == 2) {image = downL2;}
-                    break;
-                case "left":
-                    if (spriteNum == 1) {image = left1;}
-                    if (spriteNum == 2) {image = left2;}
-                    break;
-                case "right":
-                    if (spriteNum == 1) {image = right1;}
-                    if (spriteNum == 2) {image = right2;}
-                    break;
-            }
-
-            g2.drawImage(image, screenX, screenY,null);
+            g2.drawImage(image, worldX, worldY,null);
         }
     }
-}
+

@@ -83,28 +83,6 @@ public class Entity {
     public void setAction(){}
     public void damageReaction() {}
     public void use(Entity entity){}
-    public void speak(){
-        if(dialogues[dialogueIndex]==null){
-            dialogueIndex = 0;
-        }
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
-
-        switch (gp.tower.direction){
-            case"up":
-                direction = "down";
-                break;
-            case"down":
-                direction = "up";
-                break;
-            case"left":
-                direction = "right";
-                break;
-            case"right":
-                direction = "left";
-                break;
-        }
-    }
     public void update(){
 
         setAction();
@@ -215,6 +193,31 @@ public class Entity {
             g2.drawImage(image, screenX, screenY,null);
 
             changeOpacity(g2,1f);
+    }
+
+    public void damageMonster(int i, int attack) {
+        if (i != 999) {
+            if(!gp.monster[i].invincible){
+
+                gp.playSE(5);
+
+                int damage = attack - gp.monster[i].defence;
+                if(damage<0) {
+                    damage = 0;
+                }
+
+                gp.monster[i].life -= damage;
+
+                gp.monster[i].invincible = true;
+                gp.monster[i].damageReaction();
+
+                if (gp.monster[i].life <=0){
+                    gp.monster[i].dying = true;
+                    exp += gp.monster[i].exp;
+
+                }
+            }
+        }
     }
 
 

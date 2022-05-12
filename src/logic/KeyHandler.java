@@ -2,8 +2,9 @@ package logic;
 
 import gameFolder.GamePanel;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
+
+
 
 public class KeyHandler implements KeyListener{
 
