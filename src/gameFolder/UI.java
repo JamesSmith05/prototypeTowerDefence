@@ -52,6 +52,7 @@ public class UI {
         }
         if(gp.gameState == gp.playState){
             drawMessage();
+            drawUserInfo();
         }
         if(gp.gameState == gp.pauseState){
             drawPauseScreen();}
@@ -65,7 +66,13 @@ public class UI {
 
     }
 
+    public void drawUserInfo(){
+        int messageX = gp.tileSize/2;
+        int messageY = (gp.tileSize/4)*3;
+        g2.setFont(g2.getFont().deriveFont(32F));
+        g2.drawString("Life: " + gp.userLife,messageX,messageY);
 
+    }
 
     public void drawMessage(){
 

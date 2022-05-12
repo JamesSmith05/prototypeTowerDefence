@@ -88,9 +88,8 @@ public class TileManager {
         setup(54, "gui09", true);
         setup(55, "gui10", true);
         setup(56, "gui11", true);
-
-
-
+        setup(57, "roadStart", true);
+        setup(58, "roadEnd", true);
 
     }
 

@@ -17,14 +17,14 @@ public class MON_PinkSlime extends Entity {
         speed = 4;
         maxLife = 7;
         life = maxLife;
-        attack = 5;
+        attack = 2;
         defence = 1;
         exp = 4;
 
-        solidArea.x = 3;
-        solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.x = 4;
+        solidArea.y = 24;
+        solidArea.width = 56;
+        solidArea.height = 40;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

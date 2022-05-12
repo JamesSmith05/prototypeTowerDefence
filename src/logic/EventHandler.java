@@ -61,6 +61,10 @@ public class EventHandler {
         if(hit(entity,17, 2, "any")){
             faceLeft(entity);}
 
+        if(hit(entity,0,2,"any")){
+            damageUser(entity);
+        }
+
     }
     public boolean hit(Entity entity, int col, int row, String reqDirection){
         boolean hit = false;
@@ -97,6 +101,12 @@ public class EventHandler {
     }
     public void faceRight(Entity entity){
         entity.direction = "right";
+    }
+    public void damageUser(Entity entity){
+        gp.userLife -= entity.attack;
+        if (gp.userLife<0){
+            gp.userLife = 0;
+        }
     }
 
 }

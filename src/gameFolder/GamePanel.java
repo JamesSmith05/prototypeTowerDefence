@@ -69,6 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public int maxEnemies;
     public int spawnerCounter = 0;
+    public int userLife;
 
     public GamePanel() {
 
@@ -86,7 +87,8 @@ public class GamePanel extends JPanel implements Runnable {
 //        aSetter.setObject();
 //        aSetter.setNPC();
         aSetter.setEnemy();
-        maxEnemies = 40;
+        maxEnemies = 100;
+        userLife = 50;
         //playMusic(0);
         gameState = titleState;
 
