@@ -190,7 +190,6 @@ public class Entity {
                 dyingAnimation(g2);
             }
 
-            g2.drawString("this should be here",screenX,screenY);
             g2.drawImage(image, screenX, screenY,null);
 
             changeOpacity(g2,1f);

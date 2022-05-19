@@ -19,15 +19,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     JFrame window;
 
-    final int originalTileSize = 32;
-    final int scale = 2;
+    final int originalTileSize = 64;
+    final int scale = 1;
     public int mouseX = 0, mouseY = 0;
 
     public boolean leftClick = false;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 23; // 20 map tiles plus 3 tower tiles
-    public final int maxScreenRow = 16; // 15 map tiles + info tiles
+    public final int maxScreenRow = 15; // 14 map tiles + info tiles
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
 
@@ -147,9 +147,13 @@ public class GamePanel extends JPanel implements Runnable {
         int tempMouseX = MouseInfo.getPointerInfo().getLocation().x;
         int tempMouseY = MouseInfo.getPointerInfo().getLocation().y;
 
-        mouseX = tempMouseX - tempX - 10;
-        mouseY = tempMouseY - tempY - 45;
+//        mouseX = tempMouseX - tempX - 10;
+//        mouseY = tempMouseY - tempY - 45;
 
+
+
+        mouseX = tempMouseX - tempX -5;
+        mouseY = tempMouseY - tempY - 22;
 
         if(gameState == playState){
 
@@ -160,6 +164,7 @@ public class GamePanel extends JPanel implements Runnable {
                         aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)));
                     }
                 }
+                leftClick = false;
                 System.out.println( " the click was " + mouseX + " " + mouseY);
             }
 
@@ -204,8 +209,6 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        leftClick = false;
-
     }
     public void paintComponent(Graphics g) {
 
@@ -244,12 +247,6 @@ public class GamePanel extends JPanel implements Runnable {
                     entityList.add(entity);
                 }
             }
-            for (Entity entity : projectileList) {
-                if (entity != null) {
-                    entityList.add(entity);
-                }
-            }
-
             //SORT
             Collections.sort(entityList, new Comparator<Entity>() {
                 @Override
@@ -258,6 +255,12 @@ public class GamePanel extends JPanel implements Runnable {
                     return result;
                 }
             });
+
+            for (Entity entity : projectileList) {
+                if (entity != null) {
+                    entityList.add(entity);
+                }
+            }
 
             //Draw entities
             for (Entity entity : entityList) {

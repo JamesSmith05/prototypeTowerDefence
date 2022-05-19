@@ -53,13 +53,18 @@ public class CollisionChecker {
 
             Boolean collision = false;
 
-            int tileNum1, tileNum2, tileNum3, tileNum4;
+            if(entityLeftCol>=0 && entityRightCol<gp.maxScreenCol && entityBottomRow<gp.maxScreenRow && entityTopRow>=0){
+                int tileNum1, tileNum2, tileNum3, tileNum4;
 
-            tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-            tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-            tileNum3 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-            tileNum4 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-            if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision || gp.tileM.tile[tileNum3].collision || gp.tileM.tile[tileNum4].collision) {
+                tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+                tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+                tileNum3 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+                tileNum4 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+                if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision || gp.tileM.tile[tileNum3].collision || gp.tileM.tile[tileNum4].collision) {
+                    collision = true;
+                }
+            }
+            else{
                 collision = true;
             }
             return collision;
