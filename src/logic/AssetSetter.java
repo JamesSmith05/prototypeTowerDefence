@@ -1,7 +1,9 @@
 package logic;
 
+import enemies.MON_Bat;
 import enemies.MON_GreenSlime;
 import enemies.MON_PinkSlime;
+import enemies.MON_Wraith;
 import gameFolder.GamePanel;
 import towers.IceTower;
 
@@ -26,7 +28,22 @@ public class AssetSetter {
     }
 
     public void setEnemy(){
-        if (i%3 == 0 ){
+        if(i == 0){
+            gp.monster[i] = new MON_GreenSlime(gp);
+            gp.monster[i].worldX = gp.tileSize*0;
+            gp.monster[i].worldY = gp.tileSize*13;
+        }
+        else if (i%15 == 0 ){
+            gp.monster[i] = new MON_Wraith(gp);
+            gp.monster[i].worldX = gp.tileSize*0;
+            gp.monster[i].worldY = gp.tileSize*13;
+        }
+        else if (i%5 == 0){
+            gp.monster[i] = new MON_Bat(gp);
+            gp.monster[i].worldX = gp.tileSize*0;
+            gp.monster[i].worldY = gp.tileSize*13;
+        }
+        else if (i%3 == 0 ){
             gp.monster[i] = new MON_PinkSlime(gp);
             gp.monster[i].worldX = gp.tileSize*0;
             gp.monster[i].worldY = gp.tileSize*13;

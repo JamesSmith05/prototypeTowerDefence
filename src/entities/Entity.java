@@ -15,10 +15,10 @@ public class Entity {
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0, 0, 64, 64);
-    public Rectangle solidAreaDirectionChanger = new Rectangle(31, 31, 2, 2);
+    public Rectangle solidAreaDirectionChanger = new Rectangle(29, 29, 6, 6);
     public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
-    public int solidAreaDefaultDirectionX = 31, solidAreaDefaultDirectionY = 31;
+    public int solidAreaDefaultDirectionX = 29, solidAreaDefaultDirectionY = 29;
 
     public boolean collision = false;
     String dialogues[] = new String[20];
