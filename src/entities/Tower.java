@@ -8,6 +8,10 @@ import java.awt.*;
 public class Tower extends Entity {
     GamePanel gp;
 
+    int savedMonsterIndex;
+    double smallestMonsterDistanceX, smallestMonsterDistanceY, smallestMonsterDistance;
+
+
     public Tower(GamePanel gp) {
 
         super(gp);
@@ -20,17 +24,16 @@ public class Tower extends Entity {
 
     public void update() {
 
-        String valuesReturned = returnClosestEnemy();
-        String[] values = valuesReturned.split(",");
-        int closestI = Integer.parseInt(values[0]);
-        int closestDistanceX = Integer.parseInt(values[1]);
-        int closestDistanceY = Integer.parseInt(values[2]);
-        int closestDistanceABS = Integer.parseInt(values[3]);
+        returnClosestEnemy();
+
+        double closestDistanceX = smallestMonsterDistanceX;
+        double closestDistanceY = smallestMonsterDistanceY;
+        double closestDistanceABS = smallestMonsterDistance;
 
         if (closestDistanceABS<range){
-            if(shotAvailableCounter == 60){
+            if(shotAvailableCounter == 20){
 
-                projectile.set(worldX,worldY,closestDistanceX,closestDistanceY,direction,true,this);
+                projectile.set(worldX,worldY,closestDistanceX,closestDistanceY,true,this);
                 gp.projectileList.add(projectile);
                 shotAvailableCounter = 0;
 
@@ -38,10 +41,6 @@ public class Tower extends Entity {
         }
 
         setAction();
-
-        if(attacking){
-            attack();
-        }
 
         spriteCounter++;
         if (spriteCounter > 12) {
@@ -67,69 +66,6 @@ public class Tower extends Entity {
 
         // invinciblilty counter
 
-        if(shotAvailableCounter < 30){
-            shotAvailableCounter++;
-        }
-
-
-    }
-
-    public void attack(){
-
-        spriteCounter++;
-        if (spriteCounter<= 8){
-            spriteNum = 1;
-        }
-        if(spriteCounter>8 && spriteCounter<=25){
-            spriteNum = 2;
-
-            // save current WOLRDX WORLDY SOLIDAREA
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex, attack);
-
-            //RESTORE VALUES
-            worldX = currentWorldX;
-            worldY = currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-
-        }
-
-        if(spriteCounter>25){
-            spriteNum = 1;
-            spriteCounter = 0;
-            attacking = false;
-        }
-    }
-
-    public void damageMonster(int i, int attack) {
-        if (i != 999) {
-            if(!gp.monster[i].invincible){
-
-                gp.playSE(5);
-
-                int damage = attack - gp.monster[i].defence;
-                if(damage<0) {
-                    damage = 0;
-                }
-
-                gp.monster[i].life -= damage;
-
-                gp.monster[i].invincible = true;
-                gp.monster[i].damageReaction();
-
-                if (gp.monster[i].life <=0){
-                    gp.monster[i].dying = true;
-                    exp += gp.monster[i].exp;
-
-                }
-            }
-        }
     }
 
     public void draw(Graphics2D g2) {
@@ -141,21 +77,23 @@ public class Tower extends Entity {
 
     }
 
-    public String returnClosestEnemy(){
+    public void returnClosestEnemy(){
         int i = 0;
-        double distanceX = 0, distanceY = 0, distanceABS = 0, smallestDistance = 1000;
-        int savedI = 100;
-        while (i <= gp.monster.length){
-            distanceX = (gp.monster[i].worldX - worldX );
-            distanceY = (gp.monster[i].worldY - worldY );
-            distanceABS = Math.sqrt((distanceX*distanceX)+(distanceY*distanceY));
-            if(distanceABS<smallestDistance){
-                savedI = i;
-                smallestDistance = distanceABS;
+        double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
+        smallestMonsterDistance = 1000;
+        savedMonsterIndex = 100;
+        while (i < gp.monster.length){
+            if(gp.monster[i] != null){
+                monsterDistanceX = (gp.monster[i].worldX - worldX );
+                monsterDistanceY = (gp.monster[i].worldY - worldY );
+                monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
+                if(monsterDistanceABS<smallestMonsterDistance){
+                    smallestMonsterDistance = monsterDistanceABS;
+                    smallestMonsterDistanceX = monsterDistanceX;
+                    smallestMonsterDistanceY = monsterDistanceY;
+                }
             }
             i++;
         }
-        String valueR = savedI + "," + distanceX + "," + distanceY + "," + distanceABS;
-        return valueR;
     }
 }

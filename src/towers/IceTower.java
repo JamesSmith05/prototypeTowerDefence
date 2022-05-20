@@ -21,6 +21,7 @@ public class IceTower extends Tower {
         defence = 0;
         getImage();
         projectile = new OBJ_Rock(gp);
+        range = gp.tileSize*4;
 
     }
     public void getImage() {
@@ -35,7 +36,7 @@ public class IceTower extends Tower {
     }
     public void setAction() {
 
-        if(shotAvailableCounter < 60){
+        if(shotAvailableCounter < 20){
             shotAvailableCounter++;
         }
 
