@@ -73,9 +73,9 @@ public class TileManager {
         setup(40, "wall", true);
         setup(41, "tree", true);
 
-        setup(42, "road13", true);
-        setup(43, "road14", true);
-        setup(44, "road15", true);
+        setup(42, "road13", false);
+        setup(43, "road14", false);
+        setup(44, "road15", false);
         setup(45, "gui00", true);
         setup(46, "gui01", true);
         setup(47, "gui02", true);

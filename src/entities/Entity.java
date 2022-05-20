@@ -57,6 +57,9 @@ public class Entity {
     public Projectile projectile;
 
     public int range;
+    public int fireRate;
+    public int bulletSpeed;
+    public int buyPrice;
 
     //ITEM ATTRIBUTES
     public int attackValue;
@@ -103,7 +106,6 @@ public class Entity {
                 worldX += speed;
                 break;
         }
-
         spriteCounter++;
         if (spriteCounter > 12) {
             if (spriteNum == 1) {
@@ -122,7 +124,6 @@ public class Entity {
             }
         }
     }
-
 
     public void draw(Graphics2D g2){
         BufferedImage image = null;
@@ -211,17 +212,15 @@ public class Entity {
 
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
-
                 if (gp.monster[i].life <=0){
                     gp.monster[i].dying = true;
                     exp += gp.monster[i].exp;
+                    gp.userCurrency += gp.monster[i].coin;
 
                 }
             }
         }
     }
-
-
 
     public void dyingAnimation(Graphics2D g2){
 

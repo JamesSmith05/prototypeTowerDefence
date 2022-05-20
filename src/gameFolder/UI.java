@@ -53,15 +53,13 @@ public class UI {
         if(gp.gameState == gp.playState){
             drawMessage();
             drawUserInfo();
+            drawTowerImages();
         }
         if(gp.gameState == gp.pauseState){
-            drawPauseScreen();}
+            drawPauseScreen();
+        }
         if(gp.gameState == gp.dialogueState){
             drawDialogueScreen();
-        }
-        if(gp.gameState == gp.characterState){
-            drawCharacterScreen();
-
         }
 
     }
@@ -71,6 +69,10 @@ public class UI {
         int messageY = (gp.tileSize/4)*3;
         g2.setFont(g2.getFont().deriveFont(32F));
         g2.drawString("Life: " + gp.userLife,messageX,messageY);
+        messageX += 2.5*gp.tileSize;
+        g2.drawString("Coins: " + gp.userCurrency,messageX,messageY);
+        messageX += 2.5*gp.tileSize;
+        g2.drawString("Wave: " + gp.waveNum,messageX,messageY);
 
     }
 
@@ -144,6 +146,59 @@ public class UI {
         }
     }
 
+    public void drawTowerImages(){
+
+        int offset = 5;
+
+        int X = (gp.maxScreenCol*gp.tileSize) - (3*gp.tileSize) + 16, Y = 16;
+        g2.setFont(g2.getFont().deriveFont(16F));
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new BasicStroke(5));
+        for (int i = 1; i < 10; i++) {
+            g2.setColor(new Color(240,190,90));
+            g2.fillRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
+            g2.drawImage(gp.towerOptions[i].image,X,Y,null);
+
+            if(i == gp.selectedTowerIndex){
+                g2.setColor(Color.WHITE);
+                g2.setStroke(new BasicStroke(3));
+                g2.drawRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
+            }
+
+            X += gp.tileSize + 4*offset;
+
+            g2.setColor(Color.WHITE);
+            Y += 16;
+            g2.drawString("Cost: " + gp.towerOptions[i].buyPrice,X,Y);
+            Y += 16;
+            g2.drawString("Range: " + (gp.towerOptions[i].range/gp.tileSize),X,Y);
+            Y += 16;
+            g2.drawString("Fire rate: " + (60/ gp.towerOptions[i].fireRate),X,Y);
+
+            X -= (gp.tileSize + 4*offset);
+            Y += 32;
+        }
+
+        g2.setColor(new Color(240,190,90));
+        g2.fillRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
+        g2.drawImage(gp.towerOptions[0].image,X,Y,null);
+
+        if(gp.selectedTowerIndex == 0){
+            g2.setColor(Color.WHITE);
+            g2.setStroke(new BasicStroke(3));
+            g2.drawRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
+        }
+        X += gp.tileSize + 4*offset;
+
+        g2.setColor(Color.WHITE);
+        Y += 16;
+        g2.drawString("Cost: " + gp.towerOptions[0].buyPrice,X,Y);
+        Y += 16;
+        g2.drawString("Range: " + (gp.towerOptions[0].range/gp.tileSize),X,Y);
+        Y += 16;
+        g2.drawString("Fire rate: " + (60/ gp.towerOptions[0].fireRate),X,Y);
+    }
+
     public void drawPauseScreen(){
         g2.setFont(cartoon);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD,80F));
@@ -170,27 +225,7 @@ public class UI {
             g2.drawString(line,x,y);
             y += gp.tileSize;
         }
-
-
     }
-
-    public void drawCharacterScreen(){
-        final int frameX = gp.tileSize;
-        final int frameY = gp.tileSize;
-        final int frameWidth = gp.tileSize*6;
-        final int frameHeight = gp.tileSize*10;
-        drawSubWindow(frameX,frameY,frameWidth,frameHeight);
-
-        //text
-        g2.setColor(Color.WHITE);
-        g2.setFont(g2.getFont().deriveFont(32F));
-
-        int textX = frameX + 20;
-        int textY = frameY + gp.tileSize;
-        final int lineHeight = 35;
-
-    }
-
     public void drawSubWindow(int x, int y, int width, int height){
 
         Color c = new Color(0,0,0,200);

@@ -1,30 +1,26 @@
 package towers;
 
-import entities.Entity;
 import entities.Tower;
 import gameFolder.GamePanel;
-import entities.Entity;
-import gameFolder.GamePanel;
-import objects.OBJ_Fireball;
 import objects.OBJ_Rock;
-
-import java.util.Random;
 
 public class IceTower extends Tower {
     GamePanel gp;
     public IceTower(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        name = "GreenSlime";
-        speed = 3;
+        name = "IceTower";
+        bulletSpeed = 8;
         attack = 4;
         defence = 0;
         getImage();
         projectile = new OBJ_Rock(gp);
         range = gp.tileSize*4;
-
+        fireRate = 20;
+        buyPrice = 5;
     }
     public void getImage() {
+        image = setup("towers/iceTower", gp.tileSize, gp.tileSize);
         up1 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
         up2 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
         down1 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
@@ -36,24 +32,6 @@ public class IceTower extends Tower {
     }
     public void setAction() {
 
-        if(shotAvailableCounter < 20){
-            shotAvailableCounter++;
-        }
-
-        int i = new Random().nextInt(100)+1;
-
-        if (i<= 25){
-            direction = "up";
-        }
-        if (i > 25 && i<= 50){
-            direction = "down";
-        }
-        if (i > 50 && i<= 75){
-            direction = "left";
-        }
-        if (i > 75 && i<= 100){
-            direction = "right";
-        }
     }
 }
 

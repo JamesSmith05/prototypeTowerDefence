@@ -15,11 +15,12 @@ public class MON_PinkSlime extends Entity {
         type = type_monster;
         name = "PinkSlime";
         speed = 4;
-        maxLife = 7;
+        maxLife = 5;
         life = maxLife;
         attack = 2;
         defence = 1;
         exp = 4;
+        coin = 1;
 
         solidArea.x = 4;
         solidArea.y = 24;
@@ -31,6 +32,7 @@ public class MON_PinkSlime extends Entity {
         getImage();
     }
     public void getImage (){
+        image = setup("monster/pinkslime_down_1", gp.tileSize, gp.tileSize);
         up1 = setup("monster/pinkslime_down_1", gp.tileSize, gp.tileSize);
         up2 = setup("monster/pinkslime_down_2", gp.tileSize, gp.tileSize);
         down1 = setup("monster/pinkslime_down_1", gp.tileSize, gp.tileSize);

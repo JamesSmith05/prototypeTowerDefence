@@ -107,6 +107,7 @@ public class EventHandler {
         if (gp.userLife<0){
             gp.userLife = 0;
         }
+        entity.dying = true;
     }
 
 }

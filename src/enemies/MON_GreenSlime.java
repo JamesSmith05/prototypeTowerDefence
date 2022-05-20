@@ -20,6 +20,7 @@ public class MON_GreenSlime extends Entity {
         attack = 1;
         defence = 0;
         exp = 2;
+        coin = 1;
 
         solidArea.x = 4;
         solidArea.y = 24;
@@ -31,6 +32,7 @@ public class MON_GreenSlime extends Entity {
         getImage();
     }
     public void getImage (){
+        image = setup("monster/greenslime_down_1", gp.tileSize, gp.tileSize);
         up1 = setup("monster/greenslime_down_1", gp.tileSize, gp.tileSize);
         up2 = setup("monster/greenslime_down_2", gp.tileSize, gp.tileSize);
         down1 = setup("monster/greenslime_down_1", gp.tileSize, gp.tileSize);

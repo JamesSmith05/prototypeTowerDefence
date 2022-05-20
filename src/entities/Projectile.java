@@ -16,7 +16,7 @@ public class Projectile extends Entity{
         super(gp);
     }
 
-    public void set(int worldX, int worldY, double distanceX, double distanceY, boolean alive, Entity user){
+    public void set(int speed, int worldX, int worldY, double distanceX, double distanceY, boolean alive, Entity user){
 
         this.worldX = worldX;
         this.worldY = worldY;
@@ -25,6 +25,7 @@ public class Projectile extends Entity{
         this.life = this.maxLife;
         this.distanceX = distanceX;
         this.distanceY = distanceY;
+        this.speed = speed;
 
     }
     public void update(){
@@ -59,51 +60,17 @@ public class Projectile extends Entity{
 
     public void calculateVectors(){
 
+        speedX = speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY)));
+        speedY = speed-Math.abs(speedX);
         if(distanceX<0 && distanceY<0){
-            if(Math.abs(distanceX)>Math.abs(distanceY)){
-                speedX = speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY)));
-                speedY = speed-Math.abs(speedX);
-            }else{
-                speedY = speed*(Math.abs(distanceY))/(Math.abs(distanceX) + Math.abs(distanceY));
-                speedX = speed - Math.abs(speedY);
-            }
             speedY = -speedY;
             speedX = -speedX;
-
-
         }else if (distanceX>0 && distanceY<0){
-            if(distanceX>Math.abs(distanceY)){
-                speedX = speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY)));
-                speedY = speed-Math.abs(speedX);
-
-            }else {
-                speedY = speed*(Math.abs(distanceY))/(Math.abs(distanceX) + Math.abs(distanceY));
-                speedX = speed - Math.abs(speedY);
-            }
             speedY = -speedY;
 
-        }else if (distanceX<0 && distanceY>0){
-            if(Math.abs(distanceX)>distanceY){
-                speedX = speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY)));
-                speedY = speed-Math.abs(speedX);
-
-            }else {
-                speedY = speed*(Math.abs(distanceY))/(Math.abs(distanceX) + Math.abs(distanceY));
-                speedX = speed - Math.abs(speedY);
-            }
+        }else if (distanceX<0 && distanceY>0) {
             speedX = -speedX;
-
-        }else if (distanceX>0 && distanceY>0){
-            if(distanceX>distanceY){
-                speedX = speed*(distanceX/(distanceX+distanceY));
-                speedY = speed-speedX;
-            }else {
-                speedY = speed*(distanceY/(distanceX + distanceY));
-                speedX = speed - speedY;
-            }
         }
-
-        System.out.println(distanceX + "," + distanceY + "," + speedX + "," + speedY);
     }
 
     public void draw(Graphics2D g2){

@@ -31,15 +31,17 @@ public class Tower extends Entity {
         double closestDistanceABS = smallestMonsterDistance;
 
         if (closestDistanceABS<range){
-            if(shotAvailableCounter == 20){
+            if(shotAvailableCounter == fireRate){
 
-                projectile.set(worldX,worldY,closestDistanceX,closestDistanceY,true,this);
+                projectile.set(bulletSpeed,worldX,worldY,closestDistanceX,closestDistanceY,true,this);
                 gp.projectileList.add(projectile);
                 shotAvailableCounter = 0;
 
             }
         }
-
+        if(shotAvailableCounter < fireRate){
+            shotAvailableCounter++;
+        }
         setAction();
 
         spriteCounter++;

@@ -7,6 +7,7 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,7 +53,8 @@ public class GamePanel extends JPanel implements Runnable {
     public Thread gameThread;
 
     //ENTITY AND OBJECT
-    public Entity[] tower = new Entity[100];
+    public Entity[] tower = new Entity[50];
+    public Entity[] towerOptions = new Entity[10];
     public Entity[] obj = new Entity[10];  //increase number to increase max number of object on screen
     public Entity[] npc = new Entity[10];
     public Entity[] monster = new Entity[100];
@@ -67,9 +69,12 @@ public class GamePanel extends JPanel implements Runnable {
     public final int characterState = 4;
     public Rectangle mouseSolidArea = new Rectangle(0, 0, 64, 64);
 
-    public int maxEnemies;
     public int spawnerCounter = 0;
     public int userLife;
+    public int userCurrency = 10;
+    public int waveNum = 0;
+
+    public int selectedTowerIndex = 1;
 
     public GamePanel() {
 
@@ -86,8 +91,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame(){
 //        aSetter.setObject();
 //        aSetter.setNPC();
-        aSetter.setEnemy();
-        maxEnemies = 100;
+        aSetter.setTowerOptions();
         userLife = 50;
         //playMusic(0);
         gameState = titleState;
@@ -150,38 +154,33 @@ public class GamePanel extends JPanel implements Runnable {
 //        mouseX = tempMouseX - tempX - 10;
 //        mouseY = tempMouseY - tempY - 45;
 
-
-
         mouseX = tempMouseX - tempX -5;
         mouseY = tempMouseY - tempY - 22;
 
         if(gameState == playState){
 
-            if (leftClick){
-
+            if (leftClick && userCurrency>0){
                 if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea)){
-                    if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea,tower)){
-                        aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)));
+                    if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea, tower)){
+                        aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)), selectedTowerIndex);
                     }
                 }
                 leftClick = false;
                 System.out.println( " the click was " + mouseX + " " + mouseY);
             }
-
-
             spawnerCounter++;
             if (spawnerCounter > 40) {
-                if (aSetter.i < maxEnemies){
-                    aSetter.setEnemy();
-                }
-                else{
-                    aSetter.resetMobCounter();
-                }
-
+                aSetter.waveSpawner(waveNum);
                 spawnerCounter = 0;
+                if(keyH.spacePressed){
+                    if(!aSetter.waveLock){
+                        waveNum ++;
+                        aSetter.k = 0;
+                        aSetter.resetMobCounter();
+                    }
+                    keyH.spacePressed = false;
+                }
             }
-
-
             for (int i = 0; i < tower.length; i++) {
                 if(tower[i] != null) {
                     tower[i].update();
@@ -208,7 +207,6 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
-
     }
     public void paintComponent(Graphics g) {
 
@@ -270,13 +268,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             ui.draw(g2);
 
-
-            if (tower[0] != null){
-                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3F));
-                g2.drawImage(tower[0].down1, (mouseX - (tileSize/2)), (mouseY - (tileSize/2)),null);
-            }
-
-
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3F));
+            g2.drawImage(towerOptions[selectedTowerIndex].image, (mouseX - (tileSize/2)), (mouseY - (tileSize/2)),null);
         }
         g2.dispose();
     }
