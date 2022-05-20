@@ -20,6 +20,23 @@ public class Tower extends Entity {
 
     public void update() {
 
+        String valuesReturned = returnClosestEnemy();
+        String[] values = valuesReturned.split(",");
+        int closestI = Integer.parseInt(values[0]);
+        int closestDistanceX = Integer.parseInt(values[1]);
+        int closestDistanceY = Integer.parseInt(values[2]);
+        int closestDistanceABS = Integer.parseInt(values[3]);
+
+        if (closestDistanceABS<range){
+            if(shotAvailableCounter == 60){
+
+                projectile.set(worldX,worldY,closestDistanceX,closestDistanceY,direction,true,this);
+                gp.projectileList.add(projectile);
+                shotAvailableCounter = 0;
+
+            }
+        }
+
         setAction();
 
         if(attacking){
@@ -122,5 +139,23 @@ public class Tower extends Entity {
         //g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1F));
 
 
+    }
+
+    public String returnClosestEnemy(){
+        int i = 0;
+        double distanceX = 0, distanceY = 0, distanceABS = 0, smallestDistance = 1000;
+        int savedI = 100;
+        while (i <= gp.monster.length){
+            distanceX = (gp.monster[i].worldX - worldX );
+            distanceY = (gp.monster[i].worldY - worldY );
+            distanceABS = Math.sqrt((distanceX*distanceX)+(distanceY*distanceY));
+            if(distanceABS<smallestDistance){
+                savedI = i;
+                smallestDistance = distanceABS;
+            }
+            i++;
+        }
+        String valueR = savedI + "," + distanceX + "," + distanceY + "," + distanceABS;
+        return valueR;
     }
 }

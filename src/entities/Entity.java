@@ -16,7 +16,6 @@ public class Entity {
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0, 0, 64, 64);
     public Rectangle solidAreaDirectionChanger = new Rectangle(29, 29, 6, 6);
-    public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public int solidAreaDefaultDirectionX = 29, solidAreaDefaultDirectionY = 29;
 
@@ -57,6 +56,8 @@ public class Entity {
     public int coin;
     public Projectile projectile;
 
+    public int range;
+
     //ITEM ATTRIBUTES
     public int attackValue;
     public int defenceValue;
@@ -88,20 +89,20 @@ public class Entity {
 
         setAction();
 
-            switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
-            }
+        switch (direction) {
+            case "up":
+                worldY -= speed;
+                break;
+            case "down":
+                worldY += speed;
+                break;
+            case "left":
+                worldX -= speed;
+                break;
+            case "right":
+                worldX += speed;
+                break;
+        }
 
         spriteCounter++;
         if (spriteCounter > 12) {
@@ -129,70 +130,70 @@ public class Entity {
         int screenY = worldY;
 
 
-            switch (direction) {
-                case "up":
-                    if (spriteNum == 1) {image = up1;}
-                    if (spriteNum == 2) {image = up2;}
-                    break;
-                case "down":
-                    if (spriteNum == 1) {image = down1;}
-                    if (spriteNum == 2) {image = down2;}
-                    break;
-                case "left":
-                    if (spriteNum == 1) {image = left1;}
-                    if (spriteNum == 2) {image = left2;}
-                    break;
-                case "right":
-                    if (spriteNum == 1) {image = right1;}
-                    if (spriteNum == 2) {image = right2;}
-                    break;
+        switch (direction) {
+            case "up":
+                if (spriteNum == 1) {image = up1;}
+                if (spriteNum == 2) {image = up2;}
+                break;
+            case "down":
+                if (spriteNum == 1) {image = down1;}
+                if (spriteNum == 2) {image = down2;}
+                break;
+            case "left":
+                if (spriteNum == 1) {image = left1;}
+                if (spriteNum == 2) {image = left2;}
+                break;
+            case "right":
+                if (spriteNum == 1) {image = right1;}
+                if (spriteNum == 2) {image = right2;}
+                break;
+        }
+
+        //Monster HP BAR
+        if ((type == type_monster && hpBarOn) || (type == type_smallBoss && hpBarOn) || (type == type_largeBoss && hpBarOn)) {
+            double oneScale;
+            int width;
+            if (type == type_smallBoss){
+                oneScale = (double)gp.tileSize*2/maxLife;
+                width = gp.tileSize*2;
+            }else if (type == type_largeBoss){
+                oneScale = (double)gp.tileSize*3/maxLife;
+                width = gp.tileSize*3;
+            }else{
+                oneScale = (double)gp.tileSize/maxLife;
+                width = gp.tileSize;
+            }
+            double hpBarValue = oneScale*life;
+            if(hpBarValue<0){
+                hpBarValue=0;
             }
 
-            //Monster HP BAR
-            if ((type == type_monster && hpBarOn) || (type == type_smallBoss && hpBarOn) || (type == type_largeBoss && hpBarOn)) {
-                double oneScale;
-                int width;
-                if (type == type_smallBoss){
-                    oneScale = (double)gp.tileSize*2/maxLife;
-                    width = gp.tileSize*2;
-                }else if (type == type_largeBoss){
-                    oneScale = (double)gp.tileSize*3/maxLife;
-                    width = gp.tileSize*3;
-                }else{
-                    oneScale = (double)gp.tileSize/maxLife;
-                    width = gp.tileSize;
-                }
-                double hpBarValue = oneScale*life;
-                if(hpBarValue<0){
-                    hpBarValue=0;
-                }
+            g2.setColor(new Color(35,35,35));
+            g2.fillRect(screenX-1,screenY-16,width+2,12);
 
-                g2.setColor(new Color(35,35,35));
-                g2.fillRect(screenX-1,screenY-16,width+2,12);
+            g2.setColor(new Color(255,0,30));
+            g2.fillRect(screenX,screenY - 15, (int)hpBarValue, 10);
 
-                g2.setColor(new Color(255,0,30));
-                g2.fillRect(screenX,screenY - 15, (int)hpBarValue, 10);
-
-                hpBarCounter++;
-                if(hpBarCounter > 600){
-                    hpBarCounter = 0;
-                    hpBarOn = false;
-                }
-            }
-
-            if (invincible){
-                hpBarOn = true;
+            hpBarCounter++;
+            if(hpBarCounter > 600){
                 hpBarCounter = 0;
-                changeOpacity(g2,0.4f);
+                hpBarOn = false;
             }
+        }
 
-            if(dying){
-                dyingAnimation(g2);
-            }
+        if (invincible){
+            hpBarOn = true;
+            hpBarCounter = 0;
+            changeOpacity(g2,0.4f);
+        }
 
-            g2.drawImage(image, screenX, screenY,null);
+        if(dying){
+            dyingAnimation(g2);
+        }
 
-            changeOpacity(g2,1f);
+        g2.drawImage(image, screenX, screenY,null);
+
+        changeOpacity(g2,1f);
     }
 
     public void damageMonster(int i, int attack) {
