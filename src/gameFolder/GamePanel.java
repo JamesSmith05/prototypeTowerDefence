@@ -181,9 +181,9 @@ public class GamePanel extends JPanel implements Runnable {
                     keyH.spacePressed = false;
                 }
             }
-            for (int i = 0; i < tower.length; i++) {
-                if(tower[i] != null) {
-                    tower[i].update();
+            for (Entity entity : tower) {
+                if (entity != null) {
+                    entity.update();
                 }
             }
             for (int i = 0; i < monster.length; i++) {

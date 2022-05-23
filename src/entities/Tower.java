@@ -85,7 +85,7 @@ public class Tower extends Entity {
         smallestMonsterDistance = 1000;
         savedMonsterIndex = 100;
         while (i < gp.monster.length){
-            if(gp.monster[i] != null){
+            if(gp.monster[i] != null && !gp.monster[i].invincible){
                 monsterDistanceX = (gp.monster[i].worldX - worldX );
                 monsterDistanceY = (gp.monster[i].worldY - worldY );
                 monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));

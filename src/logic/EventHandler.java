@@ -20,10 +20,10 @@ public class EventHandler {
         while (col< gp.maxScreenCol && row < gp.maxScreenRow){
 
             eventRect[col][row] = new EventRect();
-            eventRect[col][row].x = 31;
-            eventRect[col][row].y = 31;
-            eventRect[col][row].width = 2;
-            eventRect[col][row].height = 2;
+            eventRect[col][row].x = 29;
+            eventRect[col][row].y = 29;
+            eventRect[col][row].width = 6;
+            eventRect[col][row].height = 6;
             eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
             eventRect[col][row].eventRectDefaultY = eventRect[col][row].y;
 
@@ -33,7 +33,6 @@ public class EventHandler {
                 row++;
             }
         }
-
     }
 
     public  void checkEvent(Entity entity){
