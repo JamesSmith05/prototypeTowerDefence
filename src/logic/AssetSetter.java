@@ -6,9 +6,7 @@ import enemies.MON_PinkSlime;
 import enemies.MON_Wraith;
 import entities.Entity;
 import gameFolder.GamePanel;
-import towers.BombTower;
-import towers.IceTower;
-import towers.SniperTower;
+import towers.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -34,13 +32,13 @@ public class AssetSetter {
             if(towerIndex == 0 ){
                 gp.tower[j] = new IceTower(gp);
             }else if(towerIndex == 1 ){
-                gp.tower[j] = new IceTower(gp);
+                gp.tower[j] = new PlainTower(gp);
             }else if(towerIndex == 2 ){
                 gp.tower[j] = new SniperTower(gp);
             }else if(towerIndex == 3 ){
                 gp.tower[j] = new BombTower(gp);
             }else if(towerIndex == 4 ){
-                gp.tower[j] = new IceTower(gp);
+                gp.tower[j] = new FlameTower(gp);
             }else if(towerIndex == 5 ){
                 gp.tower[j] = new IceTower(gp);
             }else if(towerIndex == 6 ){
@@ -138,10 +136,10 @@ public class AssetSetter {
     public void resetTowerCounter(){j = 0;}
     public void setTowerOptions(){
         gp.towerOptions[0] = new IceTower(gp);
-        gp.towerOptions[1] = new IceTower(gp);
+        gp.towerOptions[1] = new PlainTower(gp);
         gp.towerOptions[2] = new SniperTower(gp);
         gp.towerOptions[3] = new BombTower(gp);
-        gp.towerOptions[4] = new IceTower(gp);
+        gp.towerOptions[4] = new FlameTower(gp);
         gp.towerOptions[5] = new IceTower(gp);
         gp.towerOptions[6] = new IceTower(gp);
         gp.towerOptions[7] = new IceTower(gp);

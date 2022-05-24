@@ -32,7 +32,9 @@ public class OBJ_Iceball extends Projectile {
         right2 = setup("projectiles/iceball_right_2", gp.tileSize, gp.tileSize);
 
     }
-    public void setSpecialDamage() {
+    public void setSpecialDamage(int monsterIndex) {
+        gp.monster[monsterIndex].frozen=true;
+        gp.monster[monsterIndex].frozenCounter=0;
 
     }
 }

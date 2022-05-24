@@ -14,7 +14,8 @@ public class MON_Wraith extends Entity {
         this.gp = gp;
         type = type_monster;
         name = "Wraith";
-        speed = 2;
+        originalSpeed = 2;
+        speed = originalSpeed;
         maxLife = 20;
         life = maxLife;
         attack = 1;

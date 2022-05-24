@@ -11,7 +11,7 @@ public class BombTower extends Tower {
         super(gp);
         this.gp = gp;
 
-        name = "IceTower";
+        name = "BombTower";
         bulletSpeed = 8;
         attack = 2;
         getImage();
@@ -21,15 +21,15 @@ public class BombTower extends Tower {
         buyPrice = 10;
     }
     public void getImage() {
-        image = setup("towers/iceTower", gp.tileSize, gp.tileSize);
-        up1 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
-        up2 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
-        down1 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
-        down2 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
-        left1 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
-        left2 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
-        right1 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
-        right2 = setup("towers/iceTower", gp.tileSize, gp.tileSize);
+        image = setup("towers/bombTower", gp.tileSize, gp.tileSize);
+        up1 = setup("towers/bombTower", gp.tileSize, gp.tileSize);
+        up2 = setup("towers/bombTower", gp.tileSize, gp.tileSize);
+        down1 = setup("towers/bombTower", gp.tileSize, gp.tileSize);
+        down2 = setup("towers/bombTower", gp.tileSize, gp.tileSize);
+        left1 = setup("towers/bombTower", gp.tileSize, gp.tileSize);
+        left2 = setup("towers/bombTower", gp.tileSize, gp.tileSize);
+        right1 = setup("towers/bombTower", gp.tileSize, gp.tileSize);
+        right2 = setup("towers/bombTower", gp.tileSize, gp.tileSize);
     }
     public void setAction() {
 

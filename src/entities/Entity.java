@@ -20,9 +20,6 @@ public class Entity {
     public int solidAreaDefaultDirectionX = 29, solidAreaDefaultDirectionY = 29;
 
     public boolean collision = false;
-    String dialogues[] = new String[20];
-
-
 
     //STATE
     public int spriteNum = 1;
@@ -31,7 +28,6 @@ public class Entity {
     public boolean invincible = false;
     public int worldX, worldY;
     public String direction = "right";
-    boolean attacking = false;
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
@@ -47,6 +43,7 @@ public class Entity {
     //CHARACTER STATS
     public String name;
     public int speed = 0;
+    public int originalSpeed = 0;
     public int maxLife;
     public int life;
     public int attack;
@@ -61,12 +58,10 @@ public class Entity {
     public int bulletSpeed;
     public int buyPrice;
     public boolean actionFinished;
-
-    //ITEM ATTRIBUTES
-    public int attackValue;
-    public int defenceValue;
-    public String description = "";
-    public int useCost;
+    public boolean frozen = false;
+    public int frozenCounter;
+    public boolean onFire = false;
+    public int fireCounter;
 
     //TYPE
     public int type; // 0 player, 1 npc, 2 monster ,
@@ -115,6 +110,29 @@ public class Entity {
                 spriteNum = 1;
             }
             spriteCounter = 0;
+        }
+
+        if(frozen){
+            speed = originalSpeed-1;
+            frozenCounter++;
+            if (frozenCounter >120){
+                frozen = false;
+                frozenCounter = 0;
+            }
+        }
+
+        if(onFire){
+            fireCounter++;
+            if(fireCounter%60 == 0){
+                life -= 1;
+                if (life <= 0){
+                    dying = true;
+                }
+            }
+            if (fireCounter >120){
+                onFire = false;
+                fireCounter = 0;
+            }
         }
 
         if(invincible){

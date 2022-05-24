@@ -18,8 +18,8 @@ public class IceTower extends Tower {
         getImage();
         projectile = new OBJ_Iceball(gp);
         range = gp.tileSize*4;
-        fireRate = 20;
-        buyPrice = 5;
+        fireRate = 30;
+        buyPrice = 10;
     }
     public void getImage() {
         image = setup("towers/iceTower", gp.tileSize, gp.tileSize);
