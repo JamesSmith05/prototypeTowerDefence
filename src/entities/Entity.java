@@ -60,6 +60,7 @@ public class Entity {
     public int fireRate;
     public int bulletSpeed;
     public int buyPrice;
+    public boolean actionFinished;
 
     //ITEM ATTRIBUTES
     public int attackValue;
