@@ -2,7 +2,7 @@ package towers;
 
 import entities.Tower;
 import gameFolder.GamePanel;
-import objects.OBJ_Explosive;
+import objects.OBJ_Bomb;
 
 public class BombTower extends Tower {
     GamePanel gp;
@@ -15,7 +15,7 @@ public class BombTower extends Tower {
         bulletSpeed = 8;
         attack = 2;
         getImage();
-        projectile = new OBJ_Explosive(gp);
+        projectile = new OBJ_Bomb(gp);
         range = gp.tileSize*4;
         fireRate = 120;
         buyPrice = 10;

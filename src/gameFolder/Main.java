@@ -1,9 +1,6 @@
 package gameFolder;
 
-import gameFolder.GamePanel;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
 

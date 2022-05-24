@@ -4,6 +4,7 @@ import gameFolder.GamePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class Projectile extends Entity{
 
@@ -29,6 +30,8 @@ public class Projectile extends Entity{
         this.attack = attack;
         this.targetIndex = targetIndex;
 
+        solidArea = new Rectangle(10, 10, 44, 44);
+
     }
 
     public void setSpecialDamage(int monsterIndex){
@@ -37,8 +40,14 @@ public class Projectile extends Entity{
 
     public void update(){
 
-//        int monsterIndex = gp.cChecker.checkSingleEntity(this,gp.monster[targetIndex],targetIndex);
-        int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
+        int monsterIndex;
+
+        if (Objects.equals(user.name, "SniperTower")){
+            monsterIndex = gp.cChecker.checkSingleEntity(this,gp.monster[targetIndex],targetIndex);
+        }else{
+            monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
+        }
+
         if(monsterIndex != 999){
             user.damageMonster(monsterIndex, attack);
             setSpecialDamage(monsterIndex);
@@ -85,8 +94,8 @@ public class Projectile extends Entity{
     public void draw(Graphics2D g2){
         BufferedImage image = null;
 
-        if (spriteNum == 1) {image = right1;}
-        if (spriteNum == 2) {image = right2;}
+        if (spriteNum == 1) {image = down1;}
+        if (spriteNum == 2) {image = down2;}
 
         g2.drawImage(image, worldX, worldY,null);
     }

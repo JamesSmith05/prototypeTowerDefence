@@ -119,7 +119,7 @@ public class Entity {
 
         if(invincible){
             invincibleCounter++;
-            if (invincibleCounter >20){
+            if (invincibleCounter >10){
                 invincible = false;
                 invincibleCounter = 0;
             }

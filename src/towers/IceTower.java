@@ -2,6 +2,7 @@ package towers;
 
 import entities.Tower;
 import gameFolder.GamePanel;
+import objects.OBJ_Iceball;
 import objects.OBJ_Rock;
 
 public class IceTower extends Tower {
@@ -15,7 +16,7 @@ public class IceTower extends Tower {
         bulletSpeed = 8;
         attack = 2;
         getImage();
-        projectile = new OBJ_Rock(gp);
+        projectile = new OBJ_Iceball(gp);
         range = gp.tileSize*4;
         fireRate = 20;
         buyPrice = 5;

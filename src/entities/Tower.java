@@ -3,6 +3,7 @@ package entities;
 import gameFolder.GamePanel;
 
 import java.awt.*;
+import java.util.Objects;
 
 
 public class Tower extends Entity {
@@ -24,8 +25,11 @@ public class Tower extends Entity {
 
     public void update() {
 
-        returnClosestEnemy();
-//        returnStrongestEnemy();
+        if (Objects.equals(name, "SniperTower")){
+            returnStrongestEnemy();
+        }else{
+            returnClosestEnemy();
+        }
 
         double distanceX = selectedMonsterDistanceX;
         double distanceY = selectedMonsterDistanceY;
