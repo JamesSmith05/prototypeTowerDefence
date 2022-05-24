@@ -185,6 +185,11 @@ public class GamePanel extends JPanel implements Runnable {
                     entity.update();
                 }
             }
+            for (Entity entity : obj) {
+                if (entity != null) {
+                    entity.update();
+                }
+            }
             for (int i = 0; i < monster.length; i++) {
                 if(monster[i] != null) {
                     if(monster[i].alive && !monster[i].dying){
@@ -195,6 +200,13 @@ public class GamePanel extends JPanel implements Runnable {
 
                 }
             }
+
+            for (int i = 0; i < obj.length; i++) {
+                if (obj[i] != null && obj[i].actionFinished){
+                    obj[i] = null;
+                }
+            }
+
             for (int i = 0; i < projectileList.size(); i++) {
                 if(projectileList.get(i) != null) {
                     if(projectileList.get(i).alive){
@@ -235,11 +247,6 @@ public class GamePanel extends JPanel implements Runnable {
                     entityList.add(item);
                 }
             }
-            for (Entity value : obj) {
-                if (value != null) {
-                    entityList.add(value);
-                }
-            }
             for (Entity entity : monster) {
                 if (entity != null) {
                     entityList.add(entity);
@@ -257,6 +264,11 @@ public class GamePanel extends JPanel implements Runnable {
             for (Entity entity : projectileList) {
                 if (entity != null) {
                     entityList.add(entity);
+                }
+            }
+            for (Entity value : obj) {
+                if (value != null) {
+                    entityList.add(value);
                 }
             }
 
