@@ -9,7 +9,7 @@ public class Tower extends Entity {
     GamePanel gp;
 
     int savedMonsterIndex;
-    double smallestMonsterDistanceX, smallestMonsterDistanceY, smallestMonsterDistance;
+    double selectedMonsterDistanceX, selectedMonsterDistanceY, selectedMonsterDistance;
 
 
     public Tower(GamePanel gp) {
@@ -25,15 +25,16 @@ public class Tower extends Entity {
     public void update() {
 
         returnClosestEnemy();
+//        returnStrongestEnemy();
 
-        double closestDistanceX = smallestMonsterDistanceX;
-        double closestDistanceY = smallestMonsterDistanceY;
-        double closestDistanceABS = smallestMonsterDistance;
+        double distanceX = selectedMonsterDistanceX;
+        double distanceY = selectedMonsterDistanceY;
+        double distanceABS = selectedMonsterDistance;
 
-        if (closestDistanceABS<range){
+        if (distanceABS<range){
             if(shotAvailableCounter == fireRate){
 
-                projectile.set(bulletSpeed,worldX,worldY,closestDistanceX,closestDistanceY,true,this);
+                projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
                 gp.projectileList.add(projectile);
                 shotAvailableCounter = 0;
 
@@ -54,20 +55,6 @@ public class Tower extends Entity {
             spriteCounter = 0;
         }
 
-//        if(keyH.shootKeyPressed && !projectile.alive && shotAvailableCounter == 30){
-//
-//            //SET DEFAULT PARAMS
-//            projectile.set(worldX,worldY,direction,true,this);
-//
-//            gp.projectileList.add(projectile);
-//
-//            shotAvailableCounter = 0;
-//
-//            gp.playSE(7);
-//        }
-
-        // invinciblilty counter
-
     }
 
     public void draw(Graphics2D g2) {
@@ -82,20 +69,46 @@ public class Tower extends Entity {
     public void returnClosestEnemy(){
         int i = 0;
         double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
-        smallestMonsterDistance = 1000;
-        savedMonsterIndex = 100;
+        selectedMonsterDistance = 1000;
+        savedMonsterIndex = 0;
         while (i < gp.monster.length){
-            if(gp.monster[i] != null && !gp.monster[i].invincible){
-                monsterDistanceX = (gp.monster[i].worldX - worldX );
-                monsterDistanceY = (gp.monster[i].worldY - worldY );
+            if(gp.monster[i] != null){                                      //&& !gp.monster[i].invincible  to make towers ignore invincible enemies
+                monsterDistanceX = (gp.monster[i].worldX - worldX + (gp.tileSize/2));
+                monsterDistanceY = (gp.monster[i].worldY - worldY + (gp.tileSize/2));
                 monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
-                if(monsterDistanceABS<smallestMonsterDistance){
-                    smallestMonsterDistance = monsterDistanceABS;
-                    smallestMonsterDistanceX = monsterDistanceX;
-                    smallestMonsterDistanceY = monsterDistanceY;
+                if(monsterDistanceABS<selectedMonsterDistance && monsterDistanceABS<range){
+                    savedMonsterIndex = i;
+                    selectedMonsterDistance = monsterDistanceABS;
+                    selectedMonsterDistanceX = monsterDistanceX;
+                    selectedMonsterDistanceY = monsterDistanceY;
                 }
             }
             i++;
         }
     }
+
+    public void returnStrongestEnemy(){
+        int i = 0;
+        double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
+        int largestMonsterHealth = 0;
+        selectedMonsterDistance = 1000;
+        savedMonsterIndex = 0;
+        while (i < gp.monster.length){
+            if(gp.monster[i] != null){                                      //&& !gp.monster[i].invincible  to make towers ignore invincible enemies
+                monsterDistanceX = (gp.monster[i].worldX - worldX + (gp.tileSize/2));
+                monsterDistanceY = (gp.monster[i].worldY - worldY + (gp.tileSize/2));
+                monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
+                if(gp.monster[i].life > largestMonsterHealth && monsterDistanceABS<range){
+                    largestMonsterHealth = gp.monster[i].life;
+                    savedMonsterIndex = i;
+                    selectedMonsterDistance = monsterDistanceABS;
+                    selectedMonsterDistanceX = monsterDistanceX;
+                    selectedMonsterDistanceY = monsterDistanceY;
+                }
+            }
+            i++;
+        }
+    }
+
+
 }

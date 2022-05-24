@@ -10,10 +10,10 @@ public class SniperTower extends Tower {
     public SniperTower(GamePanel gp) {
         super(gp);
         this.gp = gp;
+
         name = "SniperTower";
         bulletSpeed = 20;
-        attack = 4;
-        defence = 0;
+        attack = 3;
         getImage();
         projectile = new OBJ_Rock(gp);
         range = gp.tileSize * 12;
@@ -35,8 +35,8 @@ public class SniperTower extends Tower {
 
     public void setAction() {
 
-        if (shotAvailableCounter < 20) {
-            shotAvailableCounter++;
-        }
+//        if (shotAvailableCounter < 20) {
+//            shotAvailableCounter++;
+//        }
     }
 }

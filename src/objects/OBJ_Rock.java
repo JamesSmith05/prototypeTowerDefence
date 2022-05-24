@@ -13,7 +13,6 @@ public class OBJ_Rock extends Projectile {
         maxLife = 80;
         life = maxLife;
         attack = 2;
-        useCost = 1;
         alive = false;
         getImage();
     }
@@ -38,6 +37,9 @@ public class OBJ_Rock extends Projectile {
 
         right1 = setup("projectiles/rock_down_1", gp.tileSize, gp.tileSize);
         right2 = setup("projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+
+    }
+    public void setSpecialDamage() {
 
     }
 }

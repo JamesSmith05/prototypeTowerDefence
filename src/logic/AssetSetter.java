@@ -6,6 +6,7 @@ import enemies.MON_PinkSlime;
 import enemies.MON_Wraith;
 import entities.Entity;
 import gameFolder.GamePanel;
+import towers.BombTower;
 import towers.IceTower;
 import towers.SniperTower;
 
@@ -28,67 +29,33 @@ public class AssetSetter {
     }
 
     public void setTower(int x, int y, int towerIndex){
-        if(towerIndex == 0 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }
-        else if(towerIndex == 1 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }
-        else if(towerIndex == 2 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new SniperTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=15;
-        }
-        else if(towerIndex == 3 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }
-        else if(towerIndex == 4 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }
-        else if(towerIndex == 5 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }
-        else if(towerIndex == 6 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }
-        else if(towerIndex == 7 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }else if(towerIndex == 8 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }else if(towerIndex == 9 && gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
-            gp.tower[j] = new IceTower(gp);
-            gp.tower[j].worldX = x;
-            gp.tower[j].worldY = y;
-            gp.userCurrency -=5;
-        }
+        if(gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
 
-
-
+            if(towerIndex == 0 ){
+                gp.tower[j] = new IceTower(gp);
+            }else if(towerIndex == 1 ){
+                gp.tower[j] = new IceTower(gp);
+            }else if(towerIndex == 2 ){
+                gp.tower[j] = new SniperTower(gp);
+            }else if(towerIndex == 3 ){
+                gp.tower[j] = new BombTower(gp);
+            }else if(towerIndex == 4 ){
+                gp.tower[j] = new IceTower(gp);
+            }else if(towerIndex == 5 ){
+                gp.tower[j] = new IceTower(gp);
+            }else if(towerIndex == 6 ){
+                gp.tower[j] = new IceTower(gp);
+            }else if(towerIndex == 7 ){
+                gp.tower[j] = new IceTower(gp);
+            }else if(towerIndex == 8 ){
+                gp.tower[j] = new IceTower(gp);
+            }else if(towerIndex == 9){
+                gp.tower[j] = new IceTower(gp);
+            }
+            gp.tower[j].worldX = x;
+            gp.tower[j].worldY = y;
+            gp.userCurrency -=gp.towerOptions[towerIndex].buyPrice;
+        }
         j++;
     }
 
@@ -173,7 +140,7 @@ public class AssetSetter {
         gp.towerOptions[0] = new IceTower(gp);
         gp.towerOptions[1] = new IceTower(gp);
         gp.towerOptions[2] = new SniperTower(gp);
-        gp.towerOptions[3] = new IceTower(gp);
+        gp.towerOptions[3] = new BombTower(gp);
         gp.towerOptions[4] = new IceTower(gp);
         gp.towerOptions[5] = new IceTower(gp);
         gp.towerOptions[6] = new IceTower(gp);

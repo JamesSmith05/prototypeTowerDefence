@@ -99,9 +99,7 @@ public class CollisionChecker {
     }
     //check npc or monster collision
     public int checkEntity(Entity entity,Entity[] target){
-
         int index = 999;
-
         for (int i = 0; i < target.length; i++) {
             if (target[i] != null) {
                 //get entity solid area position
@@ -126,7 +124,6 @@ public class CollisionChecker {
                         break;
 
                     }
-
                     if (entity.solidArea.intersects(target[i].solidArea)) {
                         if(target[i] != entity){
                             entity.collisionOn = true;
@@ -141,6 +138,33 @@ public class CollisionChecker {
 
         }
 
+        return index;
+    }
+
+    public int checkSingleEntity(Entity entity,Entity target,int targetIndex){
+        int index = 999;
+            if (target != null) {
+                //get entity solid area position
+                entity.solidArea.x = entity.worldX + entity.solidArea.x;
+                entity.solidArea.y = entity.worldY + entity.solidArea.y;
+                //get object solid area position
+                target.solidArea.x = target.worldX + target.solidArea.x;
+                target.solidArea.y = target.worldY + target.solidArea.y;
+
+                entity.solidArea.y += entity.speed;
+                entity.solidArea.x += entity.speed;
+
+                if (entity.solidArea.intersects(target.solidArea)) {
+                    if(target != entity){
+                        entity.collisionOn = true;
+                        index = targetIndex;
+                    }
+                }
+                entity.solidArea.x = entity.solidAreaDefaultX;
+                entity.solidArea.y = entity.solidAreaDefaultY;
+                target.solidArea.x = target.solidAreaDefaultX;
+                target.solidArea.y = target.solidAreaDefaultY;
+            }
         return index;
     }
 

@@ -71,7 +71,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public int spawnerCounter = 0;
     public int userLife;
-    public int userCurrency = 10;
+    public int userCurrency = 15;
     public int waveNum = 0;
 
     public int selectedTowerIndex = 1;
@@ -165,7 +165,6 @@ public class GamePanel extends JPanel implements Runnable {
                         aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)), selectedTowerIndex);
                     }
                 }
-                leftClick = false;
                 System.out.println( " the click was " + mouseX + " " + mouseY);
             }
             spawnerCounter++;
@@ -207,6 +206,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
+        leftClick = false;
     }
     public void paintComponent(Graphics g) {
 

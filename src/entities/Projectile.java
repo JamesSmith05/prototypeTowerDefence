@@ -1,6 +1,5 @@
 package entities;
 
-import entities.Entity;
 import gameFolder.GamePanel;
 
 import java.awt.*;
@@ -8,15 +7,16 @@ import java.awt.image.BufferedImage;
 
 public class Projectile extends Entity{
 
-    Entity user;
+    public Entity user;
 
-    double speedX, speedY,distanceX,distanceY;
+    public double speedX, speedY,distanceX,distanceY;
+    int targetIndex;
 
     public Projectile(GamePanel gp) {
         super(gp);
     }
 
-    public void set(int speed, int worldX, int worldY, double distanceX, double distanceY, boolean alive, Entity user){
+    public void set(int speed,int attack, int worldX, int worldY, double distanceX, double distanceY, boolean alive, Entity user, int targetIndex){
 
         this.worldX = worldX;
         this.worldY = worldY;
@@ -26,13 +26,22 @@ public class Projectile extends Entity{
         this.distanceX = distanceX;
         this.distanceY = distanceY;
         this.speed = speed;
+        this.attack = attack;
+        this.targetIndex = targetIndex;
 
     }
+
+    public void setSpecialDamage(int monsterIndex){
+
+    }
+
     public void update(){
 
+//        int monsterIndex = gp.cChecker.checkSingleEntity(this,gp.monster[targetIndex],targetIndex);
         int monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
         if(monsterIndex != 999){
             user.damageMonster(monsterIndex, attack);
+            setSpecialDamage(monsterIndex);
             alive = false;
         }
 

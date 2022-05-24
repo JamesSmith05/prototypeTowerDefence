@@ -2,12 +2,12 @@ package towers;
 
 import entities.Tower;
 import gameFolder.GamePanel;
-import objects.OBJ_Rock;
+import objects.OBJ_Explosive;
 
-public class IceTower extends Tower {
+public class BombTower extends Tower {
     GamePanel gp;
 
-    public IceTower(GamePanel gp) {
+    public BombTower(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
@@ -15,10 +15,10 @@ public class IceTower extends Tower {
         bulletSpeed = 8;
         attack = 2;
         getImage();
-        projectile = new OBJ_Rock(gp);
+        projectile = new OBJ_Explosive(gp);
         range = gp.tileSize*4;
-        fireRate = 20;
-        buyPrice = 5;
+        fireRate = 120;
+        buyPrice = 10;
     }
     public void getImage() {
         image = setup("towers/iceTower", gp.tileSize, gp.tileSize);
