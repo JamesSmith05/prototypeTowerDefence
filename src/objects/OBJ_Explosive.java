@@ -10,7 +10,7 @@ public class OBJ_Explosive extends Projectile {
         super(gp);
         this.gp = gp;
 
-        name  = "Explosive";
+        name  = "Explosives";
         maxLife = 80;
         life = maxLife;
         attack = 1;
@@ -21,7 +21,7 @@ public class OBJ_Explosive extends Projectile {
     public void getImage(){
         up1 = setup("projectiles/fireball_down_1", gp.tileSize, gp.tileSize);
         up2 = setup("projectiles/fireball_down_1", gp.tileSize, gp.tileSize);
-        upR1 = setup("projectiles/fireball_down_1", gp.tileSize, gp.tileSize);
+        upR1 = setup("projectiles/fireball_down_2", gp.tileSize, gp.tileSize);
         upR2 = setup("projectiles/fireball_down_1", gp.tileSize, gp.tileSize);
         upL1 = setup("projectiles/fireball_down_1", gp.tileSize, gp.tileSize);
         upL2 = setup("projectiles/fireball_down_1", gp.tileSize, gp.tileSize);
