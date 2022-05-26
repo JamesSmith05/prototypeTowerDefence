@@ -113,10 +113,14 @@ public class Entity {
         }
 
         if(frozen){
-            speed = originalSpeed-1;
+            if(speed%2==1){
+                speed += 1;
+            }
+            speed = speed/2;
             frozenCounter++;
             if (frozenCounter >120){
                 frozen = false;
+                speed = originalSpeed;
                 frozenCounter = 0;
             }
         }
