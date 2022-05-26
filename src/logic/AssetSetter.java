@@ -42,7 +42,7 @@ public class AssetSetter {
             }else if(towerIndex == 5 ){
                 gp.tower[j] = new IceTower(gp);
             }else if(towerIndex == 6 ){
-                gp.tower[j] = new IceTower(gp);
+                gp.tower[j] = new TackTower(gp);
             }else if(towerIndex == 7 ){
                 gp.tower[j] = new IceTower(gp);
             }else if(towerIndex == 8 ){
@@ -141,7 +141,7 @@ public class AssetSetter {
         gp.towerOptions[3] = new BombTower(gp);
         gp.towerOptions[4] = new FlameTower(gp);
         gp.towerOptions[5] = new IceTower(gp);
-        gp.towerOptions[6] = new IceTower(gp);
+        gp.towerOptions[6] = new TackTower(gp);
         gp.towerOptions[7] = new IceTower(gp);
         gp.towerOptions[8] = new IceTower(gp);
         gp.towerOptions[9] = new IceTower(gp);

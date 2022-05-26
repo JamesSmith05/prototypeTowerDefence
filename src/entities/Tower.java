@@ -36,18 +36,18 @@ public class Tower extends Entity {
         double distanceABS = selectedMonsterDistance;
 
         if (distanceABS<range){
-            if(shotAvailableCounter == fireRate){
-
-                projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
-                gp.projectileList.add(projectile);
+            if(shotAvailableCounter == fireRate ){
+                if(!Objects.equals(name, "TackTower")){
+                    projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+                    gp.projectileList.add(projectile);
+                }
+                setAction();
                 shotAvailableCounter = 0;
-
             }
         }
         if(shotAvailableCounter < fireRate){
             shotAvailableCounter++;
         }
-        setAction();
 
         spriteCounter++;
         if (spriteCounter > 12) {

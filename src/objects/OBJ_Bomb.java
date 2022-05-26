@@ -39,15 +39,15 @@ public class OBJ_Bomb extends Projectile {
                 gp.obj[j] = new OBJ_Explosion(gp);
                 gp.obj[j].worldX = worldX - gp.tileSize/2;
                 gp.obj[j].worldY = worldY - gp.tileSize/2;
-                j= gp.obj.length;
+                j = gp.obj.length;
             }
         }
         for (int i = 0; i < gp.monster.length; i++) {
-            if(gp.monster[i] != null){
+            if(gp.monster[i] != null && i != monsterIndex){
                 int monsterDistanceX = (gp.monster[i].worldX - worldX + (gp.tileSize/2));
                 int monsterDistanceY = (gp.monster[i].worldY - worldY + (gp.tileSize/2));
                 double monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
-                if(monsterDistanceABS<explosionRange*gp.tileSize && i != monsterIndex){
+                if(monsterDistanceABS<(explosionRange*gp.tileSize)){
                     user.damageMonster(i, attack);
                 }
             }
