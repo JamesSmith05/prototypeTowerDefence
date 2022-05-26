@@ -79,14 +79,16 @@ public class Projectile extends Entity{
     public void calculateVectors(){
 
         speedX = speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY)));
-        speedY = speed-Math.abs(speedX);
+        speedY = speed-speedX;
+//        speedX = Math.sqrt((speed^2) - (speedY*speedY));
+//        speedY = Math.sqrt((speed^2) - (speedX*speedX));
         if(distanceX<0 && distanceY<0){
             speedY = -speedY;
             speedX = -speedX;
-        }else if (distanceX>0 && distanceY<0){
+        }else if (distanceX>=0 && distanceY<0){
             speedY = -speedY;
 
-        }else if (distanceX<0 && distanceY>0) {
+        }else if (distanceX<0 && distanceY>=0) {
             speedX = -speedX;
         }
     }
@@ -96,6 +98,8 @@ public class Projectile extends Entity{
 
         if (spriteNum == 1) {image = down1;}
         if (spriteNum == 2) {image = down2;}
+
+        g2.drawString(String.valueOf(worldX) + String.valueOf(worldY),worldX,worldY);
 
         g2.drawImage(image, worldX, worldY,null);
     }

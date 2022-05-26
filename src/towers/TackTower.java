@@ -44,14 +44,14 @@ public class TackTower extends Tower {
     }
 
     public void setAction() {
-        projectile.set(bulletSpeed,attack,worldX,worldY,-100,-100,true,this,0);gp.projectileList.add(projectile);
-        projectile2.set(bulletSpeed,attack,worldX,worldY,-100,0,true,this,0);gp.projectileList.add(projectile2);
-        projectile3.set(bulletSpeed,attack,worldX,worldY,-100,100,true,this,0);gp.projectileList.add(projectile3);
-        projectile4.set(bulletSpeed,attack,worldX,worldY,0,-100,true,this,0);gp.projectileList.add(projectile4);
-        projectile5.set(bulletSpeed,attack,worldX,worldY,0,100,true,this,0);gp.projectileList.add(projectile5);
-        projectile6.set(bulletSpeed,attack,worldX,worldY,100,-100,true,this,0);gp.projectileList.add(projectile6);
-        projectile7.set(bulletSpeed,attack,worldX,worldY,100,0,true,this,0);gp.projectileList.add(projectile7);
-        projectile8.set(bulletSpeed,attack,worldX,worldY,100,100,true,this,0);gp.projectileList.add(projectile8);
+        projectile.set(bulletSpeed,attack,worldX,worldY,-100,-100,true,this,0);projectile.maxLife=10;gp.projectileList.add(projectile);
+        //projectile2.set(bulletSpeed,attack,worldX,worldY,-100,0,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile2);
+        //projectile3.set(bulletSpeed,attack,worldX,worldY,-100,100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile3);
+        //projectile4.set(bulletSpeed,attack,worldX,worldY,0,-100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile4);
+        //projectile5.set(bulletSpeed,attack,worldX,worldY,0,100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile5);
+        //projectile6.set(bulletSpeed,attack,worldX,worldY,100,-100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile6);
+        //projectile7.set(bulletSpeed,attack,worldX,worldY,100,0,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile7);
+        projectile8.set(bulletSpeed,attack,worldX,worldY,100,100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile8);
 
 
 

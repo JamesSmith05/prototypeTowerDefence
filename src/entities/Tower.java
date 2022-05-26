@@ -41,10 +41,11 @@ public class Tower extends Entity {
                     projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
                     gp.projectileList.add(projectile);
                 }
-                setAction();
+
                 shotAvailableCounter = 0;
             }
         }
+        setAction();
         if(shotAvailableCounter < fireRate){
             shotAvailableCounter++;
         }
