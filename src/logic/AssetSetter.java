@@ -61,10 +61,10 @@ public class AssetSetter {
         if(i == 0){
             gp.monster[i] = new MON_GreenSlime(gp);
         }
-        else if (i == 9 || i == 14){
+        else if (i % 9 == 0 || i % 14 == 0){
             gp.monster[i] = new MON_Wraith(gp);
         }
-        else if (i == 16){
+        else if (i % 16 ==0){
             gp.monster[i] = new MON_Bat(gp);
         }
         else if (i%2 == 0 ){

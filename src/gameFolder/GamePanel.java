@@ -71,7 +71,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public int spawnerCounter = 0;
     public int userLife;
-    public int userCurrency = 15;
+    public int userCurrency = 100;
     public int waveNum = 0;
 
     public int selectedTowerIndex = 1;

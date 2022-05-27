@@ -14,7 +14,6 @@ public class Tower extends Entity {
 
 
     public Tower(GamePanel gp) {
-
         super(gp);
         this.gp = gp;
 
@@ -41,11 +40,11 @@ public class Tower extends Entity {
                     projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
                     gp.projectileList.add(projectile);
                 }
-
+                setAction();
                 shotAvailableCounter = 0;
             }
         }
-        setAction();
+
         if(shotAvailableCounter < fireRate){
             shotAvailableCounter++;
         }
@@ -78,8 +77,8 @@ public class Tower extends Entity {
         savedMonsterIndex = 0;
         while (i < gp.monster.length){
             if(gp.monster[i] != null){                                      //&& !gp.monster[i].invincible  to make towers ignore invincible enemies
-                monsterDistanceX = (gp.monster[i].worldX - worldX + (gp.tileSize/2));
-                monsterDistanceY = (gp.monster[i].worldY - worldY + (gp.tileSize/2));
+                monsterDistanceX = (gp.monster[i].worldX - worldX);
+                monsterDistanceY = (gp.monster[i].worldY - worldY);
                 monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
                 if(monsterDistanceABS<selectedMonsterDistance && monsterDistanceABS<range){
                     savedMonsterIndex = i;
@@ -100,8 +99,8 @@ public class Tower extends Entity {
         savedMonsterIndex = 0;
         while (i < gp.monster.length){
             if(gp.monster[i] != null){                                      //&& !gp.monster[i].invincible  to make towers ignore invincible enemies
-                monsterDistanceX = (gp.monster[i].worldX - worldX + (gp.tileSize/2));
-                monsterDistanceY = (gp.monster[i].worldY - worldY + (gp.tileSize/2));
+                monsterDistanceX = (gp.monster[i].worldX - worldX);
+                monsterDistanceY = (gp.monster[i].worldY - worldY);
                 monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
                 if(gp.monster[i].life > largestMonsterHealth && monsterDistanceABS<range){
                     largestMonsterHealth = gp.monster[i].life;

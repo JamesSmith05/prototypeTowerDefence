@@ -3,7 +3,7 @@ package towers;
 import entities.Projectile;
 import entities.Tower;
 import gameFolder.GamePanel;
-import objects.OBJ_Rock;
+import objects.OBJ_Tack;
 
 public class TackTower extends Tower {
     GamePanel gp;
@@ -18,14 +18,14 @@ public class TackTower extends Tower {
         bulletSpeed = 8;
         attack = 2;
         getImage();
-        projectile = new OBJ_Rock(gp);
-        projectile2 = new OBJ_Rock(gp);
-        projectile3 = new OBJ_Rock(gp);
-        projectile4 = new OBJ_Rock(gp);
-        projectile5 = new OBJ_Rock(gp);
-        projectile6 = new OBJ_Rock(gp);
-        projectile7 = new OBJ_Rock(gp);
-        projectile8 = new OBJ_Rock(gp);
+        projectile = new OBJ_Tack(gp);
+        projectile2 = new OBJ_Tack(gp);
+        projectile3 = new OBJ_Tack(gp);
+        projectile4 = new OBJ_Tack(gp);
+        projectile5 = new OBJ_Tack(gp);
+        projectile6 = new OBJ_Tack(gp);
+        projectile7 = new OBJ_Tack(gp);
+        projectile8 = new OBJ_Tack(gp);
 
         range = gp.tileSize*4;
         fireRate = 20;
@@ -44,16 +44,37 @@ public class TackTower extends Tower {
     }
 
     public void setAction() {
-        projectile.set(bulletSpeed,attack,worldX,worldY,-100,-100,true,this,0);projectile.maxLife=10;gp.projectileList.add(projectile);
-        //projectile2.set(bulletSpeed,attack,worldX,worldY,-100,0,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile2);
-        //projectile3.set(bulletSpeed,attack,worldX,worldY,-100,100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile3);
-        //projectile4.set(bulletSpeed,attack,worldX,worldY,0,-100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile4);
-        //projectile5.set(bulletSpeed,attack,worldX,worldY,0,100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile5);
-        //projectile6.set(bulletSpeed,attack,worldX,worldY,100,-100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile6);
-        //projectile7.set(bulletSpeed,attack,worldX,worldY,100,0,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile7);
-        projectile8.set(bulletSpeed,attack,worldX,worldY,100,100,true,this,0);projectile.maxLife=5;gp.projectileList.add(projectile8);
-
-
-
+        if(!projectile.alive) {
+            projectile.set(bulletSpeed,attack,worldX,worldY,-100,-100,true,this,0);
+            gp.projectileList.add(projectile);
+        }
+        if(!projectile2.alive) {
+            projectile2.set(bulletSpeed,attack,worldX,worldY,-100,0,true,this,0);
+            gp.projectileList.add(projectile2);
+        }
+        if(!projectile3.alive) {
+            projectile3.set(bulletSpeed,attack,worldX,worldY,-100,100,true,this,0);
+            gp.projectileList.add(projectile3);
+        }
+        if(!projectile4.alive) {
+            projectile4.set(bulletSpeed,attack,worldX,worldY,0,-100,true,this,0);
+            gp.projectileList.add(projectile4);
+        }
+        if(!projectile5.alive) {
+            projectile5.set(bulletSpeed,attack,worldX,worldY,0,100,true,this,0);
+            gp.projectileList.add(projectile5);
+        }
+        if(!projectile6.alive) {
+            projectile6.set(bulletSpeed,attack,worldX,worldY,100,-100,true,this,0);
+            gp.projectileList.add(projectile6);
+        }
+        if(!projectile7.alive) {
+            projectile7.set(bulletSpeed,attack,worldX,worldY,100,0,true,this,0);
+            gp.projectileList.add(projectile7);
+        }
+        if(!projectile8.alive) {
+            projectile8.set(bulletSpeed,attack,worldX,worldY,100,100,true,this,0);
+            gp.projectileList.add(projectile8);
+        }
     }
 }

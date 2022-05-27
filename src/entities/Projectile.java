@@ -30,7 +30,7 @@ public class Projectile extends Entity{
         this.attack = attack;
         this.targetIndex = targetIndex;
 
-        solidArea = new Rectangle(10, 10, 44, 44);
+        solidArea = new Rectangle(0, 0, 64, 64);
 
     }
 
@@ -78,8 +78,40 @@ public class Projectile extends Entity{
 
     public void calculateVectors(){
 
-        speedX = speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY)));
-        speedY = speed-speedX;
+        if(Math.abs(distanceX)<Math.abs(distanceY)){
+            if(Math.abs(distanceX)/Math.abs(distanceY) < 0.025 ){
+                speedX = 0.05;
+            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.05 ){
+                speedX = 0.1;
+            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.075 ){
+                speedX = 0.2;
+            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.10 ){
+                speedX = 0.3;
+            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.125 ){
+                speedX = 0.4;
+            }
+            else{
+                speedX = Math.sqrt(speed*speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY))));
+            }
+            speedY = Math.sqrt(speed*speed*(Math.abs(distanceY)/(Math.abs(distanceX)+ Math.abs(distanceY))));
+        }else{
+            if(Math.abs(distanceY)/Math.abs(distanceX) < 0.025 ){
+                speedY=0.05;
+            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.05 ){
+                speedY=0.1;
+            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.075 ){
+                speedY=0.2;
+            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.10 ){
+                speedY=0.3;
+            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.125 ){
+                speedY=0.4;
+            }
+            else{
+                speedY = Math.sqrt(speed*speed*(Math.abs(distanceY)/(Math.abs(distanceX)+ Math.abs(distanceY))));
+            }
+            speedX = Math.sqrt(speed*speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY))));
+        }
+
 //        speedX = Math.sqrt((speed^2) - (speedY*speedY));
 //        speedY = Math.sqrt((speed^2) - (speedX*speedX));
         if(distanceX<0 && distanceY<0){
