@@ -20,8 +20,8 @@ public class EventHandler {
         while (col< gp.maxScreenCol && row < gp.maxScreenRow){
 
             eventRect[col][row] = new EventRect();
-            eventRect[col][row].x = 29;
-            eventRect[col][row].y = 29;
+            eventRect[col][row].x = (gp.tileSize/2) - 3;
+            eventRect[col][row].y = (gp.tileSize/2) - 3;
             eventRect[col][row].width = 6;
             eventRect[col][row].height = 6;
             eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;

@@ -17,7 +17,7 @@ public class Entity {
     public Rectangle solidArea = new Rectangle(0, 0, 0,0);
     public Rectangle solidAreaDirectionChanger = new Rectangle(0, 0, 6, 6);    // change around for different tile sizes
     public int solidAreaDefaultX, solidAreaDefaultY;
-    public int solidAreaDefaultDirectionX = solidAreaDirectionChanger.x, solidAreaDefaultDirectionY = solidAreaDirectionChanger.y;
+    public int solidAreaDefaultDirectionX, solidAreaDefaultDirectionY;
 
     public boolean collision = false;
 
@@ -83,6 +83,8 @@ public class Entity {
         solidArea.height = gp.tileSize;
         solidAreaDirectionChanger.x = (gp.tileSize/2) - 3;
         solidAreaDirectionChanger.y = (gp.tileSize/2) - 3;
+        solidAreaDefaultDirectionX = solidAreaDirectionChanger.x;
+        solidAreaDefaultDirectionY = solidAreaDirectionChanger.y;
 
     }
 

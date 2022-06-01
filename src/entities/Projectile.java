@@ -112,7 +112,7 @@ public class Projectile extends Entity{
 //            speedX = Math.sqrt(speed*speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY))));
 //        }
 
-        speedX = Math.abs(distanceX)/(Math.abs(distanceX)+Math.abs(distanceY));
+        speedX = speed*(Math.abs(distanceX)/(Math.abs(distanceX)+Math.abs(distanceY)));
         speedY = speed - speedX;
 
         if(distanceX<0 && distanceY<0){

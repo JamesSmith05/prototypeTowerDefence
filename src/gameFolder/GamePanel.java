@@ -18,7 +18,7 @@ import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    final int originalTileSize = 64;
+    final int originalTileSize = 48;
     final int scale = 1;
     public int mouseX = 0, mouseY = 0;
 
@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public int spawnerCounter = 0;
     public int userLife;
-    public int userCurrency = 100;
+    public int userCurrency;
     public int waveNum = 0;
 
     public int selectedTowerIndex = 1;
@@ -91,6 +91,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        aSetter.setNPC();
         aSetter.setTowerOptions();
         userLife = 50;
+        userCurrency = 10;
         //playMusic(0);
         gameState = titleState;
 
