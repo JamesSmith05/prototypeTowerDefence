@@ -67,12 +67,15 @@ public class UI {
     public void drawUserInfo(){
         int messageX = gp.tileSize/2;
         int messageY = (gp.tileSize/4)*3;
+        String text = "Life: " + gp.userLife;
         g2.setFont(g2.getFont().deriveFont(32F));
-        g2.drawString("Life: " + gp.userLife,messageX,messageY);
-        messageX += 2.5*gp.tileSize;
-        g2.drawString("Coins: " + gp.userCurrency,messageX,messageY);
-        messageX += 2.5*gp.tileSize;
-        g2.drawString("Wave: " + gp.waveNum,messageX,messageY);
+        g2.drawString(text,messageX,messageY);
+        messageX += (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth() + 10;
+        text = "Coins: " + gp.userCurrency;
+        g2.drawString(text,messageX,messageY);
+        messageX += (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth() + 10;
+        text = "Wave: " + gp.waveNum;
+        g2.drawString(text,messageX,messageY);
 
     }
 
@@ -148,12 +151,13 @@ public class UI {
 
     public void drawTowerImages(){
 
-        int offset = 5;
+        int offset = gp.tileSize/13;
 
         int X = (gp.maxScreenCol*gp.tileSize) - (3*gp.tileSize) + 16, Y = 16;
-        g2.setFont(g2.getFont().deriveFont(16F));
+
+        g2.setFont(g2.getFont().deriveFont(Float.parseFloat((gp.tileSize / 4) + "F")));
         g2.setColor(Color.WHITE);
-        g2.setStroke(new BasicStroke(5));
+//        g2.setStroke(new BasicStroke(5));
         for (int i = 1; i < 10; i++) {
             g2.setColor(new Color(240,190,90));
             g2.fillRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
@@ -165,18 +169,18 @@ public class UI {
                 g2.drawRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
             }
 
-            X += gp.tileSize + 4*offset;
+            X += gp.tileSize + 2*offset;
 
             g2.setColor(Color.WHITE);
-            Y += 16;
+            Y += gp.tileSize/4;
             g2.drawString("Cost: " + gp.towerOptions[i].buyPrice,X,Y);
-            Y += 16;
+            Y += gp.tileSize/4;
             g2.drawString("Range: " + (gp.towerOptions[i].range/gp.tileSize),X,Y);
-            Y += 16;
+            Y += gp.tileSize/4;
             g2.drawString("Fire rate: " + (60/ gp.towerOptions[i].fireRate),X,Y);
 
-            X -= (gp.tileSize + 4*offset);
-            Y += 32;
+            X -= (gp.tileSize + 2*offset);
+            Y += gp.tileSize/2;
         }
 
         g2.setColor(new Color(240,190,90));
@@ -188,14 +192,14 @@ public class UI {
             g2.setStroke(new BasicStroke(3));
             g2.drawRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
         }
-        X += gp.tileSize + 4*offset;
+        X += gp.tileSize + 2*offset;
 
         g2.setColor(Color.WHITE);
-        Y += 16;
+        Y += gp.tileSize/4;
         g2.drawString("Cost: " + gp.towerOptions[0].buyPrice,X,Y);
-        Y += 16;
+        Y += gp.tileSize/4;
         g2.drawString("Range: " + (gp.towerOptions[0].range/gp.tileSize),X,Y);
-        Y += 16;
+        Y += gp.tileSize/4;
         g2.drawString("Fire rate: " + (60/ gp.towerOptions[0].fireRate),X,Y);
     }
 

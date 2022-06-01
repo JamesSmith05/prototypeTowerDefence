@@ -14,10 +14,10 @@ public class Entity {
     public BufferedImage upR1,upR2,upL1,upL2,downR1,downR2,downL1,downL2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public BufferedImage image, image2, image3;
-    public Rectangle solidArea = new Rectangle(0, 0, 64, 64);
-    public Rectangle solidAreaDirectionChanger = new Rectangle(29, 29, 6, 6);
+    public Rectangle solidArea = new Rectangle(0, 0, 0,0);
+    public Rectangle solidAreaDirectionChanger = new Rectangle(0, 0, 6, 6);    // change around for different tile sizes
     public int solidAreaDefaultX, solidAreaDefaultY;
-    public int solidAreaDefaultDirectionX = 29, solidAreaDefaultDirectionY = 29;
+    public int solidAreaDefaultDirectionX = solidAreaDirectionChanger.x, solidAreaDefaultDirectionY = solidAreaDirectionChanger.y;
 
     public boolean collision = false;
 
@@ -79,6 +79,11 @@ public class Entity {
 
     public Entity(GamePanel gp){
         this.gp = gp;
+        solidArea.width = gp.tileSize;
+        solidArea.height = gp.tileSize;
+        solidAreaDirectionChanger.x = (gp.tileSize/2) - 3;
+        solidAreaDirectionChanger.y = (gp.tileSize/2) - 3;
+
     }
 
     public void setAction(){}

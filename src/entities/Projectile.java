@@ -78,42 +78,43 @@ public class Projectile extends Entity{
 
     public void calculateVectors(){
 
-        if(Math.abs(distanceX)<Math.abs(distanceY)){
-            if(Math.abs(distanceX)/Math.abs(distanceY) < 0.025 ){
-                speedX = 0.05;
-            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.05 ){
-                speedX = 0.1;
-            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.075 ){
-                speedX = 0.2;
-            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.10 ){
-                speedX = 0.3;
-            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.125 ){
-                speedX = 0.4;
-            }
-            else{
-                speedX = Math.sqrt(speed*speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY))));
-            }
-            speedY = Math.sqrt(speed*speed*(Math.abs(distanceY)/(Math.abs(distanceX)+ Math.abs(distanceY))));
-        }else{
-            if(Math.abs(distanceY)/Math.abs(distanceX) < 0.025 ){
-                speedY=0.05;
-            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.05 ){
-                speedY=0.1;
-            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.075 ){
-                speedY=0.2;
-            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.10 ){
-                speedY=0.3;
-            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.125 ){
-                speedY=0.4;
-            }
-            else{
-                speedY = Math.sqrt(speed*speed*(Math.abs(distanceY)/(Math.abs(distanceX)+ Math.abs(distanceY))));
-            }
-            speedX = Math.sqrt(speed*speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY))));
-        }
+//        if(Math.abs(distanceX)<Math.abs(distanceY)){
+//            if(Math.abs(distanceX)/Math.abs(distanceY) < 0.025 ){
+//                speedX = 0.05;
+//            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.05 ){
+//                speedX = 0.1;
+//            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.075 ){
+//                speedX = 0.2;
+//            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.10 ){
+//                speedX = 0.3;
+//            }else if(Math.abs(distanceX)/Math.abs(distanceY) < 0.125 ){
+//                speedX = 0.4;
+//            }
+//            else{
+//                speedX = Math.sqrt(speed*speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY))));
+//            }
+//            speedY = Math.sqrt(speed*speed*(Math.abs(distanceY)/(Math.abs(distanceX)+ Math.abs(distanceY))));
+//        }else{
+//            if(Math.abs(distanceY)/Math.abs(distanceX) < 0.025 ){
+//                speedY=0.05;
+//            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.05 ){
+//                speedY=0.1;
+//            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.075 ){
+//                speedY=0.2;
+//            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.10 ){
+//                speedY=0.3;
+//            }else if(Math.abs(distanceY)/Math.abs(distanceX) < 0.125 ){
+//                speedY=0.4;
+//            }
+//            else{
+//                speedY = Math.sqrt(speed*speed*(Math.abs(distanceY)/(Math.abs(distanceX)+ Math.abs(distanceY))));
+//            }
+//            speedX = Math.sqrt(speed*speed*(Math.abs(distanceX)/(Math.abs(distanceX)+ Math.abs(distanceY))));
+//        }
 
-//        speedX = Math.sqrt((speed^2) - (speedY*speedY));
-//        speedY = Math.sqrt((speed^2) - (speedX*speedX));
+        speedX = Math.abs(distanceX)/(Math.abs(distanceX)+Math.abs(distanceY));
+        speedY = speed - speedX;
+
         if(distanceX<0 && distanceY<0){
             speedY = -speedY;
             speedX = -speedX;
@@ -131,7 +132,7 @@ public class Projectile extends Entity{
         if (spriteNum == 1) {image = down1;}
         if (spriteNum == 2) {image = down2;}
 
-        g2.drawString(String.valueOf(worldX) + String.valueOf(worldY),worldX,worldY);
+        //g2.drawString(String.valueOf(worldX) + String.valueOf(worldY),worldX,worldY);
 
         g2.drawImage(image, worldX, worldY,null);
     }

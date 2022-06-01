@@ -18,8 +18,6 @@ import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    JFrame window;
-
     final int originalTileSize = 64;
     final int scale = 1;
     public int mouseX = 0, mouseY = 0;
