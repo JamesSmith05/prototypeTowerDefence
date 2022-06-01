@@ -74,24 +74,24 @@ public class AssetSetter {
             gp.monster[i] = new MON_GreenSlime(gp);
         }
 
-        if(5 < waveNum && waveNum <=10){
+        if(3 < waveNum && waveNum <=6){
             gp.monster[i].speed +=1;
             gp.monster[i].maxLife +=2;
             gp.monster[i].life = gp.monster[i].maxLife;
         }
-        else if(10 < waveNum && waveNum <=15){
+        else if(6 < waveNum && waveNum <=8){
             gp.monster[i].speed +=2;
-            gp.monster[i].maxLife +=4;
+            gp.monster[i].maxLife +=6;
             gp.monster[i].life = gp.monster[i].maxLife;
         }
-        else if(15 < waveNum && waveNum <=20){
+        else if(8 < waveNum && waveNum <=10){
             gp.monster[i].speed +=3;
-            gp.monster[i].maxLife +=8;
+            gp.monster[i].maxLife +=12;
             gp.monster[i].life = gp.monster[i].maxLife;
         }
-        else if (waveNum > 20){
+        else if (waveNum > 10){
             gp.monster[i].speed +=4;
-            gp.monster[i].maxLife += (waveNum*4);
+            gp.monster[i].maxLife += (waveNum*2);
             gp.monster[i].life = gp.monster[i].maxLife;
         }
 
@@ -106,7 +106,7 @@ public class AssetSetter {
         if(waveNum == 0){
 
         }
-        if (waveNum > 0 && waveNum <= 5){
+        if (waveNum > 0 && waveNum <= 3){
             if(k < waveNum*5+10) {
                 waveLock = true;
                 setEnemy(waveNum);
@@ -118,7 +118,7 @@ public class AssetSetter {
                 waveLock = false;
             }
         }
-        if (waveNum > 5 && waveNum <= 10){
+        if (waveNum > 3 && waveNum <= 6){
             if(k < waveNum*10+20) {
                 waveLock = true;
                 setEnemy(waveNum);
@@ -130,6 +130,19 @@ public class AssetSetter {
                 waveLock = false;
             }
         }
+        if (waveNum > 6){
+            if(k < waveNum*5+5) {
+                waveLock = true;
+                setEnemy(waveNum);
+                k++;
+                if(i > gp.monster.length){
+                    resetMobCounter();
+                }
+            }else{
+                waveLock = false;
+            }
+        }
+
     }
 
     public void resetMobCounter(){i = 0;}
