@@ -45,7 +45,7 @@ public class TackTower extends Tower {
 
     public void setAction() {
         if(!projectile.alive) {
-            projectile.set(bulletSpeed,attack,worldX,worldY,-100,-100,true,this,0);
+            projectile.set((int) ( bulletSpeed*1.5),attack,worldX,worldY,-100,-100,true,this,0);
             gp.projectileList.add(projectile);
         }
         if(!projectile2.alive) {
@@ -53,7 +53,7 @@ public class TackTower extends Tower {
             gp.projectileList.add(projectile2);
         }
         if(!projectile3.alive) {
-            projectile3.set(bulletSpeed,attack,worldX,worldY,-100,100,true,this,0);
+            projectile3.set((int) ( bulletSpeed*1.5),attack,worldX,worldY,-100,100,true,this,0);
             gp.projectileList.add(projectile3);
         }
         if(!projectile4.alive) {
@@ -65,7 +65,7 @@ public class TackTower extends Tower {
             gp.projectileList.add(projectile5);
         }
         if(!projectile6.alive) {
-            projectile6.set(bulletSpeed,attack,worldX,worldY,100,-100,true,this,0);
+            projectile6.set((int) ( bulletSpeed*1.5),attack,worldX,worldY,100,-100,true,this,0);
             gp.projectileList.add(projectile6);
         }
         if(!projectile7.alive) {
@@ -73,7 +73,7 @@ public class TackTower extends Tower {
             gp.projectileList.add(projectile7);
         }
         if(!projectile8.alive) {
-            projectile8.set(bulletSpeed,attack,worldX,worldY,100,100,true,this,0);
+            projectile8.set((int) ( bulletSpeed*1.5),attack,worldX,worldY,100,100,true,this,0);
             gp.projectileList.add(projectile8);
         }
     }

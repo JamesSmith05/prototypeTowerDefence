@@ -10,7 +10,7 @@ public class OBJ_Tack extends Projectile {
         this.gp = gp;
 
         name  = "Tack";
-        maxLife = 15;
+        maxLife = 11;
         life = maxLife;
         attack = 2;
         alive = false;

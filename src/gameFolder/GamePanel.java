@@ -65,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
-    public Rectangle mouseSolidArea = new Rectangle(0, 0, 64, 64);
+    public Rectangle mouseSolidArea = new Rectangle(0, 0, tileSize, tileSize);
 
     public int spawnerCounter = 0;
     public int userLife;
