@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
     //ENTITY AND OBJECT
     public Entity[] tower = new Entity[100];
     public Entity[] towerOptions = new Entity[10];
-    public Entity[] obj = new Entity[10];  //increase number to increase max number of object on screen
+    public Entity[] obj = new Entity[50];  //increase number to increase max number of object on screen
     public Entity[] npc = new Entity[10];
     public Entity[] monster = new Entity[100];
     ArrayList<Entity> entityList = new ArrayList<>();
@@ -183,7 +183,6 @@ public class GamePanel extends JPanel implements Runnable {
                     if(!aSetter.waveLock){
                         waveNum ++;
                         aSetter.k = 0;
-                        aSetter.resetMobCounter();
                     }
                     keyH.spacePressed = false;
                 }
