@@ -170,11 +170,9 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println( " the click was " + mouseX + " " + mouseY);
             }
             if (rightClick){
-                if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2)){
-                    if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2, tower)){
+                    if(cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2, tower)){
                         tower[interactTowerIndex] = null;
                     }
-                }
                 System.out.println( " the click was " + mouseX + " " + mouseY);
             }
             spawnerCounter++;
