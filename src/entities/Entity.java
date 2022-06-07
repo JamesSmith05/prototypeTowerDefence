@@ -120,6 +120,7 @@ public class Entity {
         }
 
         if(frozen){
+            speed = originalSpeed;
             if(speed%2==1){
                 speed += 1;
             }

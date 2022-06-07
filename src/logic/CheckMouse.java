@@ -22,6 +22,7 @@ public class CheckMouse extends MouseAdapter{
 
         if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) {
             System.out.println("Right click detected : " + (e.getPoint()));
+            gp.rightClick = true;
         }
 
         if ((e.getModifiers() & InputEvent.BUTTON2_MASK) != 0) {

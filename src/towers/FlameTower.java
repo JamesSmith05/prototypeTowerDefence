@@ -18,7 +18,7 @@ public class FlameTower extends Tower {
         projectile = new OBJ_Fireball(gp);
         range = gp.tileSize*4;
         fireRate = 30;
-        buyPrice = 5;
+        buyPrice = 15;
     }
     public void getImage() {
         image = setup("towers/flameTower", gp.tileSize, gp.tileSize);

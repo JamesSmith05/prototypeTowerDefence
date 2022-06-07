@@ -18,11 +18,12 @@ import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    final int originalTileSize = 48;
+    final int originalTileSize = 64;
     final int scale = 1;
     public int mouseX = 0, mouseY = 0;
 
     public boolean leftClick = false;
+    public boolean rightClick = false;
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 23; // 20 map tiles plus 3 tower tiles
@@ -66,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dialogueState = 3;
     public final int characterState = 4;
     public Rectangle mouseSolidArea = new Rectangle(0, 0, tileSize, tileSize);
+    public Rectangle mouseSolidArea2 = new Rectangle((tileSize/2)-1,(tileSize/2)-1,2,2);
 
     public int spawnerCounter = 0;
     public int userLife;
@@ -73,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int waveNum = 0;
 
     public int selectedTowerIndex = 1;
+    public int interactTowerIndex = 100;
 
     public GamePanel() {
 
@@ -91,7 +94,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        aSetter.setNPC();
         aSetter.setTowerOptions();
         userLife = 50;
-        userCurrency = 10;
+        userCurrency = 25;
         //playMusic(0);
         gameState = titleState;
 
@@ -166,8 +169,16 @@ public class GamePanel extends JPanel implements Runnable {
                 }
                 System.out.println( " the click was " + mouseX + " " + mouseY);
             }
+            if (rightClick){
+                if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2)){
+                    if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2, tower)){
+                        tower[interactTowerIndex] = null;
+                    }
+                }
+                System.out.println( " the click was " + mouseX + " " + mouseY);
+            }
             spawnerCounter++;
-            if (spawnerCounter > 40) {
+            if (spawnerCounter > 15) {
                 aSetter.waveSpawner(waveNum);
                 spawnerCounter = 0;
                 if(keyH.spacePressed){
@@ -218,6 +229,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         leftClick = false;
+        rightClick = false;
     }
     public void paintComponent(Graphics g) {
 

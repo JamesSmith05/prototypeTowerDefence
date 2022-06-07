@@ -53,8 +53,8 @@ public class AssetSetter {
             gp.tower[j].worldX = x;
             gp.tower[j].worldY = y;
             gp.userCurrency -=gp.towerOptions[towerIndex].buyPrice;
+            j++;
         }
-        j++;
     }
 
     public void setEnemy(int waveNum){
@@ -75,22 +75,26 @@ public class AssetSetter {
         }
 
         if(3 < waveNum && waveNum <=6){
-            gp.monster[i].speed +=1;
+            gp.monster[i].originalSpeed +=1;
+            gp.monster[i].speed = gp.monster[i].originalSpeed;
             gp.monster[i].maxLife +=2;
             gp.monster[i].life = gp.monster[i].maxLife;
         }
         else if(6 < waveNum && waveNum <=8){
-            gp.monster[i].speed +=2;
+            gp.monster[i].originalSpeed +=2;
+            gp.monster[i].speed = gp.monster[i].originalSpeed;
             gp.monster[i].maxLife +=6;
             gp.monster[i].life = gp.monster[i].maxLife;
         }
         else if(8 < waveNum && waveNum <=10){
-            gp.monster[i].speed +=3;
+            gp.monster[i].originalSpeed +=3;
+            gp.monster[i].speed = gp.monster[i].originalSpeed;
             gp.monster[i].maxLife +=12;
             gp.monster[i].life = gp.monster[i].maxLife;
         }
         else if (waveNum > 10){
-            gp.monster[i].speed +=4;
+            gp.monster[i].originalSpeed +=4;
+            gp.monster[i].speed = gp.monster[i].originalSpeed;
             gp.monster[i].maxLife += (waveNum*2);
             gp.monster[i].life = gp.monster[i].maxLife;
         }
@@ -109,11 +113,12 @@ public class AssetSetter {
         if (waveNum > 0 && waveNum <= 3){
             if(k < waveNum*5+10) {
                 waveLock = true;
-                setEnemy(waveNum);
-                k++;
                 if(i > gp.monster.length){
                     resetMobCounter();
                 }
+                setEnemy(waveNum);
+                k++;
+
             }else{
                 waveLock = false;
             }
@@ -121,11 +126,12 @@ public class AssetSetter {
         if (waveNum > 3 && waveNum <= 6){
             if(k < waveNum*10+20) {
                 waveLock = true;
-                setEnemy(waveNum);
-                k++;
                 if(i > gp.monster.length){
                     resetMobCounter();
                 }
+                setEnemy(waveNum);
+                k++;
+
             }else{
                 waveLock = false;
             }
@@ -133,11 +139,12 @@ public class AssetSetter {
         if (waveNum > 6){
             if(k < waveNum*5+5) {
                 waveLock = true;
-                setEnemy(waveNum);
-                k++;
                 if(i > gp.monster.length){
                     resetMobCounter();
                 }
+                setEnemy(waveNum);
+                k++;
+
             }else{
                 waveLock = false;
             }

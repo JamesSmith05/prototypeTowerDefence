@@ -86,6 +86,7 @@ public class CollisionChecker {
 
                 if (solidArea.intersects(target[i].solidArea)) {
                     collision = true;
+                    gp.interactTowerIndex = i;
                 }
                 solidArea.x = solidAreaDefaultX;
                 solidArea.y = solidAreaDefaultY;
