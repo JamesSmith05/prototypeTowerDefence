@@ -113,7 +113,7 @@ public class AssetSetter {
         if (waveNum > 0 && waveNum <= 3){
             if(k < waveNum*5+10) {
                 waveLock = true;
-                if(enemyId > gp.monster.length){
+                if(enemyId >= gp.monster.length){
                     resetMobCounter();
                 }
                 setEnemy(waveNum);
@@ -126,7 +126,7 @@ public class AssetSetter {
         if (waveNum > 3 && waveNum <= 6){
             if(k < waveNum*10+20) {
                 waveLock = true;
-                if(enemyId > gp.monster.length){
+                if(enemyId >= gp.monster.length){
                     resetMobCounter();
                 }
                 setEnemy(waveNum);
@@ -139,7 +139,7 @@ public class AssetSetter {
         if (waveNum > 6){
             if(k < waveNum*5+5) {
                 waveLock = true;
-                if(enemyId > gp.monster.length){
+                if(enemyId >= gp.monster.length){
                     resetMobCounter();
                 }
                 setEnemy(waveNum);

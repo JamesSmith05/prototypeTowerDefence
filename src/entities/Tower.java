@@ -76,7 +76,7 @@ public class Tower extends Entity {
         selectedMonsterDistance = 1000;
         savedMonsterIndex = 0;
         while (i < gp.monster.length){
-            if(gp.monster[i] != null){                                      //&& !gp.monster[i].invincible  to make towers ignore invincible enemies
+            if(gp.monster[i] != null && !gp.monster[i].dying){                                      //&& !gp.monster[i].invincible  to make towers ignore invincible enemies
                 monsterDistanceX = (gp.monster[i].worldX - worldX);
                 monsterDistanceY = (gp.monster[i].worldY - worldY);
                 monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
