@@ -13,7 +13,7 @@ public class FlameTower extends Tower {
 
         name = "FlameTower";
         bulletSpeed = 8;
-        attack = 2;
+        attack = 3;
         getImage();
         projectile = new OBJ_Fireball(gp);
         range = gp.tileSize*4;

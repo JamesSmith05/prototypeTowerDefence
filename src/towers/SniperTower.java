@@ -13,7 +13,7 @@ public class SniperTower extends Tower {
 
         name = "SniperTower";
         bulletSpeed = 20;
-        attack = 3;
+        attack = 5;
         getImage();
         projectile = new OBJ_Rock(gp);
         range = gp.tileSize * 12;

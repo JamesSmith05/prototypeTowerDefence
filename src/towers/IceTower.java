@@ -14,7 +14,7 @@ public class IceTower extends Tower {
 
         name = "IceTower";
         bulletSpeed = 8;
-        attack = 2;
+        attack = 3;
         getImage();
         projectile = new OBJ_Iceball(gp);
         range = gp.tileSize*4;

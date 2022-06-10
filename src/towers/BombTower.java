@@ -13,7 +13,7 @@ public class BombTower extends Tower {
 
         name = "BombTower";
         bulletSpeed = 8;
-        attack = 2;
+        attack = 4;
         getImage();
         projectile = new OBJ_Bomb(gp);
         range = gp.tileSize*4;
