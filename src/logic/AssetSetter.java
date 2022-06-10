@@ -81,19 +81,19 @@ public class AssetSetter {
             gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
         }
         else if(6 < waveNum && waveNum <=8){
-            gp.monster[enemyId].originalSpeed +=2;
+            gp.monster[enemyId].originalSpeed +=1;
             gp.monster[enemyId].speed = gp.monster[enemyId].originalSpeed;
             gp.monster[enemyId].maxLife +=6;
             gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
         }
         else if(8 < waveNum && waveNum <=10){
-            gp.monster[enemyId].originalSpeed +=3;
+            gp.monster[enemyId].originalSpeed +=2;
             gp.monster[enemyId].speed = gp.monster[enemyId].originalSpeed;
             gp.monster[enemyId].maxLife +=12;
             gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
         }
         else if (waveNum > 10){
-            gp.monster[enemyId].originalSpeed +=4;
+            gp.monster[enemyId].originalSpeed +=2;
             gp.monster[enemyId].speed = gp.monster[enemyId].originalSpeed;
             gp.monster[enemyId].maxLife += (waveNum*2);
             gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
@@ -124,7 +124,7 @@ public class AssetSetter {
             }
         }
         if (waveNum > 3 && waveNum <= 6){
-            if(k < waveNum*10+20) {
+            if(k < waveNum*8) {
                 waveLock = true;
                 if(enemyId >= gp.monster.length){
                     resetMobCounter();
