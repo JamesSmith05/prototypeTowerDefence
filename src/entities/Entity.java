@@ -162,7 +162,6 @@ public class Entity {
         int screenX = worldX;
         int screenY = worldY;
 
-
         switch (direction) {
             case "up":
                 if (spriteNum == 1) {image = up1;}

@@ -17,7 +17,7 @@ public class Tower extends Entity {
         super(gp);
         this.gp = gp;
 
-        solidArea = new Rectangle(0, 0, 64, 64);
+        solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }

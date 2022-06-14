@@ -15,7 +15,7 @@ public class OBJ_Explosion extends Entity {
         super(gp);
         this.gp=gp;
         name = "explosion";
-        image = setup("animations/explosion01", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+        image = setup("animations/explosion01", (gp.tileSize*3), (gp.tileSize*3));
     }
 
     public void update(){
@@ -52,21 +52,21 @@ public class OBJ_Explosion extends Entity {
 
     public void getImage(int imageID){
         if (imageID == 1){
-            image = setup("animations/explosion01", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+            image = setup("animations/explosion01", (gp.tileSize*3), (gp.tileSize*3));
         }else if (imageID == 2){
-            image = setup("animations/explosion02", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+            image = setup("animations/explosion02", (gp.tileSize*3), (gp.tileSize*3));
         }else if (imageID == 3){
-            image = setup("animations/explosion03", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+            image = setup("animations/explosion03", (gp.tileSize*3), (gp.tileSize*3));
         }else if (imageID == 4){
-            image = setup("animations/explosion04", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+            image = setup("animations/explosion04", (gp.tileSize*3), (gp.tileSize*3));
         }else if (imageID == 5){
-            image = setup("animations/explosion05", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+            image = setup("animations/explosion05", (gp.tileSize*3), (gp.tileSize*3));
         }else if (imageID == 6){
-            image = setup("animations/explosion06", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+            image = setup("animations/explosion06", (gp.tileSize*3), (gp.tileSize*3));
         }else if (imageID == 7){
-            image = setup("animations/explosion07", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+            image = setup("animations/explosion07", (gp.tileSize*3), (gp.tileSize*3));
         }else if (imageID == 8){
-            image = setup("animations/explosion08", (int) (gp.tileSize*2.5), (int) (gp.tileSize*2.5));
+            image = setup("animations/explosion08", (gp.tileSize*3), (gp.tileSize*3));
         }
 
     }

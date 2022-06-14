@@ -37,8 +37,8 @@ public class OBJ_Bomb extends Projectile {
         for (int j = 0; j < gp.obj.length; j++) {
             if (gp.obj[j] == null) {
                 gp.obj[j] = new OBJ_Explosion(gp);
-                gp.obj[j].worldX = worldX - gp.tileSize/2;
-                gp.obj[j].worldY = worldY - gp.tileSize/2;
+                gp.obj[j].worldX = worldX - gp.tileSize;
+                gp.obj[j].worldY = worldY - gp.tileSize;
                 j = gp.obj.length;
             }
         }
