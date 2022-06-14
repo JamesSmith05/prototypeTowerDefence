@@ -99,8 +99,8 @@ public class AssetSetter {
             gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
         }
 
-        gp.monster[enemyId].worldX = gp.tileSize*0;
-        gp.monster[enemyId].worldY = gp.tileSize*13;
+        gp.monster[enemyId].worldX = gp.tileSize*gp.startCol;
+        gp.monster[enemyId].worldY = gp.tileSize*gp.startRow;
 
         enemyId++;
     }

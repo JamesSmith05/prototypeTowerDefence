@@ -45,7 +45,7 @@ public class MON_Bat extends Entity {
     }
 
     public void setAction(){
-        gp.eHandler.checkEvent(this);
+
     }
 //    public void damageReaction(){
 //        actionLockCounter = 0;

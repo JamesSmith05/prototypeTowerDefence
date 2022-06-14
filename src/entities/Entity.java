@@ -31,7 +31,6 @@ public class Entity {
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
-    public boolean onPath = false;
 
     //COUNTERS
     public int actionLockCounter=0;
@@ -92,9 +91,22 @@ public class Entity {
     public void setAction(){}
     public void damageReaction() {}
     public void use(Entity entity){}
+
+    public void checkEnemyCollision(){
+        collisionOn = false;
+        gp.cChecker.checkTileForEnemy(this);
+    }
+
     public void update(){
 
         setAction();
+
+        if(type == type_monster){
+            int goalCol = gp.goalCol;
+            int goalRow = gp.goalRow;
+            searchPath(goalCol,goalRow);
+            gp.cChecker.checkTileForEnemy(this);
+        }
 
         switch (direction) {
             case "up":
@@ -268,6 +280,82 @@ public class Entity {
         if (dyingCounter > 40){
             alive = false;
 
+        }
+    }
+
+    public void searchPath(int goalCol, int goalRow){
+
+        int startCol = (worldX+solidArea.x)/gp.tileSize;
+        int startRow = (worldY+solidArea.y)/gp.tileSize;
+
+        gp.pFinder.setNodes(startCol,startRow,goalCol,goalRow);
+
+        if(gp.pFinder.search()){
+
+            // next world x and y
+            int nextX = gp.pFinder.pathList.get(0).col*gp.tileSize;
+            int nextY = gp.pFinder.pathList.get(0).row*gp.tileSize;
+
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = worldX + solidArea.x + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = worldY + solidArea.y + solidArea.height;
+
+            if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX+gp.tileSize){
+                direction = "up";
+            }
+            else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX+gp.tileSize){
+                direction = "down";
+            }
+            else if(enTopY >= nextY && enBottomY < nextY + gp.tileSize){
+                if(enLeftX > nextX){
+                    direction = "left";
+                }
+                if(enLeftX < nextX){
+                    direction = "right";
+                }
+            }
+            else if (enTopY > nextY && enLeftX > nextX){
+
+                direction = "up";
+                checkEnemyCollision();
+                if(collisionOn){
+                    direction = "left";
+                }
+            }
+            else if(enTopY > nextY && enLeftX < nextX){
+
+                direction = "up";
+                checkEnemyCollision();
+                if(collisionOn){
+                    direction = "right";
+                }
+            }
+            else if(enTopY < nextY && enLeftX > nextX){
+
+                direction = "down";
+                checkEnemyCollision();
+                if(collisionOn){
+                    direction = "left";
+                }
+            }
+            else if(enTopY < nextY && enLeftX < nextX){
+
+                direction = "down";
+                checkEnemyCollision();
+                if(collisionOn){
+                    direction = "right";
+                }
+            }
+
+        }
+        //if reaches goal
+        if(startCol == goalCol && startRow == goalRow){
+            gp.userLife -= attack;
+            if (gp.userLife<0){
+                gp.userLife = 0;
+            }
+            dying = true;
         }
     }
 

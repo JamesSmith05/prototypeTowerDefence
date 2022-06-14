@@ -77,7 +77,7 @@ public class PathFinder {
         while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
 
             int tileNum = gp.tileM.mapTileNum[col][row];
-            if(!gp.tileM.tile[tileNum].collision){
+            if(gp.tileM.tile[tileNum].enemyCollision){
                 node[col][row].solid = true;
             }
             // set cost
@@ -121,10 +121,10 @@ public class PathFinder {
             if(col - 1 >= 0){
                 openNode(node[col-1][row]);
             }
-            if(row + 1 > gp.maxScreenRow){
+            if(row + 1 < gp.maxScreenRow){
                 openNode(node[col][row+1]);
             }
-            if(col + 1 > gp.maxScreenCol){
+            if(col + 1 < gp.maxScreenCol){
                 openNode(node[col+1][row]);
             }
 

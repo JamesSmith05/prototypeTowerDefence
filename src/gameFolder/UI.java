@@ -61,6 +61,10 @@ public class UI {
         if(gp.gameState == gp.dialogueState){
             drawDialogueScreen();
         }
+        if(gp.gameState == gp.mapState){
+            drawMapNames();
+        }
+
 
     }
 
@@ -140,11 +144,45 @@ public class UI {
         if (commandNum == 1){
             g2.drawString(">",x-gp.tileSize,y);
         }
-        text = "QUIT";
+        text = "MAPS";
         x = getXForCentreText(text);
         y += gp.tileSize;
         g2.drawString(text,x,y);
         if (commandNum == 2){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+    }
+
+    public void drawMapNames(){
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
+
+        String text = "Map1";
+        int x = getXForCentreText(text);
+        int y = gp.tileSize*5;
+        g2.setColor(Color.WHITE);
+        g2.drawString(text,x,y);
+        if (commandNum == 0){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "Map2";
+        x = getXForCentreText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if (commandNum == 1){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "Map3";
+        x = getXForCentreText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if (commandNum == 2){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "Map4";
+        x = getXForCentreText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if (commandNum == 3){
             g2.drawString(">",x-gp.tileSize,y);
         }
     }

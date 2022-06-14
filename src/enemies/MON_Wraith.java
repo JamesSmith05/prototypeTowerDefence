@@ -45,7 +45,9 @@ public class MON_Wraith extends Entity {
     }
 
     public void setAction(){
-        gp.eHandler.checkEvent(this);
+        int goalCol = 0;
+        int goalRow = 2;
+        searchPath(goalCol,goalRow);
     }
 //    public void damageReaction(){
 //        actionLockCounter = 0;

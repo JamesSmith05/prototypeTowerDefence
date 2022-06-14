@@ -1,5 +1,6 @@
 package gameFolder;
 
+import AI.PathFinder;
 import entities.Entity;
 import entities.Tower;
 import logic.*;
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     public CheckMouse keyM = new CheckMouse(this);
+    public PathFinder pFinder = new PathFinder(this);
     Sound music = new Sound();
     Sound sEffect = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -65,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
-    public final int characterState = 4;
+    public final int mapState = 4;
     public Rectangle mouseSolidArea = new Rectangle(0, 0, tileSize, tileSize);
     public Rectangle mouseSolidArea2 = new Rectangle((tileSize/2)-1,(tileSize/2)-1,2,2);
 
@@ -73,6 +75,8 @@ public class GamePanel extends JPanel implements Runnable {
     public int userLife;
     public int userCurrency;
     public int waveNum = 0;
+    public int startCol, startRow;
+    public int goalCol, goalRow;
 
     public int selectedTowerIndex = 1;
     public int interactTowerIndex = 100;
@@ -236,7 +240,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
-        if (gameState == titleState) {
+        if (gameState == titleState || gameState == mapState) {
             ui.draw(g2);
 
         } else {

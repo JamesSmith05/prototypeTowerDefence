@@ -37,6 +37,33 @@ public class KeyHandler implements KeyListener{
         else if (gp.gameState==gp.dialogueState){
             dialogueState(code);
         }
+        else if (gp.gameState==gp.mapState){
+            mapState(code);
+        }
+    }
+    public void mapState(int code){
+        if(code == KeyEvent.VK_W && gp.ui.commandNum != 0){
+            gp.ui.commandNum--;
+        }
+        if(code == KeyEvent.VK_S && gp.ui.commandNum != 3){
+            gp.ui.commandNum++;
+        }
+        if(code == KeyEvent.VK_ENTER){
+            if(gp.ui.commandNum == 0){
+                gp.tileM.loadMap("/resources/maps/map01.txt");
+            }
+            if(gp.ui.commandNum == 1){
+                gp.tileM.loadMap("/resources/maps/map02.txt");
+            }
+            if(gp.ui.commandNum == 2){
+                gp.tileM.loadMap("/resources/maps/map03.txt");
+            }
+            if(gp.ui.commandNum == 3){
+                gp.tileM.loadMap("/resources/maps/map04.txt");
+            }
+            gp.gameState = gp.titleState;
+            gp.ui.commandNum = 0;
+        }
     }
     public void titleState(int code){
         if(code == KeyEvent.VK_W && gp.ui.commandNum != 0){
@@ -54,8 +81,9 @@ public class KeyHandler implements KeyListener{
 
             }
             if(gp.ui.commandNum == 2){
-                System.exit(0);
+                gp.gameState = gp.mapState;
             }
+            gp.ui.commandNum = 0;
         }
     }
     public void playState(int code){
