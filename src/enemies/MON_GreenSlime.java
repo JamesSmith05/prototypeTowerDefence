@@ -46,6 +46,12 @@ public class MON_GreenSlime extends Entity {
 
     public void setAction(){
         gp.eHandler.checkEvent(this);
+//        if(onPath == true){
+//            int goalCol;                  //https://youtu.be/Hd0D68guFKg?t=1273
+//            int goalRow;
+//
+//
+//        }
     }
 //    public void damageReaction(){
 //        actionLockCounter = 0;
