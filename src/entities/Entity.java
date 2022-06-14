@@ -31,6 +31,7 @@ public class Entity {
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
+    public boolean onPath = false;
 
     //COUNTERS
     public int actionLockCounter=0;
