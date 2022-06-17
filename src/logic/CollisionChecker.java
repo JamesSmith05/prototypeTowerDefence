@@ -122,7 +122,7 @@ public class CollisionChecker {
 
         }
 
-    public boolean checkEntityMouse(int mouseX, int mouseY, Rectangle solidArea, Entity[] target){
+    public boolean checkEntityMouse(int mouseX, int mouseY, Rectangle solidArea, Entity[] target, boolean selectTower){
         boolean collision = false;
         int solidAreaDefaultX = solidArea.x;
         int solidAreaDefaultY = solidArea.y;
@@ -137,16 +137,16 @@ public class CollisionChecker {
 
                 if (solidArea.intersects(target[i].solidArea)) {
                     collision = true;
-                    gp.interactTowerIndex = i;
+                    if(selectTower){
+                        gp.interactTowerIndex = i;
+                    }
                 }
                 solidArea.x = solidAreaDefaultX;
                 solidArea.y = solidAreaDefaultY;
                 target[i].solidArea.x = target[i].solidAreaDefaultX;
                 target[i].solidArea.y = target[i].solidAreaDefaultY;
             }
-
         }
-
         return collision;
     }
     //check npc or monster collision

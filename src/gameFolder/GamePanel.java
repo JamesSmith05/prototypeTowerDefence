@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 //import entities.entities.Entity;
 
@@ -79,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int goalCol, goalRow;
 
     public int selectedTowerIndex = 1;
-    public int interactTowerIndex = 100;
+    public int interactTowerIndex = 1000;
 
     public GamePanel() {
 
@@ -98,7 +99,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        aSetter.setNPC();
         aSetter.setTowerOptions();
         userLife = 50;
-        userCurrency = 25;
+        userCurrency = 1000;
         //playMusic(0);
         gameState = titleState;
 
@@ -167,20 +168,24 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (leftClick && userCurrency>0){
                 if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea)){
-                    if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea, tower)){
+                    if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea, tower, false)){
                         aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)), selectedTowerIndex);
                     }
                 }
-                System.out.println( " the click was " + mouseX + " " + mouseY);
+                //System.out.println( " the click was " + mouseX + " " + mouseY);
             }
             if (rightClick){
-                    if(cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2, tower)){
-                        tower[interactTowerIndex] = null;
+                    if(cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2, tower, true)){
+                        tower[interactTowerIndex].selected = true;
                     }
-                System.out.println( " the click was " + mouseX + " " + mouseY);
+                    else{
+                        interactTowerIndex = 1000;
+                    }
+                //System.out.println( " the click was " + mouseX + " " + mouseY);
             }
             spawnerCounter++;
-            if (spawnerCounter > 15) {
+            Random rand = new Random();
+            if (spawnerCounter > rand.nextInt(15)+5) {
                 aSetter.waveSpawner(waveNum);
                 spawnerCounter = 0;
                 if(keyH.spacePressed){
@@ -291,6 +296,12 @@ public class GamePanel extends JPanel implements Runnable {
             entityList.clear();
 
             ui.draw(g2);
+
+            g2.setColor(new Color(255,0,0,30));
+            g2.fillOval((mouseX - towerOptions[selectedTowerIndex].range), (mouseY - towerOptions[selectedTowerIndex].range), (towerOptions[selectedTowerIndex].range)*2, (towerOptions[selectedTowerIndex].range)*2);
+            if(interactTowerIndex<tower.length){
+                g2.fillOval((tower[interactTowerIndex].worldX +tileSize/2 - tower[interactTowerIndex].range), (tower[interactTowerIndex].worldY +tileSize/2 - tower[interactTowerIndex].range), (tower[interactTowerIndex].range)*2, (tower[interactTowerIndex].range)*2);
+            }
 
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3F));
             g2.drawImage(towerOptions[selectedTowerIndex].image, (mouseX - (tileSize/2)), (mouseY - (tileSize/2)),null);

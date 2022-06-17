@@ -168,16 +168,16 @@ public class TileManager {
             }
         }
 
-        if(drawPath){
-            g2.setColor(new Color(225,0,0,70));
-
-            for (int i = 0; i < gp.pFinder.pathList.size(); i++) {
-                int screenX = gp.pFinder.pathList.get(i).col * gp.tileSize;
-                int screenY = gp.pFinder.pathList.get(i).row * gp.tileSize;
-
-                g2.fillRect(screenX,screenY,gp.tileSize,gp.tileSize);
-            }
-        }
+//        if(drawPath){
+//            g2.setColor(new Color(225,0,0,70));
+//
+//            for (int i = 0; i < gp.pFinder.pathList.size(); i++) {
+//                int screenX = gp.pFinder.pathList.get(i).col * gp.tileSize;
+//                int screenY = gp.pFinder.pathList.get(i).row * gp.tileSize;
+//
+//                g2.fillRect(screenX,screenY,gp.tileSize,gp.tileSize);
+//            }
+//        }
 
 
     }
