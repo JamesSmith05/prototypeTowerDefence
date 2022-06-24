@@ -1,5 +1,9 @@
 package gameFolder;
 
+import entities.Entity;
+import logic.UtilityTool;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -10,7 +14,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     public Font cartoon, alagard, arial_28;
-    BufferedImage heart_full, heart_half,heart_blank;
+    BufferedImage titleImage;
     public boolean messageOn = false;
 
     ArrayList<String> message = new ArrayList<>();
@@ -33,6 +37,8 @@ public class UI {
 //        }catch (Exception e){
 //
 //        }
+
+        titleImage = setup("specialImages/titleScreen01",gp.screenWidth,gp.screenHeight);
 
     }
 
@@ -110,9 +116,11 @@ public class UI {
     }
 
     public void drawTitleScreen(){
+        BufferedImage tempImage = titleImage;
+        g2.drawImage(tempImage,0,0 ,null);
         g2.setFont(cartoon);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
-        String text = "This be my game";
+        String text = "Title Scream";
         int x = getXForCentreText(text);
         int y = gp.tileSize*3;
 
@@ -122,14 +130,21 @@ public class UI {
         g2.setColor(Color.WHITE);
         g2.drawString(text,x,y);
 
-        // player image
-        x = gp.screenWidth/2 - gp.tileSize;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
+
+        text = "Please be scared i work hard on that title";
+        x = getXForCentreText(text);
         y += 2*gp.tileSize;
-        //g2.drawImage(gp.player.down1,x,y,gp.tileSize*2,gp.tileSize*2,null);
+
+        g2.setColor(Color.gray);
+        g2.drawString(text,x+5,y+5);
+
+        g2.setColor(Color.WHITE);
+        g2.drawString(text,x,y);
 
         //MENU
         g2.setFont(alagard);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
+//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
         text = "NEW GAME";
         x = getXForCentreText(text);
         y += 4* gp.tileSize;
@@ -154,6 +169,8 @@ public class UI {
     }
 
     public void drawMapNames(){
+        BufferedImage tempImage = titleImage;
+        g2.drawImage(tempImage,0,0 ,null);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
 
         String text = "Map1";
@@ -289,5 +306,19 @@ public class UI {
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = tailX-textLength;
         return x;
+    }
+
+    public BufferedImage setup(String imagePath,int width,int height) {
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream("/resources/" + imagePath + ".png"));
+            image = uTool.scaleImage(image, width, height);
+
+
+        } catch (Exception e) {
+        }
+        return image;
     }
 }

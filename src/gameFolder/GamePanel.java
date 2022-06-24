@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[] towerOptions = new Entity[10];
     public Entity[] obj = new Entity[50];  //increase number to increase max number of object on screen
     public Entity[] npc = new Entity[10];
-    public Entity[] monster = new Entity[100];
+    public Entity[] monster = new Entity[150];
     ArrayList<Entity> entityList = new ArrayList<>();
     public ArrayList<Entity> projectileList = new ArrayList<>();
 
