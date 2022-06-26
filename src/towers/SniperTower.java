@@ -2,7 +2,7 @@ package towers;
 
 import entities.Tower;
 import gameFolder.GamePanel;
-import objects.OBJ_Rock;
+import objects.OBJ_SniperRound;
 
 public class SniperTower extends Tower {
     GamePanel gp;
@@ -12,13 +12,14 @@ public class SniperTower extends Tower {
         this.gp = gp;
 
         name = "SniperTower";
-        bulletSpeed = 20;
+        bulletSpeed = 40;
         attack = 5;
         getImage();
-        projectile = new OBJ_Rock(gp);
+        projectile = new OBJ_SniperRound(gp);
         range = gp.tileSize * 12;
         fireRate = 60;
         buyPrice = 15;
+        targetingType = 1;
 
     }
     public void getImage() {

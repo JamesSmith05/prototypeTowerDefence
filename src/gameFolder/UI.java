@@ -87,6 +87,48 @@ public class UI {
         text = "Wave: " + gp.waveNum;
         g2.drawString(text,messageX,messageY);
 
+        if(gp.interactTowerIndex<gp.tower.length){
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.2F));
+
+            g2.setColor(new Color(100, 53, 25));
+            g2.fillRoundRect((int) (gp.tileSize * 12.25)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
+            g2.fillRoundRect((int) (gp.tileSize * 14.5)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
+            g2.fillRoundRect((int) (gp.tileSize * 16.75)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
+            g2.fillRoundRect(gp.tileSize * 19+5, 5,gp.tileSize -10,gp.tileSize-10,25,25);
+
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1F));
+
+            g2.setColor(Color.WHITE);
+
+            messageY = (gp.tileSize/4)*3 - 6;
+            g2.setFont(g2.getFont().deriveFont(24F));
+            text = "upgrade 1";
+
+            messageX = (int) (gp.tileSize * 12.25) + getXForCentreBoxText(text,gp.tileSize*2);
+            g2.drawString(text,messageX,messageY);
+            text = "upgrade 2";
+
+            messageX = (int) (gp.tileSize * 14.5) + getXForCentreBoxText(text,gp.tileSize*2);
+            g2.drawString(text,messageX,messageY);
+            if(gp.tower[gp.interactTowerIndex].targetingType == 1)
+                text = "Strongest";
+            if(gp.tower[gp.interactTowerIndex].targetingType == 2)
+                text = "Closest";
+            if(gp.tower[gp.interactTowerIndex].targetingType == 3)
+                text = "First";
+            if(gp.tower[gp.interactTowerIndex].targetingType == 4)
+                text = "Last";
+
+            messageX = (int) (gp.tileSize * 16.75) + getXForCentreBoxText(text,gp.tileSize*2);
+            g2.drawString(text,messageX,messageY);
+
+            text = "Bin";
+            messageX = (gp.tileSize * 19) + getXForCentreBoxText(text,gp.tileSize);
+            g2.drawString(text,messageX,messageY);
+
+        }
+
+
     }
 
     public void drawMessage(){
@@ -302,6 +344,12 @@ public class UI {
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return gp.screenWidth / 2 - textLength / 2;
     }
+
+    public int getXForCentreBoxText(String text,int width){
+        int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        return (width - textLength) / 2;
+    }
+
     public int getXForAlignRightText(String text, int tailX){
         int textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = tailX-textLength;

@@ -30,6 +30,7 @@ public class TackTower extends Tower {
         range = gp.tileSize*2;
         fireRate = 60;
         buyPrice = 15;
+        targetingType = 3;
     }
     public void getImage() {
         image = setup("towers/tackTower", gp.tileSize, gp.tileSize);

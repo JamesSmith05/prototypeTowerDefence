@@ -20,6 +20,7 @@ public class IceTower extends Tower {
         range = gp.tileSize*4;
         fireRate = 30;
         buyPrice = 20;
+        targetingType = 3;
     }
     public void getImage() {
         image = setup("towers/iceTower", gp.tileSize, gp.tileSize);

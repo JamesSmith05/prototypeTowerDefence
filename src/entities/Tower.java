@@ -12,7 +12,6 @@ public class Tower extends Entity {
     int savedMonsterIndex;
     double selectedMonsterDistanceX, selectedMonsterDistanceY, selectedMonsterDistance;
 
-
     public Tower(GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -24,10 +23,14 @@ public class Tower extends Entity {
 
     public void update() {
 
-        if (Objects.equals(name, "SniperTower")){
+        if (targetingType == 1){
             returnStrongestEnemy();
-        }else{
+        }else if (targetingType == 2){
             returnClosestEnemy();
+        }else if (targetingType == 3){
+            returnFirstEnemy();
+        }else if (targetingType == 4){
+            returnLastEnemy();
         }
 
         double distanceX = selectedMonsterDistanceX;
@@ -104,6 +107,56 @@ public class Tower extends Entity {
                 monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
                 if(gp.monster[i].life > largestMonsterHealth && monsterDistanceABS<range){
                     largestMonsterHealth = gp.monster[i].life;
+                    savedMonsterIndex = i;
+                    selectedMonsterDistance = monsterDistanceABS;
+                    selectedMonsterDistanceX = monsterDistanceX;
+                    selectedMonsterDistanceY = monsterDistanceY;
+                }
+            }
+            i++;
+        }
+    }
+
+    public void returnFirstEnemy(){
+        int i = 0;
+        double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
+        int enemyPositionInWave;
+        int selectedMonsterPosition = 100000;
+        selectedMonsterDistance = 1000;
+        savedMonsterIndex = 0;
+        while (i < gp.monster.length){
+            if(gp.monster[i] != null && !gp.monster[i].dying){                                      //&& !gp.monster[i].invincible  to make towers ignore invincible enemies
+                monsterDistanceX = (gp.monster[i].worldX - worldX);
+                monsterDistanceY = (gp.monster[i].worldY - worldY);
+                monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
+                enemyPositionInWave = gp.monster[i].distanceTraveled;
+                if(enemyPositionInWave<selectedMonsterPosition && monsterDistanceABS<range){
+                    selectedMonsterPosition = enemyPositionInWave;
+                    savedMonsterIndex = i;
+                    selectedMonsterDistance = monsterDistanceABS;
+                    selectedMonsterDistanceX = monsterDistanceX;
+                    selectedMonsterDistanceY = monsterDistanceY;
+                }
+            }
+            i++;
+        }
+    }
+
+    public void returnLastEnemy(){
+        int i = 0;
+        double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
+        int enemyPositionInWave;
+        int selectedMonsterPosition = 0;
+        selectedMonsterDistance = 1000;
+        savedMonsterIndex = 0;
+        while (i < gp.monster.length){
+            if(gp.monster[i] != null && !gp.monster[i].dying){                                      //&& !gp.monster[i].invincible  to make towers ignore invincible enemies
+                monsterDistanceX = (gp.monster[i].worldX - worldX);
+                monsterDistanceY = (gp.monster[i].worldY - worldY);
+                monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
+                enemyPositionInWave = gp.monster[i].distanceTraveled;
+                if(enemyPositionInWave>selectedMonsterPosition && monsterDistanceABS<range){
+                    selectedMonsterPosition = enemyPositionInWave;
                     savedMonsterIndex = i;
                     selectedMonsterDistance = monsterDistanceABS;
                     selectedMonsterDistanceX = monsterDistanceX;

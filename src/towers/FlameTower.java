@@ -19,6 +19,7 @@ public class FlameTower extends Tower {
         range = gp.tileSize*4;
         fireRate = 30;
         buyPrice = 15;
+        targetingType = 3;
     }
     public void getImage() {
         image = setup("towers/flameTower", gp.tileSize, gp.tileSize);

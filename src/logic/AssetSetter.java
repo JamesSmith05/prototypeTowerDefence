@@ -15,6 +15,7 @@ public class AssetSetter {
 
     GamePanel gp;
 
+    public int enemyTotalCounter;
     public int enemyId;
     public int j;
     public int k;

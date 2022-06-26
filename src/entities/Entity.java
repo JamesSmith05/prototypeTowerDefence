@@ -54,6 +54,10 @@ public class Entity {
     public int coin;
     public Projectile projectile;
 
+    public boolean upgrade1, upgrade2;
+
+    public int distanceTraveled;
+
     public int range;
     public int fireRate;
     public int bulletSpeed;
@@ -63,6 +67,8 @@ public class Entity {
     public int frozenCounter;
     public boolean onFire = false;
     public int fireCounter;
+
+    public int targetingType;
 
     //TYPE
     public int type; // 0 player, 1 npc, 2 monster ,
@@ -107,6 +113,7 @@ public class Entity {
             int goalRow = gp.goalRow;
             searchPath(goalCol,goalRow);
             gp.cChecker.checkTileForEnemy(this);
+            distanceTraveled += speed;
         }
 
         switch (direction) {

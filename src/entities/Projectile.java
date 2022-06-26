@@ -30,7 +30,7 @@ public class Projectile extends Entity{
         this.attack = attack;
         this.targetIndex = targetIndex;
 
-        solidArea = new Rectangle(0, 0, gp.tileSize/2, gp.tileSize/2);
+        solidArea = new Rectangle(gp.tileSize/4, gp.tileSize/4, gp.tileSize/2, gp.tileSize/2);
 
     }
 

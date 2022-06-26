@@ -15,10 +15,13 @@ public class Main {
 
         window.pack();
 
+        window.setLayout(null);
+
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
         gamePanel.setupGame();
 
-        gamePanel.startGameThread();    }
+        gamePanel.startGameThread();
+    }
 }

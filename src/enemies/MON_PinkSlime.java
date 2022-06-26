@@ -45,9 +45,7 @@ public class MON_PinkSlime extends Entity {
     }
 
     public void setAction(){
-        int goalCol = 0;
-        int goalRow = 2;
-        searchPath(goalCol,goalRow);
+
     }
 }
 

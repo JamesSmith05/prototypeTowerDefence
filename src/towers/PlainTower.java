@@ -19,6 +19,7 @@ import objects.OBJ_Rock;
             range = gp.tileSize*4;
             fireRate = 20;
             buyPrice = 5;
+            targetingType = 3;
         }
         public void getImage() {
             image = setup("towers/plainTower", gp.tileSize, gp.tileSize);

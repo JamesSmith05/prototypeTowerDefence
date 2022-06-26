@@ -19,6 +19,7 @@ public class BombTower extends Tower {
         range = gp.tileSize*4;
         fireRate = 120;
         buyPrice = 10;
+        targetingType = 3;
     }
     public void getImage() {
         image = setup("towers/bombTower", gp.tileSize, gp.tileSize);
