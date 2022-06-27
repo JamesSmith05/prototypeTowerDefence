@@ -228,14 +228,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         if(gameState == playState){
 
             if (leftClick ){
-                if(selectedTowerIndex<towerOptions.length && userCurrency>0){
-                    if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea)){
-                        if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea, tower, false)){
-                            aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)), selectedTowerIndex);
-                            selectedTowerIndex = 50;
-                        }
-                    }
-                }if(selectedTowerIndex>towerOptions.length){
+                if(selectedTowerIndex>towerOptions.length){
                     if(cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2, tower, true)){
                         //tower[interactTowerIndex].selected = true;
                         addTowerButtons();
@@ -245,8 +238,15 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                         removeTowerButtons();
                     }
                 }
-
-                //System.out.println( " the click was " + mouseX + " " + mouseY);
+                if(selectedTowerIndex<towerOptions.length && userCurrency>0){
+                    if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea)){
+                        if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea, tower, false)){
+                            aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)), selectedTowerIndex);
+                            selectedTowerIndex = 50;
+                        }
+                    }
+                }
+            //System.out.println( " the click was " + mouseX + " " + mouseY);
             }
             if (rightClick){
                 //System.out.println( " the click was " + mouseX + " " + mouseY);
@@ -430,34 +430,34 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
             }
         }
         if(e.getSource() == towerSelect1){
-
+            selectedTowerIndex = 1;
         }
         if(e.getSource() == towerSelect2){
-
+            selectedTowerIndex = 2;
         }
         if(e.getSource() == towerSelect3){
-
+            selectedTowerIndex = 3;
         }
         if(e.getSource() == towerSelect4){
-
+            selectedTowerIndex = 4;
         }
         if(e.getSource() == towerSelect5){
-
+            selectedTowerIndex = 5;
         }
         if(e.getSource() == towerSelect6){
-
+            selectedTowerIndex = 6;
         }
         if(e.getSource() == towerSelect7){
-
+            selectedTowerIndex = 7;
         }
         if(e.getSource() == towerSelect8){
-
+            selectedTowerIndex = 8;
         }
         if(e.getSource() == towerSelect9){
-
+            selectedTowerIndex = 9;
         }
         if(e.getSource() == towerSelect0){
-
+            selectedTowerIndex = 0;
         }
     }
 
