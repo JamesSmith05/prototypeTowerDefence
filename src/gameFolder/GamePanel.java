@@ -43,6 +43,19 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     ButtonTemplate upgradeB2 =  new ButtonTemplate((int) (tileSize * 14.5)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 2");
     ButtonTemplate targetingButton = new ButtonTemplate((int) (tileSize * 16.75)+5, 5,tileSize*2 -10,tileSize-10,"targeting");
     ButtonTemplate deleteB = new ButtonTemplate(tileSize * 19+5, 5,tileSize -10,tileSize-10,"delete");
+    int tempButtonX = ((maxScreenCol*tileSize) - (3*tileSize) + 16);
+    int tempButtonY = 16;
+    int tempButtonChange = tileSize*5/4;
+    ButtonTemplate towerSelect1 = new ButtonTemplate(tempButtonX,tempButtonY,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect2 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect3 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*2,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect4 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*3,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect5 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*4,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect6 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*5,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect7 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*6,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect8 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*7,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect9 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*8,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate towerSelect0 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*9,tileSize,tileSize,"TowerSelect");
 
     //SYSTEM
     public TileManager tileM = new TileManager(this);
@@ -103,6 +116,16 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         upgradeB2.addActionListener(this);
         targetingButton.addActionListener(this);
         deleteB.addActionListener(this);
+        towerSelect1.addActionListener(this);
+        towerSelect2.addActionListener(this);
+        towerSelect3.addActionListener(this);
+        towerSelect4.addActionListener(this);
+        towerSelect5.addActionListener(this);
+        towerSelect6.addActionListener(this);
+        towerSelect7.addActionListener(this);
+        towerSelect8.addActionListener(this);
+        towerSelect9.addActionListener(this);
+        towerSelect0.addActionListener(this);
 
     }
 
@@ -119,6 +142,19 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.remove(targetingButton);
     }
 
+    void addSelectTowers(){
+        this.add(towerSelect1);
+        this.add(towerSelect2);
+        this.add(towerSelect3);
+        this.add(towerSelect4);
+        this.add(towerSelect5);
+        this.add(towerSelect6);
+        this.add(towerSelect7);
+        this.add(towerSelect8);
+        this.add(towerSelect9);
+        this.add(towerSelect0);
+    }
+
     public void setupGame(){
 //        aSetter.setObject();
 //        aSetter.setNPC();
@@ -127,6 +163,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         userCurrency = 1000;
         //playMusic(0);
         gameState = titleState;
+        addSelectTowers();
     }
 
     public void startGameThread() {
@@ -190,16 +227,15 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
         if(gameState == playState){
 
-            if (leftClick && userCurrency>0 && selectedTowerIndex<towerOptions.length){
-                if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea)){
-                    if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea, tower, false)){
-                        aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)), selectedTowerIndex);
-                        selectedTowerIndex = 50;
+            if (leftClick ){
+                if(selectedTowerIndex<towerOptions.length && userCurrency>0){
+                    if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea)){
+                        if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea, tower, false)){
+                            aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)), selectedTowerIndex);
+                            selectedTowerIndex = 50;
+                        }
                     }
-                }
-                //System.out.println( " the click was " + mouseX + " " + mouseY);
-            }
-            if (rightClick){
+                }if(selectedTowerIndex>towerOptions.length){
                     if(cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2, tower, true)){
                         //tower[interactTowerIndex].selected = true;
                         addTowerButtons();
@@ -208,7 +244,13 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                         interactTowerIndex = 1000;
                         removeTowerButtons();
                     }
+                }
+
                 //System.out.println( " the click was " + mouseX + " " + mouseY);
+            }
+            if (rightClick){
+                //System.out.println( " the click was " + mouseX + " " + mouseY);
+                selectedTowerIndex = 50;
             }
             spawnerCounter++;
             Random rand = new Random();
@@ -360,12 +402,14 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
             System.out.println("upgrade button 1");
             if (tower[interactTowerIndex] != null && !tower[interactTowerIndex].upgrade1){
                 tower[interactTowerIndex].upgrade1 = true;
+                tower[interactTowerIndex].attack = tower[interactTowerIndex].attack*2;
             }
         }
         if (e.getSource() == upgradeB2) {
             System.out.println("upgrade button 2");
             if (tower[interactTowerIndex] != null && !tower[interactTowerIndex].upgrade2){
                 tower[interactTowerIndex].upgrade2 = true;
+                tower[interactTowerIndex].fireRate -= 20;
             }
         }
         if (e.getSource() == targetingButton) {
@@ -385,7 +429,36 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 interactTowerIndex = 1000;
             }
         }
+        if(e.getSource() == towerSelect1){
 
+        }
+        if(e.getSource() == towerSelect2){
+
+        }
+        if(e.getSource() == towerSelect3){
+
+        }
+        if(e.getSource() == towerSelect4){
+
+        }
+        if(e.getSource() == towerSelect5){
+
+        }
+        if(e.getSource() == towerSelect6){
+
+        }
+        if(e.getSource() == towerSelect7){
+
+        }
+        if(e.getSource() == towerSelect8){
+
+        }
+        if(e.getSource() == towerSelect9){
+
+        }
+        if(e.getSource() == towerSelect0){
+
+        }
     }
 
 }
