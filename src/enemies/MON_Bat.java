@@ -26,7 +26,7 @@ public class MON_Bat extends Entity {
         solidArea.x = 4;
         solidArea.y = 4;
         solidArea.width = 56;
-        solidArea.height = 20;
+        solidArea.height = 40;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 

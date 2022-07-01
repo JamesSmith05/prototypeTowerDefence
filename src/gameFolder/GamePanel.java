@@ -166,7 +166,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         aSetter.resetTowerCounter();
         aSetter.setTowerOptions();
         userLife = 50;
-        userCurrency = 1000;
+        userCurrency = 25;
         waveNum = 0;
         //playMusic(0);
         gameState = titleState;
