@@ -1,14 +1,11 @@
 package towers;
 
-import entities.Projectile;
 import entities.Tower;
 import gameFolder.GamePanel;
 import objects.OBJ_Tack;
 
 public class TackTower extends Tower {
     GamePanel gp;
-
-    public Projectile projectile2,projectile3,projectile4,projectile5,projectile6,projectile7,projectile8;
 
     public TackTower(GamePanel gp) {
         super(gp);
@@ -31,6 +28,12 @@ public class TackTower extends Tower {
         fireRate = 60;
         buyPrice = 15;
         targetingType = 3;
+        upgrade1Aprice = 10;
+        upgrade1Bprice = 15;
+        upgrade1Cprice = 20;
+        upgrade2Aprice = 15;
+        upgrade2Bprice = 20;
+        upgrade2Cprice = 25;
     }
     public void getImage() {
         image = setup("towers/tackTower", gp.tileSize, gp.tileSize);
@@ -79,8 +82,22 @@ public class TackTower extends Tower {
             gp.projectileList.add(projectile8);
         }
     }
-    public void setUpgrade1(){
-        attack += 100;
+    public void setUpgrade1A(){
+
     }
-    public void setUpgrade2(){}
+    public void setUpgrade1B(){
+
+    }
+    public void setUpgrade1C(){
+
+    }
+    public void setUpgrade2A(){
+        range += gp.tileSize;
+    }
+    public void setUpgrade2B(){
+
+    }
+    public void setUpgrade2C(){
+
+    }
 }

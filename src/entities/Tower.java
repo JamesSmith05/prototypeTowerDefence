@@ -40,8 +40,7 @@ public class Tower extends Entity {
         if (distanceABS<range){
             if(shotAvailableCounter == fireRate ){
                 if(!Objects.equals(name, "TackTower")){
-                    projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
-                    gp.projectileList.add(projectile);
+                    createProjectiles(distanceX,distanceY);
                 }
                 setAction();
                 shotAvailableCounter = 0;
@@ -60,6 +59,45 @@ public class Tower extends Entity {
                 spriteNum = 1;
             }
             spriteCounter = 0;
+        }
+
+    }
+
+    void createProjectiles(double distanceX, double distanceY){
+
+        if(!projectile.alive){
+            projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            gp.projectileList.add(projectile);
+        }
+        else if(!projectile2.alive){
+            projectile2.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            gp.projectileList.add(projectile2);
+        }
+        else if(!projectile3.alive){
+            projectile3.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            gp.projectileList.add(projectile3);
+        }
+        else if(!projectile4.alive){
+            projectile4.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            gp.projectileList.add(projectile4);
+        }
+        else if(!projectile5.alive){
+            projectile5.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            gp.projectileList.add(projectile5);
+        }
+        else if(!projectile6.alive){
+            projectile6.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            gp.projectileList.add(projectile6);
+
+        }
+        else if(!projectile7.alive){
+            projectile7.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            gp.projectileList.add(projectile7);
+
+        }
+        else if(!projectile8.alive){
+            projectile8.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            gp.projectileList.add(projectile8);
         }
 
     }

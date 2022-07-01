@@ -52,9 +52,9 @@ public class Entity {
     public int exp;
     public int nextLevelExp;
     public int coin;
-    public Projectile projectile;
+    public Projectile projectile, projectile2,projectile3,projectile4,projectile5,projectile6,projectile7,projectile8;
 
-    public boolean upgrade1, upgrade2;
+    public boolean upgrade1A, upgrade1B, upgrade1C, upgrade2A, upgrade2B, upgrade2C;
 
     public int distanceTraveled;
 
@@ -62,8 +62,12 @@ public class Entity {
     public int fireRate;
     public int bulletSpeed;
     public int buyPrice;
-    public int upgrade1price;
-    public int upgrade2price;
+    public int upgrade1Aprice;
+    public int upgrade1Bprice;
+    public int upgrade1Cprice;
+    public int upgrade2Aprice;
+    public int upgrade2Bprice;
+    public int upgrade2Cprice;
     public boolean actionFinished;
     public boolean frozen = false;
     public int frozenCounter;
@@ -71,6 +75,7 @@ public class Entity {
     public int fireCounter;
 
     public int targetingType;
+    public int towerWorth = 0;
 
     //TYPE
     public int type; // 0 player, 1 npc, 2 monster ,
@@ -98,8 +103,13 @@ public class Entity {
     }
 
     public void setAction(){}
-    public void setUpgrade1(){}
-    public void setUpgrade2(){}
+    public void setUpgrade1A(){}
+    public void setUpgrade1B(){}
+    public void setUpgrade1C(){}
+
+    public void setUpgrade2A(){}
+    public void setUpgrade2B(){}
+    public void setUpgrade2C(){}
     public void damageReaction() {}
     public void use(Entity entity){}
 

@@ -39,10 +39,10 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     int FPS = 60;
 
     //buttons
-    ButtonTemplate upgradeB1 = new ButtonTemplate((int) (tileSize * 12.25)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 1");
-    ButtonTemplate upgradeB2 =  new ButtonTemplate((int) (tileSize * 14.5)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 2");
+    ButtonTemplate upgradeButton1 = new ButtonTemplate((int) (tileSize * 12.25)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 1");
+    ButtonTemplate upgradeButton2 =  new ButtonTemplate((int) (tileSize * 14.5)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 2");
     ButtonTemplate targetingButton = new ButtonTemplate((int) (tileSize * 16.75)+5, 5,tileSize*2 -10,tileSize-10,"targeting");
-    ButtonTemplate deleteB = new ButtonTemplate(tileSize * 19+5, 5,tileSize -10,tileSize-10,"delete");
+    ButtonTemplate deleteButton = new ButtonTemplate(tileSize * 19+5, 5,tileSize -10,tileSize-10,"delete");
     int tempButtonX = ((maxScreenCol*tileSize) - (3*tileSize) + 16);
     int tempButtonY = 16;
     int tempButtonChange = tileSize*5/4;
@@ -112,10 +112,10 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.setFocusable(true);
 
         //button setup
-        upgradeB1.addActionListener(this);
-        upgradeB2.addActionListener(this);
+        upgradeButton1.addActionListener(this);
+        upgradeButton2.addActionListener(this);
         targetingButton.addActionListener(this);
-        deleteB.addActionListener(this);
+        deleteButton.addActionListener(this);
         towerSelect1.addActionListener(this);
         towerSelect2.addActionListener(this);
         towerSelect3.addActionListener(this);
@@ -130,15 +130,15 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     }
 
     public void addTowerButtons() {
-        this.add(upgradeB1);
-        this.add(upgradeB2);
-        this.add(deleteB);
+        this.add(upgradeButton1);
+        this.add(upgradeButton2);
+        this.add(deleteButton);
         this.add(targetingButton);
     }
     public void removeTowerButtons() {
-        this.remove(upgradeB1);
-        this.remove(upgradeB2);
-        this.remove(deleteB);
+        this.remove(upgradeButton1);
+        this.remove(upgradeButton2);
+        this.remove(deleteButton);
         this.remove(targetingButton);
     }
 
@@ -398,18 +398,41 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == upgradeB1) {
+        if (e.getSource() == upgradeButton1) {
             System.out.println("upgrade button 1");
-            if (tower[interactTowerIndex] != null && !tower[interactTowerIndex].upgrade1){
-                tower[interactTowerIndex].upgrade1 = true;
-                tower[interactTowerIndex].setUpgrade1();
+            if (tower[interactTowerIndex] != null && !tower[interactTowerIndex].upgrade1A && userCurrency>= tower[interactTowerIndex].upgrade1Aprice){
+                tower[interactTowerIndex].upgrade1A = true;
+                tower[interactTowerIndex].setUpgrade1A();
+                userCurrency -= tower[interactTowerIndex].upgrade1Aprice;
+            }
+            else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade1A &&  !tower[interactTowerIndex].upgrade1B && userCurrency>= tower[interactTowerIndex].upgrade1Bprice){
+                tower[interactTowerIndex].upgrade1B = true;
+                tower[interactTowerIndex].setUpgrade1B();
+                userCurrency -= tower[interactTowerIndex].upgrade1Bprice;
+            }
+            else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade1A &&  tower[interactTowerIndex].upgrade1B && !tower[interactTowerIndex].upgrade1C &&  userCurrency>= tower[interactTowerIndex].upgrade1Cprice){
+                tower[interactTowerIndex].upgrade1C = true;
+                tower[interactTowerIndex].setUpgrade1C();
+                userCurrency -= tower[interactTowerIndex].upgrade1Cprice;
             }
         }
-        if (e.getSource() == upgradeB2) {
+        if (e.getSource() == upgradeButton2) {
             System.out.println("upgrade button 2");
-            if (tower[interactTowerIndex] != null && !tower[interactTowerIndex].upgrade2){
-                tower[interactTowerIndex].upgrade2 = true;
-                tower[interactTowerIndex].setUpgrade2();            }
+            if (tower[interactTowerIndex] != null && !tower[interactTowerIndex].upgrade2A && userCurrency >= tower[interactTowerIndex].upgrade2Aprice){
+                tower[interactTowerIndex].upgrade2A = true;
+                tower[interactTowerIndex].setUpgrade2A();
+                userCurrency -= tower[interactTowerIndex].upgrade2Aprice;
+            }
+            else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade2A &&  !tower[interactTowerIndex].upgrade2B && userCurrency>= tower[interactTowerIndex].upgrade2Bprice){
+                tower[interactTowerIndex].upgrade2B = true;
+                tower[interactTowerIndex].setUpgrade2B();
+                userCurrency -= tower[interactTowerIndex].upgrade2Bprice;
+            }
+            else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade2A &&  tower[interactTowerIndex].upgrade2B && !tower[interactTowerIndex].upgrade2C &&  userCurrency>= tower[interactTowerIndex].upgrade2Cprice){
+                tower[interactTowerIndex].upgrade2C = true;
+                tower[interactTowerIndex].setUpgrade2C();
+                userCurrency -= tower[interactTowerIndex].upgrade2Cprice;
+            }
         }
         if (e.getSource() == targetingButton) {
             System.out.println("targeting button");
@@ -421,7 +444,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 }
             }
         }
-        if (e.getSource() == deleteB) {
+        if (e.getSource() == deleteButton) {
             System.out.println("delete button");
             if (tower[interactTowerIndex] != null){
                 tower[interactTowerIndex] = null;

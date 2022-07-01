@@ -10,7 +10,7 @@ public class OBJ_Rock extends Projectile {
         this.gp = gp;
 
         name  = "Rock";
-        maxLife = 80;
+        maxLife = 160;
         life = maxLife;
         attack = 2;
         alive = false;

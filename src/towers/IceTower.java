@@ -3,7 +3,7 @@ package towers;
 import entities.Tower;
 import gameFolder.GamePanel;
 import objects.OBJ_Iceball;
-import objects.OBJ_Rock;
+
 
 public class IceTower extends Tower {
     GamePanel gp;
@@ -17,10 +17,24 @@ public class IceTower extends Tower {
         attack = 3;
         getImage();
         projectile = new OBJ_Iceball(gp);
+        projectile2 = new OBJ_Iceball(gp);
+        projectile3 = new OBJ_Iceball(gp);
+        projectile4 = new OBJ_Iceball(gp);
+        projectile5 = new OBJ_Iceball(gp);
+        projectile6 = new OBJ_Iceball(gp);
+        projectile7 = new OBJ_Iceball(gp);
+        projectile8 = new OBJ_Iceball(gp);
+
         range = gp.tileSize*4;
         fireRate = 30;
         buyPrice = 20;
         targetingType = 3;
+        upgrade1Aprice = 10;
+        upgrade1Bprice = 15;
+        upgrade1Cprice = 20;
+        upgrade2Aprice = 15;
+        upgrade2Bprice = 20;
+        upgrade2Cprice = 25;
     }
     public void getImage() {
         image = setup("towers/iceTower", gp.tileSize, gp.tileSize);
@@ -36,9 +50,23 @@ public class IceTower extends Tower {
     public void setAction() {
 
     }
-    public void setUpgrade1(){
-        attack += 100;
+    public void setUpgrade1A(){
+
     }
-    public void setUpgrade2(){}
+    public void setUpgrade1B(){
+
+    }
+    public void setUpgrade1C(){
+
+    }
+    public void setUpgrade2A(){
+        range += gp.tileSize;
+    }
+    public void setUpgrade2B(){
+
+    }
+    public void setUpgrade2C(){
+
+    }
 }
 

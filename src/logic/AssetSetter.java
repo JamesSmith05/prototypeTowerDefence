@@ -53,6 +53,7 @@ public class AssetSetter {
             }
             gp.tower[j].worldX = x;
             gp.tower[j].worldY = y;
+            gp.tower[j].towerWorth += gp.towerOptions[towerIndex].buyPrice;
             gp.userCurrency -=gp.towerOptions[towerIndex].buyPrice;
             j++;
         }

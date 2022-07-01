@@ -16,10 +16,23 @@ public class SniperTower extends Tower {
         attack = 5;
         getImage();
         projectile = new OBJ_SniperRound(gp);
+        projectile2 = new OBJ_SniperRound(gp);
+        projectile3 = new OBJ_SniperRound(gp);
+        projectile4 = new OBJ_SniperRound(gp);
+        projectile5 = new OBJ_SniperRound(gp);
+        projectile6 = new OBJ_SniperRound(gp);
+        projectile7 = new OBJ_SniperRound(gp);
+        projectile8 = new OBJ_SniperRound(gp);
         range = gp.tileSize * 8;
         fireRate = 60;
         buyPrice = 15;
         targetingType = 1;
+        upgrade1Aprice = 10;
+        upgrade1Bprice = 15;
+        upgrade1Cprice = 20;
+        upgrade2Aprice = 15;
+        upgrade2Bprice = 20;
+        upgrade2Cprice = 25;
 
     }
     public void getImage() {
@@ -40,10 +53,22 @@ public class SniperTower extends Tower {
 //            shotAvailableCounter++;
 //        }
     }
-    public void setUpgrade1(){
-        attack += 100;
+    public void setUpgrade1A(){
+
     }
-    public void setUpgrade2(){
+    public void setUpgrade1B(){
+
+    }
+    public void setUpgrade1C(){
+
+    }
+    public void setUpgrade2A(){
+        range += gp.tileSize;
+    }
+    public void setUpgrade2B(){
         fireRate -= 20;
+    }
+    public void setUpgrade2C(){
+
     }
 }

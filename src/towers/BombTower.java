@@ -16,10 +16,24 @@ public class BombTower extends Tower {
         attack = 4;
         getImage();
         projectile = new OBJ_Bomb(gp);
+        projectile2 = new OBJ_Bomb(gp);
+        projectile3 = new OBJ_Bomb(gp);
+        projectile4 = new OBJ_Bomb(gp);
+        projectile5 = new OBJ_Bomb(gp);
+        projectile6 = new OBJ_Bomb(gp);
+        projectile7 = new OBJ_Bomb(gp);
+        projectile8 = new OBJ_Bomb(gp);
+
         range = gp.tileSize*4;
         fireRate = 120;
         buyPrice = 10;
         targetingType = 3;
+        upgrade1Aprice = 10;
+        upgrade1Bprice = 15;
+        upgrade1Cprice = 20;
+        upgrade2Aprice = 15;
+        upgrade2Bprice = 20;
+        upgrade2Cprice = 25;
     }
     public void getImage() {
         image = setup("towers/bombTower", gp.tileSize, gp.tileSize);
@@ -35,9 +49,23 @@ public class BombTower extends Tower {
     public void setAction() {
 
     }
-    public void setUpgrade1(){
-        attack += 100;
+    public void setUpgrade1A(){
+
     }
-    public void setUpgrade2(){}
+    public void setUpgrade1B(){
+
+    }
+    public void setUpgrade1C(){
+
+    }
+    public void setUpgrade2A(){
+        range += gp.tileSize;
+    }
+    public void setUpgrade2B(){
+
+    }
+    public void setUpgrade2C(){
+
+    }
 }
 
