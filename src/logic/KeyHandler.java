@@ -79,6 +79,7 @@ public class KeyHandler implements KeyListener{
             if(gp.ui.commandNum == 0){
                 gp.gameState = gp.playState;
                 gp.addSelectTowers();
+                gp.removeInfoButton();
 //                gp.playMusic(0);
             }
             if(gp.ui.commandNum == 1){

@@ -533,8 +533,12 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         }
         if(e.getSource() == infoButton){
             gameState = infoState;
-            this.remove(infoButton);
+            removeInfoButton();
         }
+    }
+
+    public void removeInfoButton(){
+        this.remove(infoButton);
     }
 
 }
