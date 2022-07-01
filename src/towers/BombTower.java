@@ -50,22 +50,22 @@ public class BombTower extends Tower {
 
     }
     public void setUpgrade1A(){
-
+        attack +=1;
     }
     public void setUpgrade1B(){
-
+        attack +=1;
     }
     public void setUpgrade1C(){
-
+        attack +=1;
     }
     public void setUpgrade2A(){
         range += gp.tileSize;
     }
     public void setUpgrade2B(){
-
+        fireRate -=10;
     }
     public void setUpgrade2C(){
-
+        fireRate -=10;
     }
 }
 

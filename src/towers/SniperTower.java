@@ -54,13 +54,13 @@ public class SniperTower extends Tower {
 //        }
     }
     public void setUpgrade1A(){
-
+        attack += 1;
     }
     public void setUpgrade1B(){
-
+        attack += 1;
     }
     public void setUpgrade1C(){
-
+        attack += 2;
     }
     public void setUpgrade2A(){
         range += gp.tileSize;
@@ -69,6 +69,6 @@ public class SniperTower extends Tower {
         fireRate -= 20;
     }
     public void setUpgrade2C(){
-
+        attack += 3;
     }
 }

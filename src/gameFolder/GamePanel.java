@@ -54,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     ButtonTemplate towerSelect8 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*7,tileSize,tileSize,"TowerSelect");
     ButtonTemplate towerSelect9 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*8,tileSize,tileSize,"TowerSelect");
     ButtonTemplate towerSelect0 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*9,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate infoButton = new ButtonTemplate( 671,724,130,50,"InfoButton");
 
     //SYSTEM
     public TileManager tileM = new TileManager(this);
@@ -85,13 +86,14 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int mapState = 4;
+    public final int infoState = 5;
     public Rectangle mouseSolidArea = new Rectangle(0, 0, tileSize, tileSize);
     public Rectangle mouseSolidArea2 = new Rectangle((tileSize/2)-1,(tileSize/2)-1,2,2);
 
     public int spawnerCounter = 0;
     public int userLife;
     public int userCurrency;
-    public int waveNum = 0;
+    public int waveNum;
     public int startCol, startRow;
     public int goalCol, goalRow;
 
@@ -126,6 +128,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         towerSelect8.addActionListener(this);
         towerSelect9.addActionListener(this);
         towerSelect0.addActionListener(this);
+        infoButton.addActionListener(this);
 
     }
 
@@ -142,7 +145,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.remove(targetingButton);
     }
 
-    void addSelectTowers(){
+    public void addSelectTowers(){
         this.add(towerSelect1);
         this.add(towerSelect2);
         this.add(towerSelect3);
@@ -158,12 +161,38 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     public void setupGame(){
 //        aSetter.setObject();
 //        aSetter.setNPC();
+        resetEntities();
+        aSetter.resetMobCounter();
+        aSetter.resetTowerCounter();
         aSetter.setTowerOptions();
         userLife = 50;
         userCurrency = 1000;
+        waveNum = 0;
         //playMusic(0);
         gameState = titleState;
-        addSelectTowers();
+        this.add(infoButton);
+    }
+
+    public void resetEntities(){
+        for (int i = 0; i < tower.length; i++) {
+            tower[i] = null;
+        }
+        for (int i = 0; i < monster.length; i++) {
+            monster[i] = null;
+        }
+        for (int i = 0; i < obj.length; i++) {
+            obj[i] = null;
+        }
+
+        for (Entity entity : entityList) {
+            if (entity != null) {
+                entity = null;
+            }
+        }
+
+        for (int i = 0; i < projectileList.size(); i++) {
+            projectileList.remove(0);
+        }
     }
 
     public void startGameThread() {
@@ -226,6 +255,10 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         mouseY = tempMouseY - tempY - 22;
 
         if(gameState == playState){
+
+            if(userLife<=0){
+                setupGame();
+            }
 
             if (leftClick ){
                 if(selectedTowerIndex>towerOptions.length){
@@ -314,7 +347,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
 
 
-        if (gameState == titleState || gameState == mapState) {
+        if (gameState == titleState || gameState == mapState || gameState == infoState) {
             ui.draw(g2);
 
         } else {
@@ -497,6 +530,10 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         }
         if(e.getSource() == towerSelect0){
             selectedTowerIndex = 0;
+        }
+        if(e.getSource() == infoButton){
+            gameState = infoState;
+            this.remove(infoButton);
         }
     }
 

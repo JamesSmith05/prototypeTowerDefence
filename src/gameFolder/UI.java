@@ -14,7 +14,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     public Font cartoon, alagard, arial_28;
-    BufferedImage titleImage1,titleImage2,titleImage3,titleImage4,titleImage5,titleImage6,titleImage7,titleImage8;
+    BufferedImage titleImage1,titleImage2,titleImage3,titleImage4,titleImage5,titleImage6,titleImage7,titleImage8,titleImage9;
     public boolean messageOn = false;
     int titleCounter;
 
@@ -27,17 +27,11 @@ public class UI {
     public int slotCol;
     public int slotRow;
 
+    Color infoTextColor = new Color(217, 217, 217);
+    int infoX, infoY;
+
     public UI(GamePanel gp) {
         this.gp = gp;
-
-//        try{
-//            InputStream is = getClass().getResourceAsStream("/resources/fonts/alagard.ttf");
-//            alagard = Font.createFont(Font.TRUETYPE_FONT,is);
-//            is = getClass().getResourceAsStream("/resources/fonts/Mario-Kart-DS.ttf");
-//            cartoon = Font.createFont(Font.TRUETYPE_FONT,is);
-//        }catch (Exception e){
-//
-//        }
 
         getTitleImages();
 
@@ -52,6 +46,7 @@ public class UI {
         titleImage6 = setup("specialImages/waterfall6",gp.screenWidth,gp.screenHeight);
         titleImage7 = setup("specialImages/waterfall7",gp.screenWidth,gp.screenHeight);
         titleImage8 = setup("specialImages/waterfall8",gp.screenWidth,gp.screenHeight);
+        titleImage9 = setup("specialImages/titleScreen02",gp.screenWidth,gp.screenHeight);
     }
 
     public void addMessage(String text){
@@ -82,8 +77,54 @@ public class UI {
         if(gp.gameState == gp.mapState){
             drawMapNames();
         }
+        if(gp.gameState == gp.infoState){
+            drawInfoScreen();
+        }
 
 
+    }
+
+    public void drawInfoScreen(){
+        BufferedImage tempImage = titleImage9;
+        g2.drawImage(tempImage,0,0 ,null);
+        infoY = gp.tileSize;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
+        String text = "This is my project game";
+        drawText(text);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,42F));
+        text = "Now you probably got here by clicking the info button,";
+        drawText(text);
+        text = "however menus are supposed to be navigated using";
+        drawText(text);
+        text = "'w' to go up, 's' to go down and 'enter' to select.";
+        drawText(text);
+        text = "Once in a game you can use number keys to select towers";
+        drawText(text);
+        text = "or you can click on the icon. There are many types of towers,";
+        drawText(text);
+        text = "however i will leave you to figure out what each one does.";
+        drawText(text);
+        text = "Once a tower is selected they are placed using the mouse.";
+        drawText(text);
+        text = "You can click on a placed tower to interact with it.";
+        drawText(text);
+        text = "Press 'space' to start a wave and i'll leave the rest up to you!";
+        drawText(text);
+        text = "It should be quite simple if you've played a TowerDefence before.";
+        drawText(text);
+        text = "However don't be afraid to ask me how to do something.";
+        drawText(text);
+        text = "The game is very much in beta but this is my CS project.";
+        drawText(text);
+    }
+
+    void drawText(String text){
+        infoX = getXForCentreText(text);
+        infoY += gp.tileSize;
+        g2.setColor(Color.gray);
+        g2.drawString(text,infoX+1,infoY+1);
+        g2.setColor(infoTextColor);
+        g2.drawString(text,infoX,infoY);
     }
 
     public void drawUserInfo(){
@@ -115,16 +156,50 @@ public class UI {
 
             g2.setColor(Color.WHITE);
 
-            messageY = (gp.tileSize/4)*3 - 6;
+            messageY = (gp.tileSize/2)-2;
             g2.setFont(g2.getFont().deriveFont(24F));
             text = "upgrade 1";
+            messageX = (int) (gp.tileSize * 12.25) + getXForCentreBoxText(text,gp.tileSize*2);
+            g2.drawString(text,messageX,messageY);
+
+            messageY = (gp.tileSize/2)+20;
+            if(!gp.tower[gp.interactTowerIndex].upgrade1A){
+                text = "cost: " + gp.tower[gp.interactTowerIndex].upgrade1Aprice;
+            }else if(!gp.tower[gp.interactTowerIndex].upgrade1B){
+                text = "cost: " + gp.tower[gp.interactTowerIndex].upgrade1Bprice;
+            }else if(!gp.tower[gp.interactTowerIndex].upgrade1C){
+                text = "cost: " + gp.tower[gp.interactTowerIndex].upgrade1Cprice;
+            }else{
+                text = "sold out!";
+            }
 
             messageX = (int) (gp.tileSize * 12.25) + getXForCentreBoxText(text,gp.tileSize*2);
             g2.drawString(text,messageX,messageY);
-            text = "upgrade 2";
 
+            messageY = (gp.tileSize/2)-2;
+            text = "upgrade 2";
             messageX = (int) (gp.tileSize * 14.5) + getXForCentreBoxText(text,gp.tileSize*2);
             g2.drawString(text,messageX,messageY);
+
+            messageY = (gp.tileSize/2)+20;
+            if(!gp.tower[gp.interactTowerIndex].upgrade2A){
+                text = "cost: " + gp.tower[gp.interactTowerIndex].upgrade2Aprice;
+            }else if(!gp.tower[gp.interactTowerIndex].upgrade2B){
+                text = "cost: " + gp.tower[gp.interactTowerIndex].upgrade2Bprice;
+            }else if(!gp.tower[gp.interactTowerIndex].upgrade2C){
+                text = "cost: " + gp.tower[gp.interactTowerIndex].upgrade2Cprice;
+            }else{
+                text = "sold out!";
+            }
+            messageX = (int) (gp.tileSize * 14.5) + getXForCentreBoxText(text,gp.tileSize*2);
+            g2.drawString(text,messageX,messageY);
+
+            messageY = (gp.tileSize/2)-2;
+            text = "targeting:";
+            messageX = (int) (gp.tileSize * 16.75) + getXForCentreBoxText(text,gp.tileSize*2);
+            g2.drawString(text,messageX,messageY);
+
+            messageY = (gp.tileSize/2)+22;
             if(gp.tower[gp.interactTowerIndex].targetingType == 1)
                 text = "Strongest";
             if(gp.tower[gp.interactTowerIndex].targetingType == 2)
@@ -137,6 +212,7 @@ public class UI {
             messageX = (int) (gp.tileSize * 16.75) + getXForCentreBoxText(text,gp.tileSize*2);
             g2.drawString(text,messageX,messageY);
 
+            messageY = (gp.tileSize/4)*3-6;
             text = "Bin";
             messageX = (gp.tileSize * 19) + getXForCentreBoxText(text,gp.tileSize);
             g2.drawString(text,messageX,messageY);
@@ -200,6 +276,8 @@ public class UI {
         g2.drawImage(tempImage,0,0 ,null);
         g2.setFont(cartoon);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
+        Color myGrey = new Color(44, 42, 42);
+        g2.setColor(myGrey);
         String text = "Title Scream";
         int x = getXForCentreText(text);
         int y = gp.tileSize*3;
@@ -207,7 +285,7 @@ public class UI {
         g2.setColor(Color.gray);
         g2.drawString(text,x+5,y+5);
 
-        g2.setColor(Color.WHITE);
+        g2.setColor(myGrey);
         g2.drawString(text,x,y);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
@@ -219,7 +297,7 @@ public class UI {
         g2.setColor(Color.gray);
         g2.drawString(text,x+5,y+5);
 
-        g2.setColor(Color.WHITE);
+        g2.setColor(myGrey);
         g2.drawString(text,x,y);
 
         //MENU
@@ -244,6 +322,13 @@ public class UI {
         y += gp.tileSize;
         g2.drawString(text,x,y);
         if (commandNum == 2){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "INFO";
+        x = getXForCentreText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if (commandNum == 3){
             g2.drawString(">",x-gp.tileSize,y);
         }
     }
