@@ -13,7 +13,7 @@ public class IceTower extends Tower {
         this.gp = gp;
 
         name = "IceTower";
-        bulletSpeed = 8;
+        bulletSpeed = 12;
         attack = 3;
         getImage();
         projectile = new OBJ_Iceball(gp);

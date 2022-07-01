@@ -2,18 +2,16 @@ package gameFolder;
 
 import AI.PathFinder;
 import entities.Entity;
-import entities.Tower;
 import logic.*;
+import objects.OBJ_UpgradeEffect;
 import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
 
 //import entities.entities.Entity;
@@ -99,6 +97,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
     public int selectedTowerIndex = 50;
     public int interactTowerIndex = 1000;
+
+    public int remainingEnemies;
 
     public JFrame frame;
 
@@ -319,6 +319,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
         } else {
 
+             remainingEnemies = 0;
+
             //TILE
             tileM.draw(g2);
 
@@ -336,15 +338,13 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
             for (Entity entity : monster) {
                 if (entity != null) {
                     entityList.add(entity);
+                    remainingEnemies +=1;
                 }
             }
             //SORT
-            Collections.sort(entityList, new Comparator<Entity>() {
-                @Override
-                public int compare(Entity e1, Entity e2) {
-                    int result = Integer.compare(e1.worldY,e2.worldY);
-                    return result;
-                }
+            Collections.sort(entityList, (e1, e2) -> {
+                int result = Integer.compare(e1.worldY,e2.worldY);
+                return result;
             });
 
             for (Entity entity : projectileList) {
@@ -395,6 +395,17 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         sEffect.play();
     }
 
+    void addUpgradeEffect(int x,int y){
+        for (int j = 0; j < obj.length; j++) {
+            if (obj[j] == null) {
+                obj[j] = new OBJ_UpgradeEffect(this);
+                obj[j].worldX = x;
+                obj[j].worldY = y;
+                j = obj.length;
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -404,16 +415,19 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 tower[interactTowerIndex].upgrade1A = true;
                 tower[interactTowerIndex].setUpgrade1A();
                 userCurrency -= tower[interactTowerIndex].upgrade1Aprice;
+                addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
             else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade1A &&  !tower[interactTowerIndex].upgrade1B && userCurrency>= tower[interactTowerIndex].upgrade1Bprice){
                 tower[interactTowerIndex].upgrade1B = true;
                 tower[interactTowerIndex].setUpgrade1B();
                 userCurrency -= tower[interactTowerIndex].upgrade1Bprice;
+                addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
             else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade1A &&  tower[interactTowerIndex].upgrade1B && !tower[interactTowerIndex].upgrade1C &&  userCurrency>= tower[interactTowerIndex].upgrade1Cprice){
                 tower[interactTowerIndex].upgrade1C = true;
                 tower[interactTowerIndex].setUpgrade1C();
                 userCurrency -= tower[interactTowerIndex].upgrade1Cprice;
+                addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
         }
         if (e.getSource() == upgradeButton2) {
@@ -422,16 +436,19 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 tower[interactTowerIndex].upgrade2A = true;
                 tower[interactTowerIndex].setUpgrade2A();
                 userCurrency -= tower[interactTowerIndex].upgrade2Aprice;
+                addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
             else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade2A &&  !tower[interactTowerIndex].upgrade2B && userCurrency>= tower[interactTowerIndex].upgrade2Bprice){
                 tower[interactTowerIndex].upgrade2B = true;
                 tower[interactTowerIndex].setUpgrade2B();
                 userCurrency -= tower[interactTowerIndex].upgrade2Bprice;
+                addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
             else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade2A &&  tower[interactTowerIndex].upgrade2B && !tower[interactTowerIndex].upgrade2C &&  userCurrency>= tower[interactTowerIndex].upgrade2Cprice){
                 tower[interactTowerIndex].upgrade2C = true;
                 tower[interactTowerIndex].setUpgrade2C();
                 userCurrency -= tower[interactTowerIndex].upgrade2Cprice;
+                addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
         }
         if (e.getSource() == targetingButton) {

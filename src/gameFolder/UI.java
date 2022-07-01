@@ -14,8 +14,9 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     public Font cartoon, alagard, arial_28;
-    BufferedImage titleImage;
+    BufferedImage titleImage1,titleImage2,titleImage3,titleImage4,titleImage5,titleImage6,titleImage7,titleImage8;
     public boolean messageOn = false;
+    int titleCounter;
 
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
@@ -38,8 +39,19 @@ public class UI {
 //
 //        }
 
-        titleImage = setup("specialImages/titleScreen01",gp.screenWidth,gp.screenHeight);
+        getTitleImages();
 
+    }
+
+    void getTitleImages(){
+        titleImage1 = setup("specialImages/waterfall1",gp.screenWidth,gp.screenHeight);
+        titleImage2 = setup("specialImages/waterfall2",gp.screenWidth,gp.screenHeight);
+        titleImage3 = setup("specialImages/waterfall3",gp.screenWidth,gp.screenHeight);
+        titleImage4 = setup("specialImages/waterfall4",gp.screenWidth,gp.screenHeight);
+        titleImage5 = setup("specialImages/waterfall5",gp.screenWidth,gp.screenHeight);
+        titleImage6 = setup("specialImages/waterfall6",gp.screenWidth,gp.screenHeight);
+        titleImage7 = setup("specialImages/waterfall7",gp.screenWidth,gp.screenHeight);
+        titleImage8 = setup("specialImages/waterfall8",gp.screenWidth,gp.screenHeight);
     }
 
     public void addMessage(String text){
@@ -85,6 +97,9 @@ public class UI {
         g2.drawString(text,messageX,messageY);
         messageX += (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth() + 10;
         text = "Wave: " + gp.waveNum;
+        g2.drawString(text,messageX,messageY);
+        messageX += (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth() + 10;
+        text = "No. Enemies: " + gp.remainingEnemies;
         g2.drawString(text,messageX,messageY);
 
         if(gp.interactTowerIndex<gp.tower.length){
@@ -158,7 +173,30 @@ public class UI {
     }
 
     public void drawTitleScreen(){
-        BufferedImage tempImage = titleImage;
+        titleCounter++;
+        BufferedImage tempImage = null;
+        if (titleCounter<4){
+            tempImage = titleImage1;
+        }else if (titleCounter<8){
+            tempImage = titleImage2;
+        }else if (titleCounter<16){
+            tempImage = titleImage3;
+        }else if (titleCounter<20){
+            tempImage = titleImage4;
+        }else if (titleCounter<24){
+            tempImage = titleImage5;
+        }else if (titleCounter<28){
+            tempImage = titleImage6;
+        }else if (titleCounter<32){
+            tempImage = titleImage7;
+        }else if (titleCounter<36){
+            tempImage = titleImage8;
+        }if (titleCounter==35){
+            titleCounter=0;
+        }
+
+
+
         g2.drawImage(tempImage,0,0 ,null);
         g2.setFont(cartoon);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
@@ -211,7 +249,27 @@ public class UI {
     }
 
     public void drawMapNames(){
-        BufferedImage tempImage = titleImage;
+        titleCounter++;
+        BufferedImage tempImage = null;
+        if (titleCounter<4){
+            tempImage = titleImage1;
+        }else if (titleCounter<8){
+            tempImage = titleImage2;
+        }else if (titleCounter<16){
+            tempImage = titleImage3;
+        }else if (titleCounter<20){
+            tempImage = titleImage4;
+        }else if (titleCounter<24){
+            tempImage = titleImage5;
+        }else if (titleCounter<28){
+            tempImage = titleImage6;
+        }else if (titleCounter<32){
+            tempImage = titleImage7;
+        }else if (titleCounter<36){
+            tempImage = titleImage8;
+        }if (titleCounter==35){
+            titleCounter=0;
+        }
         g2.drawImage(tempImage,0,0 ,null);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
 

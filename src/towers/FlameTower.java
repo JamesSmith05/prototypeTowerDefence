@@ -12,7 +12,7 @@ public class FlameTower extends Tower {
         this.gp = gp;
 
         name = "FlameTower";
-        bulletSpeed = 8;
+        bulletSpeed = 12;
         attack = 3;
         getImage();
         projectile = new OBJ_Fireball(gp);

@@ -11,7 +11,7 @@ public class OBJ_Bomb extends Projectile {
         this.gp = gp;
 
         name  = "bomb";
-        maxLife = 160;
+        maxLife = 110;
         life = maxLife;
         attack = 1;
         alive = false;

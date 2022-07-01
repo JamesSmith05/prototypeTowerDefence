@@ -5,16 +5,16 @@ import gameFolder.GamePanel;
 
 import objects.OBJ_Rock;
 
-public class PlainTower extends Tower {
+public class MachineGunTower extends Tower {
 
     GamePanel gp;
 
-    public PlainTower(GamePanel gp) {
+    public MachineGunTower(GamePanel gp) {
         super(gp);
         this.gp = gp;
-        name = "PlainTower";
-        bulletSpeed = 12;
-        attack = 2;
+        name = "MachineGunTower";
+        bulletSpeed = 30;
+        attack = 1;
         getImage();
         projectile = new OBJ_Rock(gp);
         projectile2 = new OBJ_Rock(gp);
@@ -25,9 +25,9 @@ public class PlainTower extends Tower {
         projectile7 = new OBJ_Rock(gp);
         projectile8 = new OBJ_Rock(gp);
 
-        range = gp.tileSize*4;
-        fireRate = 20;
-        buyPrice = 5;
+        range = (int) (gp.tileSize*1.25);
+        fireRate = 30;
+        buyPrice = 50;
         targetingType = 3;
         upgrade1Aprice = 10;
         upgrade1Bprice = 15;
@@ -48,23 +48,25 @@ public class PlainTower extends Tower {
         right2 = setup("towers/plainTower", gp.tileSize, gp.tileSize);
     }
     public void setAction() {
+
+
     }
     public void setUpgrade1A(){
         attack += 1;
     }
     public void setUpgrade1B(){
-        attack += 2;
+        attack += 1;
     }
     public void setUpgrade1C(){
-        attack +=4;
+        attack += 1;
     }
     public void setUpgrade2A(){
-        range += gp.tileSize;
+        fireRate -= 5;
     }
     public void setUpgrade2B(){
-        range += gp.tileSize;
+        fireRate -= 5;
     }
     public void setUpgrade2C(){
-        range += gp.tileSize;
+        fireRate -= 5;
     }
 }

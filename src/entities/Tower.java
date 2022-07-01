@@ -37,8 +37,14 @@ public class Tower extends Entity {
         double distanceY = selectedMonsterDistanceY;
         double distanceABS = selectedMonsterDistance;
 
+        if (Objects.equals(name, "MachineGunTower") && gp.remainingEnemies != 0 ){
+            distanceX = gp.mouseX-worldX;
+            distanceY = gp.mouseY-worldY;
+            distanceABS = 1;
+        }
+
         if (distanceABS<range){
-            if(shotAvailableCounter == fireRate ){
+            if(shotAvailableCounter >= fireRate ){
                 if(!Objects.equals(name, "TackTower")){
                     createProjectiles(distanceX,distanceY);
                 }

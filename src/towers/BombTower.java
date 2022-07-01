@@ -12,7 +12,7 @@ public class BombTower extends Tower {
         this.gp = gp;
 
         name = "BombTower";
-        bulletSpeed = 8;
+        bulletSpeed = 12;
         attack = 4;
         getImage();
         projectile = new OBJ_Bomb(gp);

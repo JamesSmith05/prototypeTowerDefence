@@ -22,7 +22,7 @@ public class OBJ_Explosion extends Entity {
 
         explosionCounter++;
         if (explosionCounter== 1){
-
+            //play sound
         }
         else if (explosionCounter== 3){
             getImage(2);

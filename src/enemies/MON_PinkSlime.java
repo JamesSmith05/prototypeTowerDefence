@@ -19,7 +19,7 @@ public class MON_PinkSlime extends Entity {
         maxLife = 5;
         life = maxLife;
         attack = 2;
-        defence = 1;
+        defence = 0;
         exp = 4;
         coin = 1;
 
