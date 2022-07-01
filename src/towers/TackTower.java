@@ -79,4 +79,8 @@ public class TackTower extends Tower {
             gp.projectileList.add(projectile8);
         }
     }
+    public void setUpgrade1(){
+        attack += 100;
+    }
+    public void setUpgrade2(){}
 }

@@ -62,6 +62,8 @@ public class Entity {
     public int fireRate;
     public int bulletSpeed;
     public int buyPrice;
+    public int upgrade1price;
+    public int upgrade2price;
     public boolean actionFinished;
     public boolean frozen = false;
     public int frozenCounter;
@@ -96,6 +98,8 @@ public class Entity {
     }
 
     public void setAction(){}
+    public void setUpgrade1(){}
+    public void setUpgrade2(){}
     public void damageReaction() {}
     public void use(Entity entity){}
 

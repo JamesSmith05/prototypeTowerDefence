@@ -35,5 +35,9 @@ public class BombTower extends Tower {
     public void setAction() {
 
     }
+    public void setUpgrade1(){
+        attack += 100;
+    }
+    public void setUpgrade2(){}
 }
 

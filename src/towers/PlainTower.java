@@ -17,7 +17,7 @@ import objects.OBJ_Rock;
             getImage();
             projectile = new OBJ_Rock(gp);
             range = gp.tileSize*4;
-            fireRate = 20;
+            fireRate = 30;
             buyPrice = 5;
             targetingType = 3;
         }
@@ -35,4 +35,12 @@ import objects.OBJ_Rock;
         public void setAction() {
 
         }
+        public void setUpgrade1(){
+            attack += 100;
+        }
+        public void setUpgrade2(){
+            range += gp.tileSize;
+        }
+
+
     }

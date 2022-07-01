@@ -16,7 +16,7 @@ public class SniperTower extends Tower {
         attack = 5;
         getImage();
         projectile = new OBJ_SniperRound(gp);
-        range = gp.tileSize * 12;
+        range = gp.tileSize * 8;
         fireRate = 60;
         buyPrice = 15;
         targetingType = 1;
@@ -39,5 +39,11 @@ public class SniperTower extends Tower {
 //        if (shotAvailableCounter < 20) {
 //            shotAvailableCounter++;
 //        }
+    }
+    public void setUpgrade1(){
+        attack += 100;
+    }
+    public void setUpgrade2(){
+        fireRate -= 20;
     }
 }

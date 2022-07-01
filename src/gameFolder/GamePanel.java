@@ -402,15 +402,14 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
             System.out.println("upgrade button 1");
             if (tower[interactTowerIndex] != null && !tower[interactTowerIndex].upgrade1){
                 tower[interactTowerIndex].upgrade1 = true;
-                tower[interactTowerIndex].attack = tower[interactTowerIndex].attack*2;
+                tower[interactTowerIndex].setUpgrade1();
             }
         }
         if (e.getSource() == upgradeB2) {
             System.out.println("upgrade button 2");
             if (tower[interactTowerIndex] != null && !tower[interactTowerIndex].upgrade2){
                 tower[interactTowerIndex].upgrade2 = true;
-                tower[interactTowerIndex].fireRate -= 20;
-            }
+                tower[interactTowerIndex].setUpgrade2();            }
         }
         if (e.getSource() == targetingButton) {
             System.out.println("targeting button");

@@ -121,7 +121,7 @@ public class Tower extends Entity {
         int i = 0;
         double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
         int enemyPositionInWave;
-        int selectedMonsterPosition = 100000;
+        int selectedMonsterPosition = 0;
         selectedMonsterDistance = 1000;
         savedMonsterIndex = 0;
         while (i < gp.monster.length){
@@ -130,7 +130,7 @@ public class Tower extends Entity {
                 monsterDistanceY = (gp.monster[i].worldY - worldY);
                 monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
                 enemyPositionInWave = gp.monster[i].distanceTraveled;
-                if(enemyPositionInWave<selectedMonsterPosition && monsterDistanceABS<range){
+                if(enemyPositionInWave>selectedMonsterPosition && monsterDistanceABS<range){
                     selectedMonsterPosition = enemyPositionInWave;
                     savedMonsterIndex = i;
                     selectedMonsterDistance = monsterDistanceABS;
@@ -146,7 +146,7 @@ public class Tower extends Entity {
         int i = 0;
         double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
         int enemyPositionInWave;
-        int selectedMonsterPosition = 0;
+        int selectedMonsterPosition = 100000;
         selectedMonsterDistance = 1000;
         savedMonsterIndex = 0;
         while (i < gp.monster.length){
@@ -155,7 +155,7 @@ public class Tower extends Entity {
                 monsterDistanceY = (gp.monster[i].worldY - worldY);
                 monsterDistanceABS = Math.sqrt((monsterDistanceX*monsterDistanceX)+(monsterDistanceY*monsterDistanceY));
                 enemyPositionInWave = gp.monster[i].distanceTraveled;
-                if(enemyPositionInWave>selectedMonsterPosition && monsterDistanceABS<range){
+                if(enemyPositionInWave<selectedMonsterPosition && monsterDistanceABS<range){
                     selectedMonsterPosition = enemyPositionInWave;
                     savedMonsterIndex = i;
                     selectedMonsterDistance = monsterDistanceABS;
