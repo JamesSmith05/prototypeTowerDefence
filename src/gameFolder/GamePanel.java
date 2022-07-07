@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 //import entities.entities.Entity;
@@ -166,7 +167,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         aSetter.resetTowerCounter();
         aSetter.setTowerOptions();
         userLife = 50;
-        userCurrency = 25;
+        userCurrency = 1000;
         waveNum = 0;
         //playMusic(0);
         gameState = titleState;
@@ -375,10 +376,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 }
             }
             //SORT
-            Collections.sort(entityList, (e1, e2) -> {
-                int result = Integer.compare(e1.worldY,e2.worldY);
-                return result;
-            });
+            entityList.sort(Comparator.comparingInt(e -> e.worldY));
 
             for (Entity entity : projectileList) {
                 if (entity != null) {

@@ -45,7 +45,7 @@ public class Projectile extends Entity{
         if (Objects.equals(user.name, "SniperTower")){
             monsterIndex = gp.cChecker.checkSingleEntity(this,gp.monster[targetIndex],targetIndex);
         }else{
-            monsterIndex = gp.cChecker.checkEntity(this,gp.monster);
+            monsterIndex = gp.cChecker.checkHittableEntity(this,gp.monster);
         }
 
         if(monsterIndex != 999){

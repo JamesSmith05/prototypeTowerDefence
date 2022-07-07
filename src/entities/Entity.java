@@ -6,6 +6,7 @@ import logic.UtilityTool;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Entity {
 
@@ -184,7 +185,7 @@ public class Entity {
 
         if(invincible){
             invincibleCounter++;
-            if (invincibleCounter >10){
+            if (invincibleCounter >5){
                 invincible = false;
                 invincibleCounter = 0;
             }
@@ -280,8 +281,11 @@ public class Entity {
                 if (gp.monster[i].life <=0){
                     gp.monster[i].dying = true;
                     exp += gp.monster[i].exp;
-                    gp.userCurrency += gp.monster[i].coin;
 
+                    Random rand = new Random();
+                    if(rand.nextInt(2)==1) {
+                        gp.userCurrency += gp.monster[i].coin;
+                    }
                 }
             }
         }

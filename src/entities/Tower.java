@@ -94,7 +94,6 @@ public class Tower extends Entity {
         else if(!projectile6.alive){
             projectile6.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
             gp.projectileList.add(projectile6);
-
         }
         else if(!projectile7.alive){
             projectile7.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
