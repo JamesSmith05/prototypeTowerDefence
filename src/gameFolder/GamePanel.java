@@ -185,12 +185,6 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
             obj[i] = null;
         }
 
-        for (Entity entity : entityList) {
-            if (entity != null) {
-                entity = null;
-            }
-        }
-
         for (int i = 0; i < projectileList.size(); i++) {
             projectileList.remove(0);
         }
