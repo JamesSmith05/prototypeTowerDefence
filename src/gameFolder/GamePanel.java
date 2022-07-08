@@ -167,7 +167,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         aSetter.resetTowerCounter();
         aSetter.setTowerOptions();
         userLife = 50;
-        userCurrency = 25;
+        userCurrency = 1000;
         waveNum = 0;
         //playMusic(0);
         gameState = titleState;
@@ -440,18 +440,21 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 tower[interactTowerIndex].upgrade1A = true;
                 tower[interactTowerIndex].setUpgrade1A();
                 userCurrency -= tower[interactTowerIndex].upgrade1Aprice;
+                tower[interactTowerIndex].towerWorth += tower[interactTowerIndex].upgrade1Aprice;
                 addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
             else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade1A &&  !tower[interactTowerIndex].upgrade1B && userCurrency>= tower[interactTowerIndex].upgrade1Bprice){
                 tower[interactTowerIndex].upgrade1B = true;
                 tower[interactTowerIndex].setUpgrade1B();
                 userCurrency -= tower[interactTowerIndex].upgrade1Bprice;
+                tower[interactTowerIndex].towerWorth += tower[interactTowerIndex].upgrade1Bprice;
                 addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
             else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade1A &&  tower[interactTowerIndex].upgrade1B && !tower[interactTowerIndex].upgrade1C &&  userCurrency>= tower[interactTowerIndex].upgrade1Cprice){
                 tower[interactTowerIndex].upgrade1C = true;
                 tower[interactTowerIndex].setUpgrade1C();
                 userCurrency -= tower[interactTowerIndex].upgrade1Cprice;
+                tower[interactTowerIndex].towerWorth += tower[interactTowerIndex].upgrade1Cprice;
                 addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
         }
@@ -461,18 +464,21 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 tower[interactTowerIndex].upgrade2A = true;
                 tower[interactTowerIndex].setUpgrade2A();
                 userCurrency -= tower[interactTowerIndex].upgrade2Aprice;
+                tower[interactTowerIndex].towerWorth += tower[interactTowerIndex].upgrade2Aprice;
                 addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
             else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade2A &&  !tower[interactTowerIndex].upgrade2B && userCurrency>= tower[interactTowerIndex].upgrade2Bprice){
                 tower[interactTowerIndex].upgrade2B = true;
                 tower[interactTowerIndex].setUpgrade2B();
                 userCurrency -= tower[interactTowerIndex].upgrade2Bprice;
+                tower[interactTowerIndex].towerWorth += tower[interactTowerIndex].upgrade2Bprice;
                 addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
             else if (tower[interactTowerIndex] != null && tower[interactTowerIndex].upgrade2A &&  tower[interactTowerIndex].upgrade2B && !tower[interactTowerIndex].upgrade2C &&  userCurrency>= tower[interactTowerIndex].upgrade2Cprice){
                 tower[interactTowerIndex].upgrade2C = true;
                 tower[interactTowerIndex].setUpgrade2C();
                 userCurrency -= tower[interactTowerIndex].upgrade2Cprice;
+                tower[interactTowerIndex].towerWorth += tower[interactTowerIndex].upgrade2Cprice;
                 addUpgradeEffect(tower[interactTowerIndex].worldX,tower[interactTowerIndex].worldY);
             }
         }
@@ -489,6 +495,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         if (e.getSource() == deleteButton) {
             System.out.println("delete button");
             if (tower[interactTowerIndex] != null){
+                userCurrency += tower[interactTowerIndex].towerWorth/2;
                 tower[interactTowerIndex] = null;
                 interactTowerIndex = 1000;
             }
