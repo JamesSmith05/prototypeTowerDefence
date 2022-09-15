@@ -19,6 +19,8 @@ public class PathFinder {
         instantiateNodes();
     }
 
+
+    //assign node to each tile
     public void instantiateNodes() {
 
         node = new Node[gp.maxScreenCol][gp.maxScreenRow];
@@ -37,6 +39,7 @@ public class PathFinder {
         }
     }
 
+    //set all nodes to default
     public void resetNodes(){
 
         int col = 0;
@@ -61,6 +64,7 @@ public class PathFinder {
         step = 0;
     }
 
+    //set the starting point for the pathfinding
     public void setNodes(int startCol, int startRow, int goalCol, int goalRow){
 
         resetNodes();
@@ -91,6 +95,7 @@ public class PathFinder {
         }
     }
 
+    //calculate the cost of the node
     public void getCost(Node node){
 
         // G cost
@@ -106,6 +111,7 @@ public class PathFinder {
         node.fCost = node.gCost+node.hCost;
     }
 
+    //pathfind
     public boolean search(){
 
         while (!goalReached && step < 500){
@@ -143,13 +149,10 @@ public class PathFinder {
                     }
                 }
             }
-
             if(openList.size() == 0){
                 break;
             }
-
             currentNode = openList.get(bestNodeIndex);
-
             if(currentNode == goalNode){
                 goalReached = true;
                 trackThePath();
@@ -160,6 +163,7 @@ public class PathFinder {
         return goalReached;
     }
 
+    //set node to open
     public void openNode(Node node){
         if(!node.open && !node.checked && !node.solid){
             node.open = true;
@@ -168,6 +172,7 @@ public class PathFinder {
         }
     }
 
+    //map the path out
     public void trackThePath(){
         Node current = goalNode;
         while (current != startNode){
