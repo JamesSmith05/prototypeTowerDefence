@@ -278,7 +278,7 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
         Color myGrey = new Color(44, 42, 42);
         g2.setColor(myGrey);
-        String text = "Title Scream";
+        String text = "Title Screan";
         int x = getXForCentreText(text);
         int y = gp.tileSize*3;
 
@@ -290,7 +290,7 @@ public class UI {
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
 
-        text = "Please be scared i work hard on that title";
+        text = "It's a game";
         x = getXForCentreText(text);
         y += 2*gp.tileSize;
 

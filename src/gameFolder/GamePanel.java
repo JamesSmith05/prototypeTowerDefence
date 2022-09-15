@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     public final int screenHeight = tileSize * maxScreenRow;
 
     //fps
-    int FPS = 60;
+    int FPS = 10;
 
     //buttons
     ButtonTemplate upgradeButton1 = new ButtonTemplate((int) (tileSize * 12.25)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 1");

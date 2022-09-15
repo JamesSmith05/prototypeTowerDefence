@@ -42,13 +42,18 @@ public class MON_Bat extends Entity {
         left2 = setup("monster/bat_down_2", gp.tileSize, gp.tileSize);
         right1 = setup("monster/bat_right_1", gp.tileSize, gp.tileSize);
         right2 = setup("monster/bat_right_2", gp.tileSize, gp.tileSize);
+
+        fup1 = setup("monster/bat_down_1_frozen", gp.tileSize, gp.tileSize);
+        fup2 = setup("monster/bat_down_2_frozen", gp.tileSize, gp.tileSize);
+        fdown1 = setup("monster/bat_right_1_frozen", gp.tileSize, gp.tileSize);
+        fdown2 = setup("monster/bat_right_2_frozen", gp.tileSize, gp.tileSize);
+        fleft1 = setup("monster/bat_down_1_frozen", gp.tileSize, gp.tileSize);
+        fleft2 = setup("monster/bat_down_2_frozen", gp.tileSize, gp.tileSize);
+        fright1 = setup("monster/bat_right_1_frozen", gp.tileSize, gp.tileSize);
+        fright2 = setup("monster/bat_right_2_frozen", gp.tileSize, gp.tileSize);
     }
 
     public void setAction(){
 
     }
-//    public void damageReaction(){
-//        actionLockCounter = 0;
-//        direction = gp.player.direction;
-//    }
 }

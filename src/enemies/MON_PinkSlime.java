@@ -33,6 +33,15 @@ public class MON_PinkSlime extends Entity {
         getImage();
     }
     public void getImage (){
+        fup1 = setup("monster/pinkslime_down_1_frozen", gp.tileSize, gp.tileSize);
+        fup2 = setup("monster/pinkslime_down_2_frozen", gp.tileSize, gp.tileSize);
+        fdown1 = setup("monster/pinkslime_down_1_frozen", gp.tileSize, gp.tileSize);
+        fdown2 = setup("monster/pinkslime_down_2_frozen", gp.tileSize, gp.tileSize);
+        fleft1 = setup("monster/pinkslime_down_1_frozen", gp.tileSize, gp.tileSize);
+        fleft2 = setup("monster/pinkslime_down_2_frozen", gp.tileSize, gp.tileSize);
+        fright1 = setup("monster/pinkslime_down_1_frozen", gp.tileSize, gp.tileSize);
+        fright2 = setup("monster/pinkslime_down_2_frozen", gp.tileSize, gp.tileSize);
+
         image = setup("monster/pinkslime_down_1", gp.tileSize, gp.tileSize);
         up1 = setup("monster/pinkslime_down_1", gp.tileSize, gp.tileSize);
         up2 = setup("monster/pinkslime_down_2", gp.tileSize, gp.tileSize);
