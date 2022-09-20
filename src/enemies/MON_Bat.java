@@ -56,4 +56,8 @@ public class MON_Bat extends Entity {
     public void setAction(){
 
     }
+//    public void damageReaction(){
+//        actionLockCounter = 0;
+//        direction = gp.player.direction;
+//    }
 }
