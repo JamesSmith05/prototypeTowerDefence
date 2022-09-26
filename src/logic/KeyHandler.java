@@ -80,7 +80,6 @@ public class KeyHandler implements KeyListener{
                 gp.gameState = gp.playState;
                 gp.addSelectTowers();
                 gp.removeInfoButton();
-                gp.dba.loadGameData(1);
 //                gp.playMusic(0);
             }
             if(gp.ui.commandNum == 1){

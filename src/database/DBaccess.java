@@ -11,9 +11,8 @@ public class DBaccess{
 
     private Connection dbConnection = null;
 
-    GamePanel gp = new GamePanel();
-
-    AssetSetter aS = new AssetSetter(gp);
+    public DBaccess(){
+    }
 
     private Statement getSqlStatement() throws SQLException {
 
@@ -37,7 +36,7 @@ public class DBaccess{
         return true;
     }
 
-    public void loadGameData(int gameSaveID) {
+    public void loadGameData(int gameSaveID , GamePanel gp) {
         String sqlQuery = "SELECT GameID, TowerID from GameTowerRelation";
         int towerID;
         int gameID;
@@ -50,7 +49,7 @@ public class DBaccess{
                 gameID = rs.getInt("GameID");
                 towerID = rs.getInt("TowerID");
                 if (gameID == gameSaveID){
-                    loadSingleTower(towerID);
+                    loadSingleTower(towerID,gp);
                 }
             }
             stmt.close();
@@ -60,7 +59,7 @@ public class DBaccess{
 
     }
 
-    private void loadSingleTower(int towerSavedID){
+    private void loadSingleTower(int towerSavedID,GamePanel gp){
 
         String sqlQuery = "SELECT * from Tower";
 
@@ -83,7 +82,7 @@ public class DBaccess{
                     u2A = rs.getBoolean("upgrade2A");
                     u2B = rs.getBoolean("upgrade2B");
                     u2C = rs.getBoolean("upgrade2C");
-                    aS.loadTowerFromSave(xCoord,yCoord,towerName,elementID,u1A,u1B,u1C,u2A,u2B,u2C);
+                    gp.aSetter.loadTowerFromSave(xCoord,yCoord,towerName,elementID,u1A,u1B,u1C,u2A,u2B,u2C);
                 }
             }
             stmt.close();
