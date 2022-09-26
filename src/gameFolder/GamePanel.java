@@ -1,6 +1,7 @@
 package gameFolder;
 
 import AI.PathFinder;
+import database.DBaccess;
 import entities.Entity;
 import logic.*;
 import objects.OBJ_UpgradeEffect;
@@ -11,7 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
@@ -104,6 +104,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     public int remainingEnemies;
 
     public JFrame frame;
+
+    public DBaccess dba = new DBaccess();
 
     public GamePanel() {
 

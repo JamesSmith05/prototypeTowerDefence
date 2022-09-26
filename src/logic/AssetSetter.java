@@ -27,6 +27,33 @@ public class AssetSetter {
         resetTowerCounter();
     }
 
+    public void loadTowerFromSave(int x,int y,String towerName, int elementID,boolean a,boolean b,boolean c,boolean d,boolean e,boolean f){
+        if(towerName.equals("FlameTower")){
+            gp.tower[j] = new FlameTower(gp);
+        }else if(towerName.equals("BombTower")){
+            gp.tower[j] = new BombTower(gp);
+        }else if(towerName.equals("IceTower")){
+            gp.tower[j] = new IceTower(gp);
+        }else if(towerName.equals("MachineGunTower")){
+            gp.tower[j] = new MachineGunTower(gp);
+        }else if(towerName.equals("PlainTower")){
+            gp.tower[j] = new PlainTower(gp);
+        }else if(towerName.equals("SniperTower")){
+            gp.tower[j] = new SniperTower(gp);
+        }else if(towerName.equals("TackTower")){
+            gp.tower[j] = new TackTower(gp);
+        }
+        gp.tower[j].worldX = x;
+        gp.tower[j].worldY = y;
+        gp.tower[j].upgrade1A = a;
+        gp.tower[j].upgrade1B = b;
+        gp.tower[j].upgrade1C = c;
+        gp.tower[j].upgrade2A = d;
+        gp.tower[j].upgrade2B = e;
+        gp.tower[j].upgrade2C = f;
+        j++;
+    }
+
     public void setTower(int x, int y, int towerIndex){
         if(gp.userCurrency >= gp.towerOptions[towerIndex].buyPrice){
 

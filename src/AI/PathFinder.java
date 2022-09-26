@@ -19,7 +19,6 @@ public class PathFinder {
         instantiateNodes();
     }
 
-
     //assign node to each tile
     public void instantiateNodes() {
 

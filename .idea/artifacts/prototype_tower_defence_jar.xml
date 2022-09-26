@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="prototype tower defence:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/prototype_tower_defence_jar</output-path>
+    <root id="archive" name="prototype tower defence.jar">
+      <element id="module-output" name="prototype tower defence" />
+    </root>
+  </artifact>
+</component>
