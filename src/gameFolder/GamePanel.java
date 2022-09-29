@@ -90,6 +90,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     public final int dialogueState = 3;
     public final int mapState = 4;
     public final int infoState = 5;
+    public final int loadState = 6;
     public Rectangle mouseSolidArea = new Rectangle(0, 0, tileSize, tileSize);
     public Rectangle mouseSolidArea2 = new Rectangle((tileSize/2)-1,(tileSize/2)-1,2,2);
 
@@ -352,7 +353,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
 
 
-        if (gameState == titleState || gameState == mapState || gameState == infoState) {
+        if (gameState == titleState || gameState == mapState || gameState == infoState || gameState == loadState) {
             ui.draw(g2);
 
         } else {

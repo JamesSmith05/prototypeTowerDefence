@@ -14,6 +14,8 @@ public class KeyHandler implements KeyListener{
 
     public boolean showDebugText = false;
 
+    ArrayList<Integer> tempArray = new ArrayList<>();
+
     public KeyHandler(GamePanel gp){
         this.gp = gp;
     }
@@ -26,6 +28,9 @@ public class KeyHandler implements KeyListener{
 
         if (gp.gameState == gp.titleState){
             titleState(code);
+        }
+        else if (gp.gameState == gp.loadState){
+            loadState(code);
         }
         else if(gp.gameState == gp.playState){
             playState(code);
@@ -69,8 +74,6 @@ public class KeyHandler implements KeyListener{
         }
     }
 
-    ArrayList<Integer> tempArray = new ArrayList<>();
-
     public void titleState(int code){
         if(code == KeyEvent.VK_W && gp.ui.commandNum != 0){
             gp.ui.commandNum--;
@@ -86,17 +89,47 @@ public class KeyHandler implements KeyListener{
 //                gp.playMusic(0);
             }
             if(gp.ui.commandNum == 1){
-                gp.gameState = gp.playState;
-                gp.addSelectTowers();
-                gp.removeInfoButton();
-                tempArray = gp.dba.getGameSaves(gp.username);
-                gp.loadGameSave(tempArray.get(0));
+                gp.gameState = gp.loadState;
             }
             if(gp.ui.commandNum == 2){
                 gp.gameState = gp.mapState;
             }
             if(gp.ui.commandNum == 3){
                 gp.gameState = gp.infoState;
+            }
+            gp.ui.commandNum = 0;
+        }
+    }
+
+    public void loadState(int code){
+        if(code == KeyEvent.VK_W && gp.ui.commandNum != 0){
+            gp.ui.commandNum--;
+        }
+        if(code == KeyEvent.VK_S && gp.ui.commandNum != 3){
+            gp.ui.commandNum++;
+        }
+        if(code == KeyEvent.VK_ENTER){
+            if(gp.ui.commandNum == 0){
+                gp.gameState = gp.playState;
+                gp.addSelectTowers();
+                gp.removeInfoButton();
+                tempArray = gp.dba.getGameSaves(gp.username);
+                gp.loadGameSave(tempArray.get(0));
+            }
+            if(gp.ui.commandNum == 1){
+                gp.gameState = gp.playState;
+                gp.addSelectTowers();
+                gp.removeInfoButton();
+            }
+            if(gp.ui.commandNum == 2){
+                gp.gameState = gp.playState;
+                gp.addSelectTowers();
+                gp.removeInfoButton();
+            }
+            if(gp.ui.commandNum == 3){
+                gp.gameState = gp.playState;
+                gp.addSelectTowers();
+                gp.removeInfoButton();
             }
             gp.ui.commandNum = 0;
         }

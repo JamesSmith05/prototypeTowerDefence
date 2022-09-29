@@ -63,6 +63,9 @@ public class UI {
         if(gp.gameState == gp.titleState){
             drawTitleScreen();
         }
+        if(gp.gameState == gp.loadState){
+            drawLoadScreen();
+        }
         if(gp.gameState == gp.playState){
             drawMessage();
             drawUserInfo();
@@ -245,6 +248,89 @@ public class UI {
                     messageCounter.remove(i);
                 }
             }
+        }
+    }
+
+    public void drawLoadScreen(){
+        titleCounter++;
+        BufferedImage tempImage = null;
+        if (titleCounter<4){
+            tempImage = titleImage1;
+        }else if (titleCounter<8){
+            tempImage = titleImage2;
+        }else if (titleCounter<16){
+            tempImage = titleImage3;
+        }else if (titleCounter<20){
+            tempImage = titleImage4;
+        }else if (titleCounter<24){
+            tempImage = titleImage5;
+        }else if (titleCounter<28){
+            tempImage = titleImage6;
+        }else if (titleCounter<32){
+            tempImage = titleImage7;
+        }else if (titleCounter<36){
+            tempImage = titleImage8;
+        }if (titleCounter==35){
+            titleCounter=0;
+        }
+
+        g2.drawImage(tempImage,0,0 ,null);
+        g2.setFont(cartoon);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
+        Color myGrey = new Color(44, 42, 42);
+        g2.setColor(myGrey);
+        String text = "Load Game Save";
+        int x = getXForCentreText(text);
+        int y = gp.tileSize*3;
+
+        g2.setColor(Color.gray);
+        g2.drawString(text,x+5,y+5);
+
+        g2.setColor(myGrey);
+        g2.drawString(text,x,y);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
+
+        text = "You can select from your saved games";
+        x = getXForCentreText(text);
+        y += 2*gp.tileSize;
+
+        g2.setColor(Color.gray);
+        g2.drawString(text,x+5,y+5);
+
+        g2.setColor(myGrey);
+        g2.drawString(text,x,y);
+
+
+        g2.setFont(alagard);
+//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
+        text = "GAME 1 ++info";
+        x = getXForCentreText(text);
+        y += 4* gp.tileSize;
+        g2.drawString(text,x,y);
+        if (commandNum == 0){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "GAME 2 ++info";
+        x = getXForCentreText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if (commandNum == 1){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "GAME 3 ++info";
+        x = getXForCentreText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if (commandNum == 2){
+            g2.drawString(">",x-gp.tileSize,y);
+        }
+        text = "GAME 4 ++info";
+        x = getXForCentreText(text);
+        y += gp.tileSize;
+        g2.drawString(text,x,y);
+        if (commandNum == 3){
+            g2.drawString(">",x-gp.tileSize,y);
         }
     }
 
