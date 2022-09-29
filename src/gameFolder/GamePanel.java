@@ -21,6 +21,8 @@ import java.util.Random;
 
 public class GamePanel extends JPanel implements Runnable, ActionListener {
 
+    public String username;
+
     final int originalTileSize = 64;
     final int scale = 1;
     public int mouseX = 0, mouseY = 0;
@@ -107,7 +109,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
     public DBaccess dba = new DBaccess();
 
-    public GamePanel() {
+    public GamePanel(String username) {
+
+        this.username = username;
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -236,14 +240,11 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
     }
 
-    boolean loadPlease = true;
+    public void loadGameSave(int gameToLoad){
+        dba.loadGameData(gameToLoad,this);
+    }
 
     public void update() {
-
-        if (loadPlease){
-            dba.loadGameData(1,this);
-            loadPlease = !loadPlease;
-        }
 
         frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 

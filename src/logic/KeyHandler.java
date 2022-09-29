@@ -3,7 +3,7 @@ package logic;
 import gameFolder.GamePanel;
 
 import java.awt.event.*;
-
+import java.util.ArrayList;
 
 
 public class KeyHandler implements KeyListener{
@@ -68,6 +68,9 @@ public class KeyHandler implements KeyListener{
             gp.ui.commandNum = 0;
         }
     }
+
+    ArrayList<Integer> tempArray = new ArrayList<>();
+
     public void titleState(int code){
         if(code == KeyEvent.VK_W && gp.ui.commandNum != 0){
             gp.ui.commandNum--;
@@ -83,7 +86,11 @@ public class KeyHandler implements KeyListener{
 //                gp.playMusic(0);
             }
             if(gp.ui.commandNum == 1){
-
+                gp.gameState = gp.playState;
+                gp.addSelectTowers();
+                gp.removeInfoButton();
+                tempArray = gp.dba.getGameSaves(gp.username);
+                gp.loadGameSave(tempArray.get(0));
             }
             if(gp.ui.commandNum == 2){
                 gp.gameState = gp.mapState;
@@ -94,6 +101,7 @@ public class KeyHandler implements KeyListener{
             gp.ui.commandNum = 0;
         }
     }
+
     public void infoState(int code){
         if(code == KeyEvent.VK_ENTER){
             if(gp.ui.commandNum == 0){

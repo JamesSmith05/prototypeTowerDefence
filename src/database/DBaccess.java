@@ -4,6 +4,7 @@ import gameFolder.GamePanel;
 import logic.AssetSetter;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBaccess{
 
@@ -34,6 +35,31 @@ public class DBaccess{
             return false;
         }
         return true;
+    }
+
+    public ArrayList<Integer> getGameSaves(String username){
+        ArrayList<Integer> games = new ArrayList<>();
+
+        String sqlQuery = "SELECT GameID, Username from Game";
+        String dbUsername;
+        int gameID;
+        try {
+
+            Statement stmt = getSqlStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+
+            while (rs.next()) {
+                gameID = rs.getInt("GameID");
+                dbUsername = rs.getString("Username");
+                if (dbUsername.equals(username)){
+                    games.add(gameID);
+                }
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return games;
     }
 
     public void loadGameData(int gameSaveID , GamePanel gp) {
@@ -74,7 +100,7 @@ public class DBaccess{
                 if (towerID == towerSavedID){
                     towerName = rs.getString("TowerName");
                     xCoord = rs.getInt("xCoord");
-                    yCoord = rs.getInt("xCoord");
+                    yCoord = rs.getInt("yCoord");
                     elementID = rs.getInt("ElementID");
                     u1A = rs.getBoolean("upgrade1A");
                     u1B = rs.getBoolean("upgrade1B");
@@ -82,6 +108,7 @@ public class DBaccess{
                     u2A = rs.getBoolean("upgrade2A");
                     u2B = rs.getBoolean("upgrade2B");
                     u2C = rs.getBoolean("upgrade2C");
+                    System.out.println("Setting tower");
                     gp.aSetter.loadTowerFromSave(xCoord,yCoord,towerName,elementID,u1A,u1B,u1C,u2A,u2B,u2C);
                 }
             }
@@ -115,36 +142,37 @@ public class DBaccess{
 //        return topScores;
 //    } // either HighestScore OR HighestRally
 //
-//    public boolean createUser(String username, String password) {
-//
-//        String passwordHashValue = HashGenerator.getHashValue(password);
-//
-//        String sqlQuery = String.format("INSERT INTO Users VALUES ('%s', '%s', 0, 0)", username, passwordHashValue);
-//        return executeUpdateSql(sqlQuery);
-//    }
-//
-//    public Boolean loginUser(String username, String password) {
-//
-//        String passwordHashValue = HashGenerator.getHashValue(password);
-//
-//        String sqlQuery = String.format("SELECT * FROM Users WHERE Username ='%s' AND Password = '%s'", username, passwordHashValue);
-//
-//        Boolean isValidUser = false;
-//
-//        try {
-//            Statement stmt = getSqlStatement();
-//            ResultSet rs = stmt.executeQuery(sqlQuery);
-//
-//            isValidUser = rs.next();
-//
-//            stmt.close();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return isValidUser;
-//    }
+    public boolean createUser(String username, String password) {
+
+        String passwordHashValue = StringHasher.getHashValue(password);
+
+        String sqlQuery = String.format("INSERT INTO User (Username, Password) VALUES ('%s', '%s')" , username , passwordHashValue);
+
+        return executeUpdateSql(sqlQuery);
+    }
+
+    public Boolean loginUser(String username, String password) {
+
+        String passwordHashValue = StringHasher.getHashValue(password);
+
+        String sqlQuery = String.format("SELECT * FROM User WHERE Username ='%s' AND Password = '%s'", username, passwordHashValue);
+
+        Boolean isValidUser = false;
+
+        try {
+            Statement stmt = getSqlStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+
+            isValidUser = rs.next();
+
+            stmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isValidUser;
+    }
 //
 //    public void updateHighScore (String username, int lastScore) {
 //        String sqlQuery = String.format("UPDATE Users SET HighestScore = %s WHERE Username = '%s' AND HighestScore < %s", lastScore, username, lastScore);
