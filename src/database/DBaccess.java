@@ -63,9 +63,33 @@ public class DBaccess{
     }
 
     public void loadGameData(int gameSaveID , GamePanel gp) {
-        String sqlQuery = "SELECT GameID, TowerID from GameTowerRelation";
-        int towerID;
+
+        String sqlQuery = "SELECT * from Game";
+
         int gameID;
+
+        try {
+
+            Statement stmt = getSqlStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+
+            while (rs.next()) {
+                gameID = rs.getInt("GameID");
+                if (gameID == gameSaveID){
+                    gp.userCurrency = rs.getInt("Cash");
+                    gp.waveNum = rs.getInt("Round");
+                    gp.userLife = rs.getInt("Lives");
+                    gp.tileM.loadMap("/resources/maps/map0" + rs.getInt("MapID") + ".txt");
+                }
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        sqlQuery = "SELECT GameID, TowerID from GameTowerRelation";
+        int towerID;
         try {
 
             Statement stmt = getSqlStatement();

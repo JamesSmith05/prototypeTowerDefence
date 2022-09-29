@@ -131,6 +131,13 @@ public class UI {
     }
 
     public void drawUserInfo(){
+
+        if (!gp.aSetter.waveLock){
+            drawSaveButton();
+        }
+
+        g2.setColor(Color.WHITE);
+
         int messageX = gp.tileSize/2;
         int messageY = (gp.tileSize/4)*3;
         String text = "Life: " + gp.userLife;
@@ -556,6 +563,26 @@ public class UI {
             y += gp.tileSize;
         }
     }
+
+    public void drawSaveButton(){
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.2F));
+
+        g2.setColor(new Color(100, 53, 25));
+        g2.fillRoundRect(896, 1296,gp.tileSize*2,gp.tileSize,25,25);
+
+//        g2.fillRoundRect((int) (gp.tileSize * 12.25)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25)
+
+        int messageY = 1306;
+        g2.setFont(g2.getFont().deriveFont(24F));
+        String text = "Save Game";
+        int messageX = 896 + getXForCentreBoxText(text,gp.tileSize*2);
+        g2.drawString(text,messageX,messageY);
+
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1F));
+
+//        (896,1296,tileSize*2,tileSize,"Save game")
+    }
+
     public void drawSubWindow(int x, int y, int width, int height){
 
         Color c = new Color(0,0,0,200);

@@ -57,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     ButtonTemplate towerSelect8 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*7,tileSize,tileSize,"TowerSelect");
     ButtonTemplate towerSelect9 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*8,tileSize,tileSize,"TowerSelect");
     ButtonTemplate towerSelect0 = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*9,tileSize,tileSize,"TowerSelect");
+    ButtonTemplate saveButton = new ButtonTemplate(tempButtonX,tempButtonY+tempButtonChange*11,tileSize*2,tileSize,"Save game");
     ButtonTemplate infoButton = new ButtonTemplate( 671,724,130,50,"InfoButton");
 
     //SYSTEM
