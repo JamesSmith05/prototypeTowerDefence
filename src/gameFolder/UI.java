@@ -6,6 +6,7 @@ import logic.UtilityTool;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -13,7 +14,7 @@ public class UI {
 
     GamePanel gp;
     Graphics2D g2;
-    public Font cartoon, alagard, arial_28;
+    public Font cartoon, alagard;
     BufferedImage titleImage1,titleImage2,titleImage3,titleImage4,titleImage5,titleImage6,titleImage7,titleImage8,titleImage9;
     public boolean messageOn = false;
     int titleCounter;
@@ -34,6 +35,13 @@ public class UI {
         this.gp = gp;
 
         getTitleImages();
+
+        try{
+            InputStream is = getClass().getResourceAsStream("/resources/fonts/SweetCherryFree.otf");
+            cartoon = Font.createFont(Font.TRUETYPE_FONT,is);
+        }catch (Exception e){
+
+        }
 
     }
 
@@ -285,7 +293,7 @@ public class UI {
         g2.drawImage(tempImage,0,0 ,null);
         g2.setFont(cartoon);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
-        Color textColour = new Color(199, 66, 234);
+        Color textColour = new Color(44, 42, 42);
         g2.setColor(textColour);
         String text = "Load Game Save";
         int x = getXForCentreText(text);
@@ -297,65 +305,44 @@ public class UI {
         g2.setColor(textColour);
         g2.drawString(text,x,y);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,64F));
 
         text = "You can select from your saved games";
         x = getXForCentreText(text);
         y += 2*gp.tileSize;
 
         g2.setColor(Color.gray);
-        g2.drawString(text,x+5,y+5);
+        g2.drawString(text,x+2,y+2);
 
         g2.setColor(textColour);
         g2.drawString(text,x,y);
 
-
-        g2.setFont(alagard);
-//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
-
-        for (int i = 1; i < gp.possibleGameSaves.size(); i++) {
+        for (int i = 0; i < gp.possibleGameSaves.size(); i++) {
             y = gp.tileSize*8;
-            if( i <=4){
-                text = "GAME " + (i) + ": " + gp.dba.returnGameInfo(gp.possibleGameSaves.get(i));
-                x = getXForCentreText(text);
-                y += gp.tileSize * i;
-                g2.drawString(text,x,y);
-                if (commandNum == i){
-                    g2.drawString(">",x-gp.tileSize,y);
-                }
-            }
-            else if( i <=8 && commandNum > 4){
-                text = "GAME " + (i) + ": " + gp.dba.returnGameInfo(gp.possibleGameSaves.get(i));
-                x = getXForCentreText(text);
-                y += gp.tileSize * (i-4);
-                g2.drawString(text,x,y);
-                if (commandNum == i){
-                    g2.drawString(">",x-gp.tileSize,y);
+
+            int k = commandNum/4 + 1;
+
+            if(commandNum <= (4*k)){
+                if(i >=4*(k-1) && i < 4*k){
+                    text = "GAME " + (i+1) + ": " + gp.dba.returnGameInfo(gp.possibleGameSaves.get(i));
+                    x = getXForCentreText(text);
+                    y += gp.tileSize * (i-(4*(k-1)));
+
+                    g2.setColor(Color.gray);
+                    g2.drawString(text,x+2,y+2);
+
+                    g2.setColor(textColour);
+                    g2.drawString(text,x,y);
+                    if (commandNum == i){
+                        g2.setColor(Color.WHITE);
+                        g2.drawString(">",x-gp.tileSize+2,y+2);
+
+                        g2.setColor(textColour);
+                        g2.drawString(">",x-gp.tileSize,y);
+                    }
                 }
             }
         }
-
-//        text = "GAME 2 " + gp.dba.returnGameInfo(1);
-//        x = getXForCentreText(text);
-//        y += gp.tileSize;
-//        g2.drawString(text,x,y);
-//        if (commandNum == 1){
-//            g2.drawString(">",x-gp.tileSize,y);
-//        }
-//        text = "GAME 3 " + gp.dba.returnGameInfo(0);
-//        x = getXForCentreText(text);
-//        y += gp.tileSize;
-//        g2.drawString(text,x,y);
-//        if (commandNum == 2){
-//            g2.drawString(">",x-gp.tileSize,y);
-//        }
-//        text = "GAME 4 " + gp.dba.returnGameInfo(0);
-//        x = getXForCentreText(text);
-//        y += gp.tileSize;
-//        g2.drawString(text,x,y);
-//        if (commandNum == 3){
-//            g2.drawString(">",x-gp.tileSize,y);
-//        }
     }
 
     public void drawTitleScreen(){
@@ -398,7 +385,7 @@ public class UI {
         g2.setColor(myGrey);
         g2.drawString(text,x,y);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,64F));
 
         text = "It's a game";
         x = getXForCentreText(text);
@@ -411,8 +398,6 @@ public class UI {
         g2.drawString(text,x,y);
 
         //MENU
-        g2.setFont(alagard);
-//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
         text = "NEW GAME";
         x = getXForCentreText(text);
         y += 4* gp.tileSize;
@@ -466,7 +451,7 @@ public class UI {
             titleCounter=0;
         }
         g2.drawImage(tempImage,0,0 ,null);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,64F));
 
         String text = "Map1";
         int x = getXForCentreText(text);

@@ -109,8 +109,14 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_W && gp.ui.commandNum != 0){
             gp.ui.commandNum--;
         }
-        if(code == KeyEvent.VK_S && gp.ui.commandNum != 7){
+        if(code == KeyEvent.VK_S && gp.ui.commandNum != gp.possibleGameSaves.size()-1){
             gp.ui.commandNum++;
+        }
+        if(code == KeyEvent.VK_D && gp.ui.commandNum < gp.possibleGameSaves.size()-5){
+            gp.ui.commandNum += 4;
+        }
+        if(code == KeyEvent.VK_A && gp.ui.commandNum > 3){
+            gp.ui.commandNum -= 4;
         }
         if(code == KeyEvent.VK_ENTER){
             if(gp.ui.commandNum == 0){
