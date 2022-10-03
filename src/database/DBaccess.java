@@ -189,11 +189,37 @@ public class DBaccess{
 
     public void saveLoadedGame (GamePanel gp){
 
-        String sqlQuery = String.format("UPDATE Game SET Cash = '%s' Round = '%s' Lives = '%s' WHERE GameID = '%s'", gp.userCurrency,gp.waveNum,gp.userLife,gp.loadedGameID);
-
+        String sqlQuery = String.format("UPDATE Game SET Cash = '%s' WHERE GameID = '%s'", gp.userCurrency,gp.loadedGameID);
+        executeUpdateSql(sqlQuery);
+        sqlQuery = String.format("UPDATE Game SET Round = '%s'  WHERE GameID = '%s'",gp.waveNum,gp.loadedGameID);
+        executeUpdateSql(sqlQuery);
+        sqlQuery = String.format("UPDATE Game SET Lives = '%s' WHERE GameID = '%s'",gp.userLife,gp.loadedGameID);
         executeUpdateSql(sqlQuery);
 
-        //String sqlQuery = String.format("UPDATE Users SET HighestRally = %s WHERE Username = '%s' AND HighestRally < %s", lastRally, username, lastRally);
+
+        int gameID;
+
+        sqlQuery = "SELECT GameID, TowerID from GameTowerRelation";
+        int towerID;
+        try {
+
+            Statement stmt = getSqlStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+
+            while (rs.next()) {
+                gameID = rs.getInt("GameID");
+                towerID = rs.getInt("TowerID");
+                if (gameID == gp.loadedGameID){
+                    sqlQuery = String.format("DELETE FROM GameTowerRelation WHERE TowerID = '%s'",towerID);
+                    executeUpdateSql(sqlQuery);
+                    sqlQuery = String.format("DELETE FROM Tower WHERE TowerID = '%s'",towerID);
+                    executeUpdateSql(sqlQuery);
+                }
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         int generatedTowerKey;
 

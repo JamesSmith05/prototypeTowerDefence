@@ -56,6 +56,9 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_S && gp.ui.commandNum != 3){
             gp.ui.commandNum++;
         }
+        if(code == KeyEvent.VK_ESCAPE){
+            gp.gameState = gp.titleState;
+        }
         if(code == KeyEvent.VK_ENTER){
             if(gp.ui.commandNum == 0){
                 gp.tileM.loadMap("/resources/maps/map01.txt");
@@ -118,6 +121,9 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_A && gp.ui.commandNum > 3){
             gp.ui.commandNum -= 4;
         }
+        if(code == KeyEvent.VK_ESCAPE){
+            gp.gameState = gp.titleState;
+        }
         if(code == KeyEvent.VK_ENTER){
             if(gp.ui.commandNum == 0){
                 gp.gameState = gp.playState;
@@ -152,6 +158,9 @@ public class KeyHandler implements KeyListener{
                 gp.gameState = gp.titleState;
             }
             gp.ui.commandNum = 0;
+        }
+        if(code == KeyEvent.VK_ESCAPE){
+            gp.gameState = gp.titleState;
         }
     }
     public void playState(int code){
