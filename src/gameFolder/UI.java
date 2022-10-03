@@ -69,6 +69,7 @@ public class UI {
         if(gp.gameState == gp.playState){
             drawMessage();
             drawUserInfo();
+            drawSaveButton();
             drawTowerImages();
         }
         if(gp.gameState == gp.pauseState){
@@ -284,8 +285,8 @@ public class UI {
         g2.drawImage(tempImage,0,0 ,null);
         g2.setFont(cartoon);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
-        Color myGrey = new Color(44, 42, 42);
-        g2.setColor(myGrey);
+        Color textColour = new Color(199, 66, 234);
+        g2.setColor(textColour);
         String text = "Load Game Save";
         int x = getXForCentreText(text);
         int y = gp.tileSize*3;
@@ -293,7 +294,7 @@ public class UI {
         g2.setColor(Color.gray);
         g2.drawString(text,x+5,y+5);
 
-        g2.setColor(myGrey);
+        g2.setColor(textColour);
         g2.drawString(text,x,y);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
@@ -305,40 +306,56 @@ public class UI {
         g2.setColor(Color.gray);
         g2.drawString(text,x+5,y+5);
 
-        g2.setColor(myGrey);
+        g2.setColor(textColour);
         g2.drawString(text,x,y);
 
 
         g2.setFont(alagard);
 //        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,48F));
-        text = "GAME 1 ++info";
-        x = getXForCentreText(text);
-        y += 4* gp.tileSize;
-        g2.drawString(text,x,y);
-        if (commandNum == 0){
-            g2.drawString(">",x-gp.tileSize,y);
+
+        for (int i = 1; i < gp.possibleGameSaves.size(); i++) {
+            y = gp.tileSize*8;
+            if( i <=4){
+                text = "GAME " + (i) + ": " + gp.dba.returnGameInfo(gp.possibleGameSaves.get(i));
+                x = getXForCentreText(text);
+                y += gp.tileSize * i;
+                g2.drawString(text,x,y);
+                if (commandNum == i){
+                    g2.drawString(">",x-gp.tileSize,y);
+                }
+            }
+            else if( i <=8 && commandNum > 4){
+                text = "GAME " + (i) + ": " + gp.dba.returnGameInfo(gp.possibleGameSaves.get(i));
+                x = getXForCentreText(text);
+                y += gp.tileSize * (i-4);
+                g2.drawString(text,x,y);
+                if (commandNum == i){
+                    g2.drawString(">",x-gp.tileSize,y);
+                }
+            }
         }
-        text = "GAME 2 ++info";
-        x = getXForCentreText(text);
-        y += gp.tileSize;
-        g2.drawString(text,x,y);
-        if (commandNum == 1){
-            g2.drawString(">",x-gp.tileSize,y);
-        }
-        text = "GAME 3 ++info";
-        x = getXForCentreText(text);
-        y += gp.tileSize;
-        g2.drawString(text,x,y);
-        if (commandNum == 2){
-            g2.drawString(">",x-gp.tileSize,y);
-        }
-        text = "GAME 4 ++info";
-        x = getXForCentreText(text);
-        y += gp.tileSize;
-        g2.drawString(text,x,y);
-        if (commandNum == 3){
-            g2.drawString(">",x-gp.tileSize,y);
-        }
+
+//        text = "GAME 2 " + gp.dba.returnGameInfo(1);
+//        x = getXForCentreText(text);
+//        y += gp.tileSize;
+//        g2.drawString(text,x,y);
+//        if (commandNum == 1){
+//            g2.drawString(">",x-gp.tileSize,y);
+//        }
+//        text = "GAME 3 " + gp.dba.returnGameInfo(0);
+//        x = getXForCentreText(text);
+//        y += gp.tileSize;
+//        g2.drawString(text,x,y);
+//        if (commandNum == 2){
+//            g2.drawString(">",x-gp.tileSize,y);
+//        }
+//        text = "GAME 4 " + gp.dba.returnGameInfo(0);
+//        x = getXForCentreText(text);
+//        y += gp.tileSize;
+//        g2.drawString(text,x,y);
+//        if (commandNum == 3){
+//            g2.drawString(">",x-gp.tileSize,y);
+//        }
     }
 
     public void drawTitleScreen(){
@@ -371,7 +388,7 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN,96F));
         Color myGrey = new Color(44, 42, 42);
         g2.setColor(myGrey);
-        String text = "Title Screan";
+        String text = "Title Scran";
         int x = getXForCentreText(text);
         int y = gp.tileSize*3;
 

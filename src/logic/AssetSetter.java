@@ -19,7 +19,7 @@ public class AssetSetter {
     public int enemyId;
     public int j;
     public int k;
-    public Boolean waveLock = true;
+    public Boolean waveLock = false;
 
     public AssetSetter(GamePanel gp){
         this.gp = gp;

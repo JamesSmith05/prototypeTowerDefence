@@ -1,10 +1,11 @@
 package database;
 
+import entities.Entity;
 import gameFolder.GamePanel;
-import logic.AssetSetter;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DBaccess{
 
@@ -37,29 +38,46 @@ public class DBaccess{
         return true;
     }
 
-    public ArrayList<Integer> getGameSaves(String username){
-        ArrayList<Integer> games = new ArrayList<>();
+    private Integer executeUpdateSqlReturnKey(String sqlQuery) {
+        int key = -1;
+
+        try {
+            Statement stmt = getSqlStatement();
+            stmt.executeUpdate(sqlQuery,Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                key = rs.getInt(1);
+            }
+            stmt.close(); // to save resources
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return key;
+        }
+        return key;
+    }
+
+    public ArrayList<Integer> gamesForUsername(String username){
+        ArrayList<Integer> tempArray = new ArrayList<>();
 
         String sqlQuery = "SELECT GameID, Username from Game";
-        String dbUsername;
-        int gameID;
+
         try {
 
             Statement stmt = getSqlStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
 
             while (rs.next()) {
-                gameID = rs.getInt("GameID");
-                dbUsername = rs.getString("Username");
-                if (dbUsername.equals(username)){
-                    games.add(gameID);
+                if (Objects.equals(username, rs.getString("Username"))){
+                    tempArray.add(rs.getInt("GameID"));
                 }
             }
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return games;
+
+        return tempArray;
     }
 
     public void loadGameData(int gameSaveID , GamePanel gp) {
@@ -140,6 +158,83 @@ public class DBaccess{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+
+
+    public String returnGameInfo (int gameToDisplay){
+
+        String sqlQuery = "SELECT * FROM Game";
+
+        String result = "blank";
+
+        try {
+
+            Statement stmt = getSqlStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+
+            while (rs.next()) {
+                if (gameToDisplay == rs.getInt("GameID")){
+                    result = "cash: " + rs.getInt("Cash") + " round: " + rs.getInt("Round") + " lives: " + rs.getInt("Lives");
+                }
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+    public void saveLoadedGame (GamePanel gp){
+
+        String sqlQuery = String.format("UPDATE Game SET Cash = '%s' Round = '%s' Lives = '%s' WHERE GameID = '%s'", gp.userCurrency,gp.waveNum,gp.userLife,gp.loadedGameID);
+
+        executeUpdateSql(sqlQuery);
+
+        //String sqlQuery = String.format("UPDATE Users SET HighestRally = %s WHERE Username = '%s' AND HighestRally < %s", lastRally, username, lastRally);
+
+        int generatedTowerKey;
+
+        for (int i = 0; i < gp.tower.length; i++) {
+            if (gp.tower[i] != null){
+                sqlQuery = String.format("INSERT INTO Tower (TowerName, xCoord, yCoord, ElementID, Upgrade1A, Upgrade1B, Upgrade1C, Upgrade2A, Upgrade2B, Upgrade2C) " +
+                                "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", gp.tower[i].name,gp.tower[i].worldX,gp.tower[i].worldY,1
+                        , gp.tower[i].upgrade1A, gp.tower[i].upgrade1B, gp.tower[i].upgrade1C, gp.tower[i].upgrade2A, gp.tower[i].upgrade2B, gp.tower[i].upgrade2C);
+                generatedTowerKey = executeUpdateSqlReturnKey(sqlQuery);
+
+                sqlQuery = String.format("INSERT INTO GameTowerRelation (GameID, TowerID) VALUES ('%s','%s')",gp.loadedGameID,generatedTowerKey);
+                executeUpdateSql(sqlQuery);
+
+            }
+        }
+    }
+
+    public void saveNewGame(String username, GamePanel gp){
+
+        String sqlQuery = String.format("INSERT INTO Game (Username, Cash, Round, Lives, MapID) VALUES ('%s', '%s', '%s', '%s', '%s')", username,gp.userCurrency,gp.waveNum,gp.userLife,gp.mapID);
+
+        int generatedGameKey = executeUpdateSqlReturnKey(sqlQuery);
+
+        gp.loadedGameID = generatedGameKey;
+
+        int generatedTowerKey;
+
+        for (int i = 0; i < gp.tower.length; i++) {
+            if (gp.tower[i] != null){
+                sqlQuery = String.format("INSERT INTO Tower (TowerName, xCoord, yCoord, ElementID, Upgrade1A, Upgrade1B, Upgrade1C, Upgrade2A, Upgrade2B, Upgrade2C) " +
+                        "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", gp.tower[i].name,gp.tower[i].worldX,gp.tower[i].worldY,1
+                        , gp.tower[i].upgrade1A, gp.tower[i].upgrade1B, gp.tower[i].upgrade1C, gp.tower[i].upgrade2A, gp.tower[i].upgrade2B, gp.tower[i].upgrade2C);
+                generatedTowerKey = executeUpdateSqlReturnKey(sqlQuery);
+
+                sqlQuery = String.format("INSERT INTO GameTowerRelation (GameID, TowerID) VALUES ('%s','%s')",generatedGameKey,generatedTowerKey);
+                executeUpdateSql(sqlQuery);
+
+            }
+        }
+
+
 
     }
 

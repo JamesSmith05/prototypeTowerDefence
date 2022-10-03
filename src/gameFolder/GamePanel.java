@@ -111,6 +111,10 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
     public DBaccess dba = new DBaccess();
 
+    public int mapID = 1;
+    public int loadedGameID = -1;
+    public ArrayList<Integer> possibleGameSaves;
+
     public GamePanel(String username) {
 
         this.username = username;
@@ -121,6 +125,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.addKeyListener(keyH);
         this.addMouseListener(keyM);
         this.setFocusable(true);
+
+        possibleGameSaves = dba.gamesForUsername(username);
 
         //button setup
         upgradeButton1.addActionListener(this);
@@ -138,6 +144,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         towerSelect9.addActionListener(this);
         towerSelect0.addActionListener(this);
         infoButton.addActionListener(this);
+        saveButton.addActionListener(this);
 
     }
 
@@ -165,6 +172,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.add(towerSelect8);
         this.add(towerSelect9);
         this.add(towerSelect0);
+        this.add(saveButton);
     }
 
     public void setupGame(){
@@ -180,6 +188,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         //playMusic(0);
         gameState = titleState;
         this.add(infoButton);
+        frame = (JFrame) SwingUtilities.getWindowAncestor(this);// moved from update section, might break it
     }
 
     public void resetEntities(){
@@ -247,8 +256,6 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     }
 
     public void update() {
-
-        frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
         int tempX = frame.getLocation().x;
         int tempY = frame.getLocation().y;
@@ -545,6 +552,13 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         if(e.getSource() == infoButton){
             gameState = infoState;
             removeInfoButton();
+        }
+        if(e.getSource() == saveButton){
+            if(loadedGameID>=0){
+                dba.saveLoadedGame(this);
+            }else{
+                dba.saveNewGame(username, this);
+            }
         }
     }
 

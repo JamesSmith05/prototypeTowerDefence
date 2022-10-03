@@ -59,15 +59,19 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_ENTER){
             if(gp.ui.commandNum == 0){
                 gp.tileM.loadMap("/resources/maps/map01.txt");
+                gp.mapID=1;
             }
             if(gp.ui.commandNum == 1){
                 gp.tileM.loadMap("/resources/maps/map02.txt");
+                gp.mapID=2;
             }
             if(gp.ui.commandNum == 2){
                 gp.tileM.loadMap("/resources/maps/map03.txt");
+                gp.mapID=3;
             }
             if(gp.ui.commandNum == 3){
                 gp.tileM.loadMap("/resources/maps/map04.txt");
+                gp.mapID=4;
             }
             gp.gameState = gp.titleState;
             gp.ui.commandNum = 0;
@@ -105,7 +109,7 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_W && gp.ui.commandNum != 0){
             gp.ui.commandNum--;
         }
-        if(code == KeyEvent.VK_S && gp.ui.commandNum != 3){
+        if(code == KeyEvent.VK_S && gp.ui.commandNum != 7){
             gp.ui.commandNum++;
         }
         if(code == KeyEvent.VK_ENTER){
@@ -113,7 +117,8 @@ public class KeyHandler implements KeyListener{
                 gp.gameState = gp.playState;
                 gp.addSelectTowers();
                 gp.removeInfoButton();
-                tempArray = gp.dba.getGameSaves(gp.username);
+                tempArray = gp.dba.gamesForUsername(gp.username);
+                gp.loadedGameID = tempArray.get(0);
                 gp.loadGameSave(tempArray.get(0));
             }
             if(gp.ui.commandNum == 1){
