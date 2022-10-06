@@ -125,20 +125,12 @@ public class KeyHandler implements KeyListener{
             gp.gameState = gp.titleState;
         }
         if(code == KeyEvent.VK_ENTER){
-            if(gp.ui.commandNum == 0){
-                gp.gameState = gp.playState;
-                gp.addSelectTowers();
-                gp.removeInfoButton();
-                tempArray = gp.dba.gamesForUsername(gp.username);
-                gp.loadedGameID = tempArray.get(gp.ui.commandNum);
-                gp.loadGameSave(tempArray.get(gp.ui.commandNum));
-            }
-            if(gp.ui.commandNum == 1){
-                gp.gameState = gp.playState;
-                gp.addSelectTowers();
-                gp.removeInfoButton();
-            }
-
+            gp.gameState = gp.playState;
+            gp.addSelectTowers();
+            gp.removeInfoButton();
+            tempArray = gp.dba.gamesForUsername(gp.username);
+            gp.loadedGameID = tempArray.get(gp.ui.commandNum);
+            gp.loadGameSave(tempArray.get(gp.ui.commandNum));
             gp.ui.commandNum = 0;
         }
     }

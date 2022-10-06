@@ -187,7 +187,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         aSetter.resetTowerCounter();
         aSetter.setTowerOptions();
         userLife = 50;
-        userCurrency = 1000;
+        userCurrency = 20;
         waveNum = 0;
         //playMusic(0);
         gameState = titleState;
@@ -355,6 +355,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
                 }
             }
+            ui.updateDamageTimers();
         }
         leftClick = false;
         rightClick = false;
@@ -364,8 +365,6 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-
-
 
         if (gameState == titleState || gameState == mapState || gameState == infoState || gameState == loadState) {
             ui.draw(g2);
@@ -426,7 +425,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3F));
                 g2.drawImage(towerOptions[selectedTowerIndex].image, (mouseX - (tileSize/2)), (mouseY - (tileSize/2)),null);
             }
-            frame.repaint();
+            frame.repaint(); // this makes it run the draw function thousands of times per second but it hides the buttons from flashing when hovered over
         }
         g2.dispose();
 

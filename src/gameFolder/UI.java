@@ -81,11 +81,9 @@ public class UI {
             drawLoadScreen();
         }
         if(gp.gameState == gp.playState){
+            drawDamageMessage();
             drawUserInfo();
             drawTowerImages();
-            if(gp.showDamage){
-                drawDamageMessage();
-            }
         }
         if(gp.gameState == gp.pauseState){
             drawPauseScreen();
@@ -144,6 +142,28 @@ public class UI {
         g2.drawString(text,infoX+1,infoY+1);
         g2.setColor(infoTextColor);
         g2.drawString(text,infoX,infoY);
+    }
+
+    // coult put in any draw function because they run thousands of times per second
+    public void updateDamageTimers(){
+        for (int i = 0; i < damageMessages.size(); i ++) {
+            if (damageMessages.get(i) != null) {
+
+                int counter = messageCounter.get(i) + 1;
+                messageCounter.set(i, counter);
+
+                if (messageCounter.get(i) % 2 == 0) {
+                    Message tempMessage = new Message(damageMessages.get(i).text, damageMessages.get(i).x, damageMessages.get(i).y - 1);
+                    damageMessages.set(i, tempMessage);
+                }
+
+                if (messageCounter.get(i) > 45) {
+                    damageMessages.remove(i);
+                    messageCounter.remove(i);
+                }
+            }
+        }
+
     }
 
     public void drawUserInfo(){
@@ -261,35 +281,24 @@ public class UI {
 
     }
 
+    public int testCounter;
     public void drawDamageMessage(){
 
         int messageX;
         int messageY;
-        String text;
 
         g2.setFont(g2.getFont().deriveFont(24F));
 
         for (int i = 0; i < damageMessages.size(); i ++) {
             if (damageMessages.get(i) != null){
-                text = damageMessages.get(i).text;
                 messageX = damageMessages.get(i).x;
                 messageY = damageMessages.get(i).y;
-                g2.setColor(Color.black);
-                g2.drawString(damageMessages.get(i).text,messageX+2,messageY+2);
-                g2.setColor(Color.RED);
-                g2.drawString(damageMessages.get(i).text,messageX,messageY);
 
-                int counter = messageCounter.get(i) +1;
-                int messageOffset = messageY - 1;
-
-                Message tempMessage = new Message(text, messageX, messageOffset);
-                damageMessages.set(i,tempMessage);
-
-                messageCounter.set(i,counter);
-
-                if(messageCounter.get(i) > 45){
-                    damageMessages.remove(i);
-                    messageCounter.remove(i);
+                if(gp.showDamage){
+                    g2.setColor(Color.black);
+                    g2.drawString(damageMessages.get(i).text,messageX+2,messageY+2);
+                    g2.setColor(Color.RED);
+                    g2.drawString(damageMessages.get(i).text,messageX,messageY);
                 }
             }
         }
