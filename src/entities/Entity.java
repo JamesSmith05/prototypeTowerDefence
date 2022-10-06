@@ -305,6 +305,8 @@ public class Entity {
 
                 gp.monster[i].life -= damage;
 
+                gp.ui.addDamageMessage("-" + damage , gp.monster[i].worldX,gp.monster[i].worldY);
+
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
                 if (gp.monster[i].life <=0){

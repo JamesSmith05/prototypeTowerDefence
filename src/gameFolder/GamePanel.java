@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     int FPS = 60;
 
     //buttons
+    ButtonTemplate hitMarkerButton = new ButtonTemplate((int) (tileSize*10.75), 5,(int) (tileSize*1.375) -10,tileSize-10,"hit");
     ButtonTemplate upgradeButton1 = new ButtonTemplate((int) (tileSize * 12.25)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 1");
     ButtonTemplate upgradeButton2 =  new ButtonTemplate((int) (tileSize * 14.5)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 2");
     ButtonTemplate targetingButton = new ButtonTemplate((int) (tileSize * 16.75)+5, 5,tileSize*2 -10,tileSize-10,"targeting");
@@ -111,6 +112,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
     public DBaccess dba = new DBaccess();
 
+    public boolean showDamage = false;
     public int mapID = 1;
     public int loadedGameID = -1;
     public ArrayList<Integer> possibleGameSaves;
@@ -145,6 +147,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         towerSelect0.addActionListener(this);
         infoButton.addActionListener(this);
         saveButton.addActionListener(this);
+        hitMarkerButton.addActionListener(this);
 
     }
 
@@ -173,6 +176,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.add(towerSelect9);
         this.add(towerSelect0);
         this.add(saveButton);
+        this.add(hitMarkerButton);
     }
 
     public void setupGame(){
@@ -188,7 +192,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         //playMusic(0);
         gameState = titleState;
         this.add(infoButton);
-        frame = (JFrame) SwingUtilities.getWindowAncestor(this);// moved from update section, might break it
+        // moved from update section, might break it //// did not break it
     }
 
     public void resetEntities(){
@@ -256,6 +260,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     }
 
     public void update() {
+
+        frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
         int tempX = frame.getLocation().x;
         int tempY = frame.getLocation().y;
@@ -552,6 +558,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         if(e.getSource() == infoButton){
             gameState = infoState;
             removeInfoButton();
+        }
+        if(e.getSource() == hitMarkerButton){
+            showDamage = !showDamage;
         }
         if(e.getSource() == saveButton){
             if(loadedGameID>=0){

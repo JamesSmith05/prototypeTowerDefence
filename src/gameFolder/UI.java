@@ -1,6 +1,5 @@
 package gameFolder;
 
-import entities.Entity;
 import logic.UtilityTool;
 
 import javax.imageio.ImageIO;
@@ -20,6 +19,7 @@ public class UI {
     int titleCounter;
 
     ArrayList<String> message = new ArrayList<>();
+    ArrayList<Message> damageMessages = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
 
     public boolean gameFinished = false;
@@ -57,8 +57,14 @@ public class UI {
         titleImage9 = setup("specialImages/titleScreen02",gp.screenWidth,gp.screenHeight);
     }
 
-    public void addMessage(String text){
-        message.add(text);
+//    public void addMessage(String text){
+//        message.add(text);
+//        messageCounter.add(0);
+//    }
+
+    public void addDamageMessage(String text, int x, int y){
+        Message tempMessage = new Message(text, x, y);
+        damageMessages.add(tempMessage);
         messageCounter.add(0);
     }
 
@@ -75,9 +81,11 @@ public class UI {
             drawLoadScreen();
         }
         if(gp.gameState == gp.playState){
-            drawMessage();
             drawUserInfo();
             drawTowerImages();
+            if(gp.showDamage){
+                drawDamageMessage();
+            }
         }
         if(gp.gameState == gp.pauseState){
             drawPauseScreen();
@@ -161,16 +169,30 @@ public class UI {
         text = "No. Enemies: " + gp.remainingEnemies;
         g2.drawString(text,messageX,messageY);
 
-        if(gp.interactTowerIndex<gp.tower.length){
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.2F));
 
-            g2.setColor(new Color(100, 53, 25));
+        g2.setColor(new Color(100, 53, 25, 52));
+        g2.fillRoundRect( (int) (gp.tileSize*10.75), 5,(int) (gp.tileSize*1.375) -10,gp.tileSize-10,25,25);
+
+        g2.setColor(Color.WHITE);
+
+        messageY = (gp.tileSize/2)-2;
+        g2.setFont(g2.getFont().deriveFont(20F));
+        text = "damage";
+        messageX = (int) (gp.tileSize*10.75) + getXForCentreBoxText(text,(int) (gp.tileSize*1.375) -10);
+        g2.drawString(text,messageX,messageY);
+        messageY = (gp.tileSize/2)+20;
+        text = "values";
+        messageX = (int) (gp.tileSize*10.75) + getXForCentreBoxText(text,(int) (gp.tileSize*1.375) -10);
+        g2.drawString(text,messageX,messageY);
+
+
+        if(gp.interactTowerIndex<gp.tower.length){
+
+            g2.setColor(new Color(100, 53, 25,52));
             g2.fillRoundRect((int) (gp.tileSize * 12.25)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
             g2.fillRoundRect((int) (gp.tileSize * 14.5)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
             g2.fillRoundRect((int) (gp.tileSize * 16.75)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
             g2.fillRoundRect(gp.tileSize * 19+5, 5,gp.tileSize -10,gp.tileSize-10,25,25);
-
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1F));
 
             g2.setColor(Color.WHITE);
 
@@ -239,31 +261,65 @@ public class UI {
 
     }
 
-    public void drawMessage(){
+    public void drawDamageMessage(){
 
-        int messageX = gp.tileSize;
-        int messageY = gp.tileSize*5;
-        g2.setFont(g2.getFont().deriveFont(32F));
+        int messageX;
+        int messageY;
+        String text;
 
-        for (int i = 0; i < message.size(); i++) {
-            if (message.get(i) != null){
+        g2.setFont(g2.getFont().deriveFont(24F));
 
+        for (int i = 0; i < damageMessages.size(); i ++) {
+            if (damageMessages.get(i) != null){
+                text = damageMessages.get(i).text;
+                messageX = damageMessages.get(i).x;
+                messageY = damageMessages.get(i).y;
                 g2.setColor(Color.black);
-                g2.drawString(message.get(i),messageX+3,messageY+3);
-                g2.setColor(Color.WHITE);
-                g2.drawString(message.get(i),messageX,messageY);
+                g2.drawString(damageMessages.get(i).text,messageX+2,messageY+2);
+                g2.setColor(Color.RED);
+                g2.drawString(damageMessages.get(i).text,messageX,messageY);
 
                 int counter = messageCounter.get(i) +1;
-                messageCounter.set(i,counter);
-                messageY += 50;
+                int messageOffset = messageY - 1;
 
-                if(messageCounter.get(i) > 180){
-                    message.remove(i);
+                Message tempMessage = new Message(text, messageX, messageOffset);
+                damageMessages.set(i,tempMessage);
+
+                messageCounter.set(i,counter);
+
+                if(messageCounter.get(i) > 45){
+                    damageMessages.remove(i);
                     messageCounter.remove(i);
                 }
             }
         }
     }
+
+//    public void drawMessage(){
+//
+//        int messageX = gp.tileSize;
+//        int messageY = gp.tileSize*5;
+//        g2.setFont(g2.getFont().deriveFont(32F));
+//
+//        for (int i = 0; i < message.size(); i++) {
+//            if (message.get(i) != null){
+//
+//                g2.setColor(Color.black);
+//                g2.drawString(message.get(i),messageX+3,messageY+3);
+//                g2.setColor(Color.WHITE);
+//                g2.drawString(message.get(i),messageX,messageY);
+//
+//                int counter = messageCounter.get(i) +1;
+//                messageCounter.set(i,counter);
+//                messageY += 50;
+//
+//                if(messageCounter.get(i) > 30){
+//                    message.remove(i);
+//                    messageCounter.remove(i);
+//                }
+//            }
+//        }
+//    }
 
     public void drawLoadScreen(){
         titleCounter++;
