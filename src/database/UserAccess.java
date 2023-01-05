@@ -73,7 +73,12 @@ public class UserAccess {
                     null,
                     ""
             );
-            if (RegexValidator.isValidUsername(username)){
+            if(username == null){
+//                JOptionPane.showMessageDialog(null, "Passwords are not the same", "Sign Up", JOptionPane.WARNING_MESSAGE);
+//                check = false;
+//                run();
+            }
+            else if (RegexValidator.isValidUsername(username)){
                 check = false;
             }
             else {

@@ -312,7 +312,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                         }
                     }
                 }
-            //System.out.println( " the click was " + mouseX + " " + mouseY);
+                //System.out.println( " the click was " + mouseX + " " + mouseY);
             }
             if (rightClick){
                 //System.out.println( " the click was " + mouseX + " " + mouseY);
@@ -385,7 +385,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
         } else {
 
-             remainingEnemies = 0;
+            remainingEnemies = 0;
 
             //TILE
             tileM.draw(g2);
