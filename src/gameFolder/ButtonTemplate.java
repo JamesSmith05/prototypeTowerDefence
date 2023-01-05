@@ -1,5 +1,6 @@
 package gameFolder;
 
+import javax.crypto.spec.PSource;
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,4 +14,9 @@ public class ButtonTemplate extends JButton {
         this.setBorder(BorderFactory.createEtchedBorder()); // adds border around box
 
     }
+
+    public void updateLocation(int x, int  y){
+        this.setBounds(x,y,this.getWidth(),this.getHeight());
+    }
+
 }

@@ -45,6 +45,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     ButtonTemplate upgradeButton2 =  new ButtonTemplate((int) (tileSize * 14.5)+5, 5,tileSize*2 -10,tileSize-10,"upgrade 2");
     ButtonTemplate targetingButton = new ButtonTemplate((int) (tileSize * 16.75)+5, 5,tileSize*2 -10,tileSize-10,"targeting");
     ButtonTemplate deleteButton = new ButtonTemplate(tileSize * 19+5, 5,tileSize -10,tileSize-10,"delete");
+    ButtonTemplate elementButton1 = new ButtonTemplate(0, 0,tileSize/2,tileSize/2,"button");
+    ButtonTemplate elementButton2 = new ButtonTemplate(0, 0,tileSize/2,tileSize/2,"button");
+    ButtonTemplate elementButton3 = new ButtonTemplate(0, 0,tileSize/2,tileSize/2,"button");
     int tempButtonX = ((maxScreenCol*tileSize) - (3*tileSize) + 16);
     int tempButtonY = 16;
     int tempButtonChange = tileSize*5/4;
@@ -156,6 +159,14 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.add(upgradeButton2);
         this.add(deleteButton);
         this.add(targetingButton);
+    }
+
+    public void displayTowerElements(){
+        int updateX = tower[interactTowerIndex].worldX + tileSize/4;
+        int updateY = tower[interactTowerIndex].worldY - tileSize;
+        elementButton1.updateLocation(updateX, updateY);
+
+
     }
     public void removeTowerButtons() {
         this.remove(upgradeButton1);
@@ -285,13 +296,15 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                     if(cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea2, tower, true)){
                         //tower[interactTowerIndex].selected = true;
                         addTowerButtons();
+                        ui.drawElm = true;
                     }
                     else{
                         interactTowerIndex = 1000;
                         removeTowerButtons();
+                        ui.drawElm = false;
                     }
                 }
-                if(selectedTowerIndex<towerOptions.length && userCurrency>0){
+                if(selectedTowerIndex<towerOptions.length && userCurrency>0){ // currency check is irrelevant
                     if (!cChecker.checkMouseTile((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea)){
                         if(!cChecker.checkEntityMouse((mouseX - (tileSize / 2)), (mouseY - (tileSize / 2)), mouseSolidArea, tower, false)){
                             aSetter.setTower((mouseX - (tileSize/2)),(mouseY - (tileSize/2)), selectedTowerIndex);
@@ -307,7 +320,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
             }
             spawnerCounter++;
             Random rand = new Random();
-            if (spawnerCounter > rand.nextInt(15)+5) {
+            if (spawnerCounter > rand.nextInt(25)+10) {
                 aSetter.waveSpawner(waveNum);
                 spawnerCounter = 0;
                 if(keyH.spacePressed){

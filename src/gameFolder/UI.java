@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class UI {
@@ -15,7 +16,9 @@ public class UI {
     Graphics2D g2;
     public Font cartoon, alagard;
     BufferedImage titleImage1,titleImage2,titleImage3,titleImage4,titleImage5,titleImage6,titleImage7,titleImage8,titleImage9;
+    BufferedImage neutralElement, waterElement, fireElement, iceElement, earthElement, airElement;
     public boolean messageOn = false;
+    public boolean drawElm = false;
     int titleCounter;
 
     ArrayList<String> message = new ArrayList<>();
@@ -25,8 +28,6 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int commandNum = 0;
-    public int slotCol;
-    public int slotRow;
 
     Color infoTextColor = new Color(217, 217, 217);
     int infoX, infoY;
@@ -35,6 +36,7 @@ public class UI {
         this.gp = gp;
 
         getTitleImages();
+        getElementImages();
 
         try{
             InputStream is = getClass().getResourceAsStream("/resources/fonts/SweetCherryFree.otf");
@@ -62,6 +64,16 @@ public class UI {
 //        messageCounter.add(0);
 //    }
 
+    void getElementImages(){
+        neutralElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
+        waterElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
+        fireElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
+        earthElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
+        iceElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
+        airElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
+
+    }
+
     public void addDamageMessage(String text, int x, int y){
         Message tempMessage = new Message(text, x, y);
         damageMessages.add(tempMessage);
@@ -83,9 +95,14 @@ public class UI {
         if(gp.gameState == gp.playState){
             drawUserInfo();
             drawTowerImages();
+            updateDamageMessages();
             if(gp.showDamage){
                 drawDamageMessage();
             }
+            if(drawElm){
+                drawElements();
+            }
+
         }
         if(gp.gameState == gp.pauseState){
             drawPauseScreen();
@@ -188,6 +205,8 @@ public class UI {
 
         if(gp.interactTowerIndex<gp.tower.length){
 
+            //asdasdas
+
             g2.setColor(new Color(100, 53, 25,52));
             g2.fillRoundRect((int) (gp.tileSize * 12.25)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
             g2.fillRoundRect((int) (gp.tileSize * 14.5)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
@@ -261,6 +280,37 @@ public class UI {
 
     }
 
+    void drawElements(){
+        int x1 = gp.elementButton1.getX();
+        int y1 = gp.elementButton1.getY();
+        int x2 = gp.elementButton2.getX();
+        int y2 = gp.elementButton2.getY();
+        int x3 = gp.elementButton3.getX();
+        int y3 = gp.elementButton3.getY();
+        if (Objects.equals(gp.tower[gp.interactTowerIndex].name, "PlainTower")){
+            g2.drawImage(neutralElement,x1,y1,null);
+            g2.drawImage(earthElement,x1,y1,null);
+            g2.drawImage(airElement,x1,y1,null);
+        }
+
+    }
+
+    public void updateDamageMessages(){
+        for (int i = 0; i < damageMessages.size(); i ++) {
+            if (damageMessages.get(i) != null){
+
+                int counter = messageCounter.get(i) +1;
+
+                messageCounter.set(i,counter);
+
+                if(messageCounter.get(i) > 45){
+                    damageMessages.remove(i);
+                    messageCounter.remove(i);
+                }
+            }
+        }
+    }
+
     public void drawDamageMessage(){
 
         int messageX;
@@ -279,18 +329,18 @@ public class UI {
                 g2.setColor(Color.RED);
                 g2.drawString(damageMessages.get(i).text,messageX,messageY);
 
-                int counter = messageCounter.get(i) +1;
+                //int counter = messageCounter.get(i) +1;
                 int messageOffset = messageY - 1;
 
                 Message tempMessage = new Message(text, messageX, messageOffset);
                 damageMessages.set(i,tempMessage);
 
-                messageCounter.set(i,counter);
+               // messageCounter.set(i,counter);
 
-                if(messageCounter.get(i) > 45){
-                    damageMessages.remove(i);
-                    messageCounter.remove(i);
-                }
+//                if(messageCounter.get(i) > 45){
+//                    damageMessages.remove(i);
+//                    messageCounter.remove(i);
+//                }
             }
         }
     }

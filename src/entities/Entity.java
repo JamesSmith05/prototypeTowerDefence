@@ -13,8 +13,7 @@ public class Entity {
     GamePanel gp;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public BufferedImage fup1,fup2,fdown1,fdown2,fleft1,fleft2,fright1,fright2;
-    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
-    public BufferedImage image, image2, image3;
+    public BufferedImage image;
     public Rectangle solidArea = new Rectangle(0, 0, 0,0);
     public Rectangle solidAreaDirectionChanger = new Rectangle(0, 0, 6, 6);    // change around for different tile sizes
     public int solidAreaDefaultX, solidAreaDefaultY;
@@ -42,7 +41,7 @@ public class Entity {
     public int dyingCounter = 0;
     public int hpBarCounter = 0;
 
-    //CHARACTER STATS
+    //ENTITY STATS
     public String name;
     public int speed = 0;
     public int originalSpeed = 0;
@@ -54,6 +53,8 @@ public class Entity {
     public int nextLevelExp;
     public int coin;
     public Projectile projectile, projectile2,projectile3,projectile4,projectile5,projectile6,projectile7,projectile8;
+    public int elementID;
+    public int monsterRank;
 
     public boolean upgrade1A, upgrade1B, upgrade1C, upgrade2A, upgrade2B, upgrade2C;
 
@@ -246,7 +247,7 @@ public class Entity {
         }
 
         //Monster HP BAR
-        if ((type == type_monster && hpBarOn) || (type == type_smallBoss && hpBarOn) || (type == type_largeBoss && hpBarOn)) {
+        if (hpBarOn && (type == type_monster  || type == type_smallBoss || type == type_largeBoss)) {
             double oneScale;
             int width;
             if (type == type_smallBoss){

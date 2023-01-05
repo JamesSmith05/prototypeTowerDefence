@@ -131,7 +131,7 @@ public class DBaccess{
 
         String sqlQuery = "SELECT * from Tower";
 
-        int towerID, xCoord,yCoord,elementID;
+        int towerID, xCoord,yCoord,elementID,towerWorth;
         boolean u1A,u1B,u1C,u2A,u2B,u2C;
         String towerName;
         try {
@@ -150,8 +150,9 @@ public class DBaccess{
                     u2A = rs.getBoolean("upgrade2A");
                     u2B = rs.getBoolean("upgrade2B");
                     u2C = rs.getBoolean("upgrade2C");
+                    towerWorth = rs.getInt("towerWorth");
                     System.out.println("Setting tower");
-                    gp.aSetter.loadTowerFromSave(xCoord,yCoord,towerName,elementID,u1A,u1B,u1C,u2A,u2B,u2C);
+                    gp.aSetter.loadTowerFromSave(xCoord,yCoord,towerName,elementID,u1A,u1B,u1C,u2A,u2B,u2C,towerWorth);
                 }
             }
             stmt.close();
@@ -225,9 +226,9 @@ public class DBaccess{
 
         for (int i = 0; i < gp.tower.length; i++) {
             if (gp.tower[i] != null){
-                sqlQuery = String.format("INSERT INTO Tower (TowerName, xCoord, yCoord, ElementID, Upgrade1A, Upgrade1B, Upgrade1C, Upgrade2A, Upgrade2B, Upgrade2C) " +
-                                "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", gp.tower[i].name,gp.tower[i].worldX,gp.tower[i].worldY,1
-                        , gp.tower[i].upgrade1A, gp.tower[i].upgrade1B, gp.tower[i].upgrade1C, gp.tower[i].upgrade2A, gp.tower[i].upgrade2B, gp.tower[i].upgrade2C);
+                sqlQuery = String.format("INSERT INTO Tower (TowerName, xCoord, yCoord, ElementID, Upgrade1A, Upgrade1B, Upgrade1C, Upgrade2A, Upgrade2B, Upgrade2C, TowerWorth) " +
+                                "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", gp.tower[i].name,gp.tower[i].worldX,gp.tower[i].worldY,1
+                        , gp.tower[i].upgrade1A, gp.tower[i].upgrade1B, gp.tower[i].upgrade1C, gp.tower[i].upgrade2A, gp.tower[i].upgrade2B, gp.tower[i].upgrade2C, gp.tower[i].towerWorth);
                 generatedTowerKey = executeUpdateSqlReturnKey(sqlQuery);
 
                 sqlQuery = String.format("INSERT INTO GameTowerRelation (GameID, TowerID) VALUES ('%s','%s')",gp.loadedGameID,generatedTowerKey);
@@ -249,9 +250,9 @@ public class DBaccess{
 
         for (int i = 0; i < gp.tower.length; i++) {
             if (gp.tower[i] != null){
-                sqlQuery = String.format("INSERT INTO Tower (TowerName, xCoord, yCoord, ElementID, Upgrade1A, Upgrade1B, Upgrade1C, Upgrade2A, Upgrade2B, Upgrade2C) " +
-                        "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", gp.tower[i].name,gp.tower[i].worldX,gp.tower[i].worldY,1
-                        , gp.tower[i].upgrade1A, gp.tower[i].upgrade1B, gp.tower[i].upgrade1C, gp.tower[i].upgrade2A, gp.tower[i].upgrade2B, gp.tower[i].upgrade2C);
+                sqlQuery = String.format("INSERT INTO Tower (TowerName, xCoord, yCoord, ElementID, Upgrade1A, Upgrade1B, Upgrade1C, Upgrade2A, Upgrade2B, Upgrade2C, TowerWorth) " +
+                        "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", gp.tower[i].name,gp.tower[i].worldX,gp.tower[i].worldY,1
+                        , gp.tower[i].upgrade1A, gp.tower[i].upgrade1B, gp.tower[i].upgrade1C, gp.tower[i].upgrade2A, gp.tower[i].upgrade2B, gp.tower[i].upgrade2C, gp.tower[i].towerWorth);
                 generatedTowerKey = executeUpdateSqlReturnKey(sqlQuery);
 
                 sqlQuery = String.format("INSERT INTO GameTowerRelation (GameID, TowerID) VALUES ('%s','%s')",generatedGameKey,generatedTowerKey);
@@ -264,29 +265,6 @@ public class DBaccess{
 
     }
 
-
-//    private String getTopPlayers (int topCount, String dbColumnName){
-//        String sqlQuery = String.format("SELECT TOP %s %s, Username FROM Users WHERE %s > 0 ORDER BY %s DESC", topCount, dbColumnName, dbColumnName, dbColumnName);
-//
-//        String topScores = "";
-//
-//        try {
-//            Statement stmt = getSqlStatement();
-//            ResultSet rs = stmt.executeQuery(sqlQuery);
-//
-//            while (rs.next()) { // for each top scorer
-//                topScores = topScores + rs.getInt(dbColumnName)+ " - " + rs.getString("Username") + "\n";
-//            }
-//
-//            stmt.close();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return topScores;
-//    } // either HighestScore OR HighestRally
-//
     public boolean createUser(String username, String password) {
 
         String passwordHashValue = StringHasher.getHashValue(password);
@@ -318,22 +296,4 @@ public class DBaccess{
 
         return isValidUser;
     }
-//
-//    public void updateHighScore (String username, int lastScore) {
-//        String sqlQuery = String.format("UPDATE Users SET HighestScore = %s WHERE Username = '%s' AND HighestScore < %s", lastScore, username, lastScore);
-//        executeUpdateSql(sqlQuery);
-//    }
-//
-//    public String getTopScores(int topCount){
-//        return getTopPlayers(topCount, "HighestScore");
-//    }
-//
-//    public void updateHighestRally (String username, int lastRally) {
-//        String sqlQuery = String.format("UPDATE Users SET HighestRally = %s WHERE Username = '%s' AND HighestRally < %s", lastRally, username, lastRally);
-//        executeUpdateSql(sqlQuery);
-//    }
-//
-//    public String getTopRallies(int topCount){
-//        return getTopPlayers(topCount, "HighestRally");
-//    }
 }

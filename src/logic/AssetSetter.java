@@ -10,6 +10,7 @@ import towers.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class AssetSetter {
 
@@ -27,7 +28,7 @@ public class AssetSetter {
         resetTowerCounter();
     }
 
-    public void loadTowerFromSave(int x,int y,String towerName, int elementID,boolean a,boolean b,boolean c,boolean d,boolean e,boolean f){
+    public void loadTowerFromSave(int x,int y,String towerName, int elementID,boolean a,boolean b,boolean c,boolean d,boolean e,boolean f,int towerWorth){
         if(towerName.equals("FlameTower")){
             gp.tower[j] = new FlameTower(gp);
         }else if(towerName.equals("BombTower")){
@@ -51,6 +52,7 @@ public class AssetSetter {
         gp.tower[j].upgrade2A = d;
         gp.tower[j].upgrade2B = e;
         gp.tower[j].upgrade2C = f;
+        gp.tower[j].towerWorth = towerWorth;
         j++;
     }
 
@@ -87,10 +89,8 @@ public class AssetSetter {
     }
 
     public void setEnemy(int waveNum){
-        if(enemyId == 0){
-            gp.monster[enemyId] = new MON_GreenSlime(gp);
-        }
-        else if (enemyId % 9 == 0 || enemyId % 14 == 0){
+        Random rand = new Random();
+        if (enemyId % 9 == 0 || enemyId % 14 == 0){
             gp.monster[enemyId] = new MON_Wraith(gp);
         }
         else if (enemyId % 16 ==0){

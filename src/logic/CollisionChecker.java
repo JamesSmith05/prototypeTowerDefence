@@ -13,33 +13,6 @@ public class CollisionChecker {
         this.gp = gp;
     }
 
-//    public boolean checkTile(Entity entity) {
-//
-//        int entityLeftWorldX = entity.worldX + entity.solidArea.x;
-//        int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
-//        int entityTopWorldY = entity.worldY + entity.solidArea.y;
-//        int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height;
-//
-//        int entityLeftCol = entityLeftWorldX / gp.tileSize;
-//        int entityRightCol = entityRightWorldX / gp.tileSize;
-//        int entityTopRow = entityTopWorldY / gp.tileSize;
-//        int entityBottomRow = entityBottomWorldY / gp.tileSize;
-//
-//        Boolean collision = false;
-//
-//        int tileNum1, tileNum2, tileNum3, tileNum4;
-//
-//                tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-//                tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-//                tileNum3 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-//                tileNum4 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-//                if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision || gp.tileM.tile[tileNum3].collision || gp.tileM.tile[tileNum4].collision) {
-//                    collision = true;
-//                }
-//                return collision;
-//
-//        }
-
     public void checkTileForEnemy(Entity entity) {
 
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;
