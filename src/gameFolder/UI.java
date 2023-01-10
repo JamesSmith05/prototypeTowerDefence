@@ -116,8 +116,6 @@ public class UI {
         if(gp.gameState == gp.infoState){
             drawInfoScreen();
         }
-
-
     }
 
     public void drawInfoScreen(){
@@ -165,6 +163,17 @@ public class UI {
 
     public void drawUserInfo(){
 
+        int x1 = gp.elementButton1.getX();
+        int y1 = gp.elementButton1.getY();
+        int x2 = gp.elementButton2.getX();
+        int y2 = gp.elementButton2.getY();
+        int x3 = gp.elementButton3.getX();
+        int y3 = gp.elementButton3.getY();
+        g2.drawImage(neutralElement,x1,y1,null);
+        g2.drawImage(earthElement,x2,y2,null);
+        g2.drawImage(airElement,x3,y3,null);
+
+
         if (!gp.aSetter.waveLock){
             drawSaveButton();
         }
@@ -204,8 +213,6 @@ public class UI {
 
 
         if(gp.interactTowerIndex<gp.tower.length){
-
-            //asdasdas
 
             g2.setColor(new Color(100, 53, 25,52));
             g2.fillRoundRect((int) (gp.tileSize * 12.25)+5, 5,gp.tileSize*2 -10,gp.tileSize-10,25,25);
@@ -289,8 +296,8 @@ public class UI {
         int y3 = gp.elementButton3.getY();
         if (Objects.equals(gp.tower[gp.interactTowerIndex].name, "PlainTower")){
             g2.drawImage(neutralElement,x1,y1,null);
-            g2.drawImage(earthElement,x1,y1,null);
-            g2.drawImage(airElement,x1,y1,null);
+            g2.drawImage(earthElement,x2,y2,null);
+            g2.drawImage(airElement,x3,y3,null);
         }
 
     }
@@ -304,6 +311,7 @@ public class UI {
                 messageCounter.set(i,counter);
 
                 if(messageCounter.get(i) > 45){
+
                     damageMessages.remove(i);
                     messageCounter.remove(i);
                 }

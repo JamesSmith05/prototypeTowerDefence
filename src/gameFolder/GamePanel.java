@@ -159,20 +159,48 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.add(upgradeButton2);
         this.add(deleteButton);
         this.add(targetingButton);
+        updateTowerElements();
+        this.add(elementButton1);
+        this.add(elementButton2);
+        this.add(elementButton3);
     }
 
-    public void displayTowerElements(){
+    public void updateTowerElements(){
         int updateX = tower[interactTowerIndex].worldX + tileSize/4;
-        int updateY = tower[interactTowerIndex].worldY - tileSize;
+        int updateY = tower[interactTowerIndex].worldY - 3*tileSize/4;
         elementButton1.updateLocation(updateX, updateY);
-
+        updateY += tileSize/8;
+        if(tower[interactTowerIndex].worldX < (3*tileSize/4)){
+            updateX += 3*tileSize/4;
+            elementButton2.updateLocation(updateX, updateY);
+            updateX += tileSize/8;
+            updateY += 3*tileSize/4;
+            elementButton3.updateLocation(updateX, updateY);
+        }
+        else if(tower[interactTowerIndex].worldX > (screenWidth - 4.5*tileSize)){
+            updateX -= 3*tileSize/4;
+            elementButton2.updateLocation(updateX, updateY);
+            updateX -= tileSize/8;
+            updateY += 3*tileSize/4;
+            elementButton3.updateLocation(updateX, updateY);
+        }else{
+            updateX += 3*tileSize/4;
+            updateY += tileSize/8;
+            elementButton2.updateLocation(updateX, updateY);
+            updateX -= 6*tileSize/4;
+            elementButton3.updateLocation(updateX, updateY);
+        }
 
     }
+
     public void removeTowerButtons() {
         this.remove(upgradeButton1);
         this.remove(upgradeButton2);
         this.remove(deleteButton);
         this.remove(targetingButton);
+        //this.remove(elementButton1);
+        //this.remove(elementButton2);
+        //this.remove(elementButton3);
     }
 
     public void addSelectTowers(){
@@ -439,7 +467,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3F));
                 g2.drawImage(towerOptions[selectedTowerIndex].image, (mouseX - (tileSize/2)), (mouseY - (tileSize/2)),null);
             }
-            frame.repaint();
+            //frame.repaint();  // fixed the problem not having this caused
         }
         g2.dispose();
 
@@ -536,6 +564,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 userCurrency += tower[interactTowerIndex].towerWorth/2;
                 tower[interactTowerIndex] = null;
                 interactTowerIndex = 1000;
+                removeTowerButtons();
+                ui.drawElm = false;
             }
         }
         if(e.getSource() == towerSelect1){
@@ -582,6 +612,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 dba.saveNewGame(username, this);
             }
         }
+        if(e.getSource() == elementButton1){    // button dont work
+            System.out.println("ball");    // button dont work
+        }    // button dont work
     }
 
     public void removeInfoButton(){

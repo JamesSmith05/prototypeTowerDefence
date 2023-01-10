@@ -11,7 +11,9 @@ public class ButtonTemplate extends JButton {
         this.setFont(new Font("Comic Sans", Font.BOLD, 20));
         this.setText(text);
         this.setFocusable(false); // removes focus box around text
-        this.setBorder(BorderFactory.createEtchedBorder()); // adds border around box
+        this.setOpaque(false);  // crucial, otherwise buttons appear when hovered over
+        this.setContentAreaFilled(false);
+        this.setBorderPainted(false);
 
     }
 
