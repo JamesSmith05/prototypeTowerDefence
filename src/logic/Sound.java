@@ -37,7 +37,12 @@ public class Sound {
     }
     public void play(){
 
-        clip.start();
+        try {
+            clip.start();
+        } catch (Exception e) {
+
+        }
+
 
     }
     public void loop(){

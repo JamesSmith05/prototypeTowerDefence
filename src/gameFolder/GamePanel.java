@@ -151,6 +151,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         infoButton.addActionListener(this);
         saveButton.addActionListener(this);
         hitMarkerButton.addActionListener(this);
+        elementButton1.addActionListener(this);
+        elementButton2.addActionListener(this);
+        elementButton3.addActionListener(this);
 
     }
 
@@ -612,9 +615,15 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
                 dba.saveNewGame(username, this);
             }
         }
-        if(e.getSource() == elementButton1){    // button dont work
-            System.out.println("ball");    // button dont work
-        }    // button dont work
+        if(e.getSource() == elementButton1){
+            System.out.println("ball");
+        }
+        if(e.getSource() == elementButton2){
+            System.out.println("ball");
+        }
+        if(e.getSource() == elementButton3){
+            System.out.println("ball");
+        }
     }
 
     public void removeInfoButton(){

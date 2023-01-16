@@ -163,17 +163,6 @@ public class UI {
 
     public void drawUserInfo(){
 
-        int x1 = gp.elementButton1.getX();
-        int y1 = gp.elementButton1.getY();
-        int x2 = gp.elementButton2.getX();
-        int y2 = gp.elementButton2.getY();
-        int x3 = gp.elementButton3.getX();
-        int y3 = gp.elementButton3.getY();
-        g2.drawImage(neutralElement,x1,y1,null);
-        g2.drawImage(earthElement,x2,y2,null);
-        g2.drawImage(airElement,x3,y3,null);
-
-
         if (!gp.aSetter.waveLock){
             drawSaveButton();
         }
