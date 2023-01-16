@@ -65,12 +65,12 @@ public class UI {
 //    }
 
     void getElementImages(){
-        neutralElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
-        waterElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
-        fireElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
-        earthElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
-        iceElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
-        airElement = setup("elements/defaultBox",gp.tileSize/2,gp.tileSize/2);
+        neutralElement = setup("elements/neutral",gp.tileSize/2,gp.tileSize/2);
+        waterElement = setup("elements/water",gp.tileSize/2,gp.tileSize/2);
+        fireElement = setup("elements/fire",gp.tileSize/2,gp.tileSize/2);
+        earthElement = setup("elements/earth",gp.tileSize/2,gp.tileSize/2);
+        iceElement = setup("elements/ice",gp.tileSize/2,gp.tileSize/2);
+        airElement = setup("elements/air",gp.tileSize/2,gp.tileSize/2);
 
     }
 
