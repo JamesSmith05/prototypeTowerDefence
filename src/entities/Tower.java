@@ -12,6 +12,9 @@ public class Tower extends Entity {
     int savedMonsterIndex;
     double selectedMonsterDistanceX, selectedMonsterDistanceY, selectedMonsterDistance;
 
+    public int elementA, elementB, elementC;
+
+
     public Tower(GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -19,6 +22,23 @@ public class Tower extends Entity {
         solidArea = new Rectangle(0, 0, gp.tileSize, gp.tileSize);
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+    }
+
+    public boolean changeElement(int newElement){
+        if(newElement == 1){
+            newElement = elementA;
+        } else if(newElement == 2){
+            newElement = elementB;
+        } else if(newElement == 3){
+            newElement = elementC;
+        }
+        if(elementID == newElement){
+            return false;
+        }
+        else{
+            elementID = newElement;
+            return true;
+        }
     }
 
     public void update() {
@@ -72,36 +92,36 @@ public class Tower extends Entity {
     void createProjectiles(double distanceX, double distanceY){
 
         if(!projectile.alive){
-            projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            projectile.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex, elementID);
             gp.projectileList.add(projectile);
         }
         else if(!projectile2.alive){
-            projectile2.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            projectile2.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex, elementID);
             gp.projectileList.add(projectile2);
         }
         else if(!projectile3.alive){
-            projectile3.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            projectile3.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex, elementID);
             gp.projectileList.add(projectile3);
         }
         else if(!projectile4.alive){
-            projectile4.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            projectile4.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex, elementID);
             gp.projectileList.add(projectile4);
         }
         else if(!projectile5.alive){
-            projectile5.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            projectile5.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex, elementID);
             gp.projectileList.add(projectile5);
         }
         else if(!projectile6.alive){
-            projectile6.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            projectile6.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex, elementID);
             gp.projectileList.add(projectile6);
         }
         else if(!projectile7.alive){
-            projectile7.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            projectile7.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex, elementID);
             gp.projectileList.add(projectile7);
 
         }
         else if(!projectile8.alive){
-            projectile8.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex);
+            projectile8.set(bulletSpeed,attack,worldX,worldY,distanceX,distanceY,true,this,savedMonsterIndex, elementID);
             gp.projectileList.add(projectile8);
         }
 
@@ -118,7 +138,7 @@ public class Tower extends Entity {
 
     public void returnClosestEnemy(){
         int i = 0;
-        double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
+        double monsterDistanceX, monsterDistanceY, monsterDistanceABS;
         selectedMonsterDistance = 1000;
         savedMonsterIndex = 0;
         while (i < gp.monster.length){
@@ -139,7 +159,7 @@ public class Tower extends Entity {
 
     public void returnStrongestEnemy(){
         int i = 0;
-        double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
+        double monsterDistanceX, monsterDistanceY, monsterDistanceABS;
         int largestMonsterHealth = 0;
         selectedMonsterDistance = 1000;
         savedMonsterIndex = 0;
@@ -162,7 +182,7 @@ public class Tower extends Entity {
 
     public void returnFirstEnemy(){
         int i = 0;
-        double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
+        double monsterDistanceX, monsterDistanceY, monsterDistanceABS;
         int enemyPositionInWave;
         int selectedMonsterPosition = 0;
         selectedMonsterDistance = 1000;
@@ -187,7 +207,7 @@ public class Tower extends Entity {
 
     public void returnLastEnemy(){
         int i = 0;
-        double monsterDistanceX, monsterDistanceY, monsterDistanceABS = 1000;
+        double monsterDistanceX, monsterDistanceY, monsterDistanceABS;
         int enemyPositionInWave;
         int selectedMonsterPosition = 100000;
         selectedMonsterDistance = 1000;

@@ -12,11 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
-
-//import entities.entities.Entity;
-
 
 
 public class GamePanel extends JPanel implements Runnable, ActionListener {
@@ -82,7 +80,6 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     public Entity[] tower = new Entity[100];
     public Entity[] towerOptions = new Entity[10];
     public Entity[] obj = new Entity[50];  //increase number to increase max number of object on screen
-    public Entity[] buttons = new Entity[3];
     public Entity[] npc = new Entity[10];
     public Entity[] monster = new Entity[150];
     ArrayList<Entity> entityList = new ArrayList<>();
@@ -201,9 +198,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         this.remove(upgradeButton2);
         this.remove(deleteButton);
         this.remove(targetingButton);
-        //this.remove(elementButton1);
-        //this.remove(elementButton2);
-        //this.remove(elementButton3);
+        this.remove(elementButton1);
+        this.remove(elementButton2);
+        this.remove(elementButton3);
     }
 
     public void addSelectTowers(){
@@ -238,18 +235,12 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     }
 
     public void resetEntities(){
-        for (int i = 0; i < tower.length; i++) {
-            tower[i] = null;
-        }
-        for (int i = 0; i < monster.length; i++) {
-            monster[i] = null;
-        }
-        for (int i = 0; i < obj.length; i++) {
-            obj[i] = null;
-        }
+        Arrays.fill(tower, null);
+        Arrays.fill(monster, null);
+        Arrays.fill(obj, null);
 
-        for (int i = 0; i < projectileList.size(); i++) {
-            projectileList.remove(0);
+        if (projectileList.size() > 0) {
+            projectileList.subList(0, projectileList.size()).clear();
         }
     }
 
@@ -278,7 +269,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
             lastTime = currentTime;
 
             if(delta>=1) {
-                // update information eg positions
+                // update information e.g. positions
                 update();
                 // draw the screen with updated information
                 repaint();
@@ -616,13 +607,25 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
             }
         }
         if(e.getSource() == elementButton1){
-            System.out.println("ball");
+            if(userCurrency>=10){
+                if(tower[interactTowerIndex].changeElement(1)){
+                    userCurrency -=10;
+                }
+            }
         }
         if(e.getSource() == elementButton2){
-            System.out.println("ball");
+            if(userCurrency>=10){
+                if(tower[interactTowerIndex].changeElement(2)){
+                    userCurrency -=10;
+                }
+            }
         }
         if(e.getSource() == elementButton3){
-            System.out.println("ball");
+            if(userCurrency>=10){
+                if(tower[interactTowerIndex].changeElement(3)){
+                    userCurrency -=10;
+                }
+            }
         }
     }
 

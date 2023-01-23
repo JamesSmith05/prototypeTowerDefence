@@ -17,7 +17,7 @@ public class Projectile extends Entity{
         super(gp);
     }
 
-    public void set(int speed,int attack, int worldX, int worldY, double distanceX, double distanceY, boolean alive, Entity user, int targetIndex){
+    public void set(int speed,int attack, int worldX, int worldY, double distanceX, double distanceY, boolean alive, Entity user, int targetIndex,int elementID){
 
         this.worldX = worldX;
         this.worldY = worldY;
@@ -29,6 +29,7 @@ public class Projectile extends Entity{
         this.speed = speed;
         this.attack = attack;
         this.targetIndex = targetIndex;
+        this.elementID = elementID;
 
         solidArea = new Rectangle(gp.tileSize/4, gp.tileSize/4, gp.tileSize/2, gp.tileSize/2);
 

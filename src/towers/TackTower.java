@@ -49,36 +49,36 @@ public class TackTower extends Tower {
 
     public void setAction() {
         if(!projectile.alive) {
-            projectile.set((int) Math.sqrt((bulletSpeed*bulletSpeed)*2),attack,worldX,worldY,-100,-100,true,this,0);
+            projectile.set((int) Math.sqrt((bulletSpeed*bulletSpeed)*2),attack,worldX,worldY,-100,-100,true,this,0,elementID);
 
             gp.projectileList.add(projectile);
         }
         if(!projectile2.alive) {
-            projectile2.set(bulletSpeed,attack,worldX,worldY,-100,0,true,this,0);
+            projectile2.set(bulletSpeed,attack,worldX,worldY,-100,0,true,this,0,elementID);
             gp.projectileList.add(projectile2);
         }
         if(!projectile3.alive) {
-            projectile3.set((int) Math.sqrt((bulletSpeed*bulletSpeed)*2),attack,worldX,worldY,-100,100,true,this,0);
+            projectile3.set((int) Math.sqrt((bulletSpeed*bulletSpeed)*2),attack,worldX,worldY,-100,100,true,this,0,elementID);
             gp.projectileList.add(projectile3);
         }
         if(!projectile4.alive) {
-            projectile4.set(bulletSpeed,attack,worldX,worldY,0,-100,true,this,0);
+            projectile4.set(bulletSpeed,attack,worldX,worldY,0,-100,true,this,0,elementID);
             gp.projectileList.add(projectile4);
         }
         if(!projectile5.alive) {
-            projectile5.set(bulletSpeed,attack,worldX,worldY,0,100,true,this,0);
+            projectile5.set(bulletSpeed,attack,worldX,worldY,0,100,true,this,0,elementID);
             gp.projectileList.add(projectile5);
         }
         if(!projectile6.alive) {
-            projectile6.set((int) Math.sqrt((bulletSpeed*bulletSpeed)*2),attack,worldX,worldY,100,-100,true,this,0);
+            projectile6.set((int) Math.sqrt((bulletSpeed*bulletSpeed)*2),attack,worldX,worldY,100,-100,true,this,0,elementID);
             gp.projectileList.add(projectile6);
         }
         if(!projectile7.alive) {
-            projectile7.set(bulletSpeed,attack,worldX,worldY,100,0,true,this,0);
+            projectile7.set(bulletSpeed,attack,worldX,worldY,100,0,true,this,0,elementID);
             gp.projectileList.add(projectile7);
         }
         if(!projectile8.alive) {
-            projectile8.set((int) Math.sqrt((bulletSpeed*bulletSpeed)*2),attack,worldX,worldY,100,100,true,this,0);
+            projectile8.set((int) Math.sqrt((bulletSpeed*bulletSpeed)*2),attack,worldX,worldY,100,100,true,this,0,elementID);
             gp.projectileList.add(projectile8);
         }
     }

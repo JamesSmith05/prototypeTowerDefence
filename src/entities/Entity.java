@@ -53,7 +53,7 @@ public class Entity {
     public int nextLevelExp;
     public int coin;
     public Projectile projectile, projectile2,projectile3,projectile4,projectile5,projectile6,projectile7,projectile8;
-    public int elementID;
+    public int elementID = 1;
     public int monsterRank;
 
     public boolean upgrade1A, upgrade1B, upgrade1C, upgrade2A, upgrade2B, upgrade2C;
@@ -116,6 +116,8 @@ public class Entity {
     public void use(Entity entity){}
 
     public void getImage(){}
+
+    public boolean changeElement(int newElement){return false;}
 
     public void checkEnemyCollision(){
         collisionOn = false;
