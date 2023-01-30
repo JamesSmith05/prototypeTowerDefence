@@ -12,9 +12,6 @@ public class Tower extends Entity {
     int savedMonsterIndex;
     double selectedMonsterDistanceX, selectedMonsterDistanceY, selectedMonsterDistance;
 
-    public int elementA, elementB, elementC;
-
-
     public Tower(GamePanel gp) {
         super(gp);
         this.gp = gp;

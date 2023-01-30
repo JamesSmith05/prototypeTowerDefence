@@ -34,6 +34,10 @@ public class BombTower extends Tower {
         upgrade2Aprice = 15;
         upgrade2Bprice = 20;
         upgrade2Cprice = 25;
+
+        elementA = 1;
+        elementB = 5;
+        elementC = 7;
     }
     public void getImage() {
         image = setup("towers/bombTower", gp.tileSize, gp.tileSize);

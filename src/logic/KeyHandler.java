@@ -123,6 +123,7 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_ESCAPE){
             gp.gameState = gp.titleState;
+            gp.ui.commandNum = 0 ;
         }
         if(code == KeyEvent.VK_ENTER){
             gp.gameState = gp.playState;
@@ -144,6 +145,7 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_ESCAPE){
             gp.gameState = gp.titleState;
+            gp.ui.commandNum = 0 ;
         }
     }
     public void playState(int code){

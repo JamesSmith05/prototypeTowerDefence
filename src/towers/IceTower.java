@@ -35,6 +35,10 @@ public class IceTower extends Tower {
         upgrade2Aprice = 15;
         upgrade2Bprice = 20;
         upgrade2Cprice = 25;
+
+        elementA = 1;
+        elementB = 4;
+        elementC = 6;
     }
     public void getImage() {
         image = setup("towers/iceTower", gp.tileSize, gp.tileSize);

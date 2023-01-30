@@ -33,6 +33,10 @@ public class FlameTower extends Tower {
         upgrade2Aprice = 15;
         upgrade2Bprice = 20;
         upgrade2Cprice = 25;
+
+        elementA = 1;
+        elementB = 3;
+        elementC = 5;
     }
     public void getImage() {
         image = setup("towers/flameTower", gp.tileSize, gp.tileSize);

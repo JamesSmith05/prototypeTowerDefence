@@ -34,6 +34,9 @@ public class SniperTower extends Tower {
         upgrade2Bprice = 20;
         upgrade2Cprice = 25;
 
+        elementA = 1;
+        elementB = 5;
+        elementC = 6;
     }
     public void getImage() {
         image = setup("towers/sniperTower", gp.tileSize, gp.tileSize);

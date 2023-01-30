@@ -16,7 +16,7 @@ public class UI {
     Graphics2D g2;
     public Font cartoon, alagard;
     BufferedImage titleImage1,titleImage2,titleImage3,titleImage4,titleImage5,titleImage6,titleImage7,titleImage8,titleImage9;
-    BufferedImage neutralElement, waterElement, fireElement, iceElement, earthElement, airElement;
+    BufferedImage neutralElement, waterElement, fireElement, iceElement, earthElement, airElement, grassElement;
     public boolean messageOn = false;
     public boolean drawElm = false;
     int titleCounter;
@@ -68,8 +68,8 @@ public class UI {
         neutralElement = setup("elements/neutral",gp.tileSize/2,gp.tileSize/2);
         waterElement = setup("elements/water",gp.tileSize/2,gp.tileSize/2);
         fireElement = setup("elements/fire",gp.tileSize/2,gp.tileSize/2);
-        earthElement = setup("elements/earth",gp.tileSize/2,gp.tileSize/2);
         iceElement = setup("elements/ice",gp.tileSize/2,gp.tileSize/2);
+        earthElement = setup("elements/earth",gp.tileSize/2,gp.tileSize/2);
         airElement = setup("elements/air",gp.tileSize/2,gp.tileSize/2);
 
     }
@@ -283,11 +283,79 @@ public class UI {
         int y2 = gp.elementButton2.getY();
         int x3 = gp.elementButton3.getX();
         int y3 = gp.elementButton3.getY();
-        if (Objects.equals(gp.tower[gp.interactTowerIndex].name, "PlainTower")){
-            g2.drawImage(neutralElement,x1,y1,null);
-            g2.drawImage(earthElement,x2,y2,null);
-            g2.drawImage(airElement,x3,y3,null);
+
+        switch (gp.tower[gp.interactTowerIndex].elementA){
+            case 1:
+                g2.drawImage(neutralElement,x1,y1,null);
+                break;
+            case 2:
+                g2.drawImage(waterElement,x1,y1,null);
+                break;
+            case 3:
+                g2.drawImage(fireElement,x1,y1,null);
+                break;
+            case 4:
+                g2.drawImage(iceElement,x1,y1,null);
+                break;
+            case 5:
+                g2.drawImage(earthElement,x1,y1,null);
+                break;
+            case 6:
+                g2.drawImage(airElement,x1,y1,null);
+                break;
+            case 7:
+                g2.drawImage(grassElement,x1,y1,null);
+                break;
         }
+
+        switch (gp.tower[gp.interactTowerIndex].elementB){
+            case 1:
+                g2.drawImage(neutralElement,x2,y2,null);
+                break;
+            case 2:
+                g2.drawImage(waterElement,x2,y2,null);
+                break;
+            case 3:
+                g2.drawImage(fireElement,x2,y2,null);
+                break;
+            case 4:
+                g2.drawImage(iceElement,x2,y2,null);
+                break;
+            case 5:
+                g2.drawImage(earthElement,x2,y2,null);
+                break;
+            case 6:
+                g2.drawImage(airElement,x2,y2,null);
+                break;
+            case 7:
+                g2.drawImage(grassElement,x2,y2,null);
+                break;
+        }
+
+        switch (gp.tower[gp.interactTowerIndex].elementC){
+            case 1:
+                g2.drawImage(neutralElement,x3,y3,null);
+                break;
+            case 2:
+                g2.drawImage(waterElement,x3,y3,null);
+                break;
+            case 3:
+                g2.drawImage(fireElement,x3,y3,null);
+                break;
+            case 4:
+                g2.drawImage(iceElement,x3,y3,null);
+                break;
+            case 5:
+                g2.drawImage(earthElement,x3,y3,null);
+                break;
+            case 6:
+                g2.drawImage(airElement,x3,y3,null);
+                break;
+            case 7:
+                g2.drawImage(grassElement,x3,y3,null);
+                break;
+        }
+
 
     }
 

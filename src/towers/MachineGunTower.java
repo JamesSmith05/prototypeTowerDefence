@@ -35,6 +35,10 @@ public class MachineGunTower extends Tower {
         upgrade2Aprice = 15;
         upgrade2Bprice = 20;
         upgrade2Cprice = 25;
+
+        elementA = 1;
+        elementB = 5;
+        elementC = 6;
     }
     public void getImage() {
         image = setup("towers/plainTower", gp.tileSize, gp.tileSize);
