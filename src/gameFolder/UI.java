@@ -71,6 +71,7 @@ public class UI {
         iceElement = setup("elements/ice",gp.tileSize/2,gp.tileSize/2);
         earthElement = setup("elements/earth",gp.tileSize/2,gp.tileSize/2);
         airElement = setup("elements/air",gp.tileSize/2,gp.tileSize/2);
+        grassElement = setup("elements/grass",gp.tileSize/2,gp.tileSize/2);
 
     }
 
@@ -652,12 +653,15 @@ public class UI {
             titleCounter=0;
         }
         g2.drawImage(tempImage,0,0 ,null);
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,64F));
+        g2.setFont(cartoon);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,72F));
+        Color myGrey = new Color(44, 42, 42);
+        g2.setColor(myGrey);
 
         String text = "Map1";
         int x = getXForCentreText(text);
         int y = gp.tileSize*5;
-        g2.setColor(Color.WHITE);
+        //g2.setColor(Color.WHITE);
         g2.drawString(text,x,y);
         if (commandNum == 0){
             g2.drawString(">",x-gp.tileSize,y);
