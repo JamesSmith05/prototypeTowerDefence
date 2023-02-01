@@ -16,14 +16,14 @@ public class MON_Wraith extends Entity {
         name = "Wraith";
         elementID = 3;
         monsterRank = 2;
-        originalSpeed = 2;
+        originalSpeed = 3;
         speed = originalSpeed;
-        maxLife = 20;
+        maxLife = 12;
         life = maxLife;
         attack = 1;
         defence = 0;
         exp = 2;
-        coin = 2;
+        coin = 5;
 
         solidArea.x = 4;
         solidArea.y = 24;

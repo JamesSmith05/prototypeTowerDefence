@@ -92,9 +92,6 @@ public class Entity {
     public final int type_smallBoss = 6;
     public final int type_largeBoss = 7;
 
-
-
-
     public Entity(GamePanel gp){
         this.gp = gp;
         solidArea.width = gp.tileSize;
@@ -103,7 +100,6 @@ public class Entity {
         solidAreaDirectionChanger.y = (gp.tileSize/2) - 3;
         solidAreaDefaultDirectionX = solidAreaDirectionChanger.x;
         solidAreaDefaultDirectionY = solidAreaDirectionChanger.y;
-
     }
 
     public void setAction(){}
@@ -125,7 +121,6 @@ public class Entity {
         collisionOn = false;
         gp.cChecker.checkTileForEnemy(this);
     }
-
 
     //update position direction and health of entities that don't overide
     public void update(){
@@ -319,7 +314,7 @@ public class Entity {
                     exp += gp.monster[i].exp;
 
                     Random rand = new Random();
-                    if(rand.nextInt(2)==1) {
+                    if(rand.nextInt(3)<2) {
                         gp.userCurrency += gp.monster[i].coin;
                     }
                 }
@@ -341,7 +336,6 @@ public class Entity {
         if(dyingCounter > i*7 && dyingCounter <= i*8){changeOpacity(g2,1f);}  //CAN BE CHANGED TO AN ANIMATION BY CHANGING IMAGE HERE
         if (dyingCounter > 40){
             alive = false;
-
         }
     }
 
@@ -378,7 +372,6 @@ public class Entity {
                 }
             }
             else if (enTopY > nextY && enLeftX > nextX){
-
                 direction = "up";
                 checkEnemyCollision();
                 if(collisionOn){
@@ -386,7 +379,6 @@ public class Entity {
                 }
             }
             else if(enTopY > nextY && enLeftX < nextX){
-
                 direction = "up";
                 checkEnemyCollision();
                 if(collisionOn){
@@ -394,7 +386,6 @@ public class Entity {
                 }
             }
             else if(enTopY < nextY && enLeftX > nextX){
-
                 direction = "down";
                 checkEnemyCollision();
                 if(collisionOn){
@@ -402,7 +393,6 @@ public class Entity {
                 }
             }
             else if(enTopY < nextY && enLeftX < nextX){
-
                 direction = "down";
                 checkEnemyCollision();
                 if(collisionOn){
