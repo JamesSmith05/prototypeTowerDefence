@@ -1,9 +1,6 @@
 package logic;
 
-import enemies.MON_Bat;
-import enemies.MON_GreenSlime;
-import enemies.MON_PinkSlime;
-import enemies.MON_Wraith;
+import enemies.*;
 import entities.Entity;
 import gameFolder.GamePanel;
 import towers.*;
@@ -88,15 +85,58 @@ public class AssetSetter {
         }
     }
 
+    public void setSpecificEnemy(String name,int x, int y){
+        switch (name){
+            case "Helmet":
+                gp.monster[enemyId] = new MON_Helmet(gp);
+        }
+
+        int waveNum = gp.waveNum;
+
+        if(3 < waveNum && waveNum <=6){
+            gp.monster[enemyId].originalSpeed +=1;
+            gp.monster[enemyId].speed = gp.monster[enemyId].originalSpeed;
+            gp.monster[enemyId].maxLife +=2;
+            gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
+        }
+        else if(6 < waveNum && waveNum <=8){
+            gp.monster[enemyId].originalSpeed +=1;
+            gp.monster[enemyId].speed = gp.monster[enemyId].originalSpeed;
+            gp.monster[enemyId].maxLife +=6;
+            gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
+        }
+        else if(8 < waveNum && waveNum <=10){
+            gp.monster[enemyId].originalSpeed +=2;
+            gp.monster[enemyId].speed = gp.monster[enemyId].originalSpeed;
+            gp.monster[enemyId].maxLife +=12;
+            gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
+        }
+        else if (waveNum > 10){
+            gp.monster[enemyId].originalSpeed +=2;
+            gp.monster[enemyId].speed = gp.monster[enemyId].originalSpeed;
+            gp.monster[enemyId].maxLife += (waveNum*2);
+            gp.monster[enemyId].life = gp.monster[enemyId].maxLife;
+        }
+
+        gp.monster[enemyId].worldX = x;
+        gp.monster[enemyId].worldY = y;
+
+        enemyId++;
+    }
+
     public void setEnemy(int waveNum){
         Random rand = new Random();
-        if (enemyId % 9 == 0 || enemyId % 14 == 0){
+        int temp = rand.nextInt(15);
+        if (temp == 0 || temp == 3){
             gp.monster[enemyId] = new MON_Wraith(gp);
         }
-        else if (enemyId % 16 ==0){
+        else if (temp == 2 || temp == 1 || temp == 4){
             gp.monster[enemyId] = new MON_Bat(gp);
         }
-        else if (enemyId%2 == 0 ){
+        else if (temp == 5){
+            gp.monster[enemyId] = new MON_Undead(gp);
+        }
+        else if (temp > 10 ){
             gp.monster[enemyId] = new MON_PinkSlime(gp);
         }
         else{
@@ -139,8 +179,8 @@ public class AssetSetter {
         if(waveNum == 0){
 
         }
-        if (waveNum > 0 && waveNum <= 3){
-            if(k < waveNum*5+10) {
+        if (waveNum > 0 && waveNum <= 5){
+            if(k < waveNum*2+8) {
                 waveLock = true;
                 if(enemyId >= gp.monster.length){
                     resetMobCounter();
@@ -152,8 +192,8 @@ public class AssetSetter {
                 waveLock = false;
             }
         }
-        if (waveNum > 3 && waveNum <= 6){
-            if(k < waveNum*8) {
+        if (waveNum > 5 && waveNum <= 10){
+            if(k < waveNum*3+8) {
                 waveLock = true;
                 if(enemyId >= gp.monster.length){
                     resetMobCounter();
@@ -165,8 +205,8 @@ public class AssetSetter {
                 waveLock = false;
             }
         }
-        if (waveNum > 6){
-            if(k < waveNum*5+5) {
+        if (waveNum > 10){
+            if(k < waveNum+5) {
                 waveLock = true;
                 if(enemyId >= gp.monster.length){
                     resetMobCounter();

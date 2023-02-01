@@ -23,7 +23,7 @@ public class MON_PinkSlime extends Entity {
         attack = 2;
         defence = 0;
         exp = 4;
-        coin = 1;
+        coin = 2;
 
         solidArea.x = 4;
         solidArea.y = 24;

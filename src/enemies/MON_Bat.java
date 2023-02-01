@@ -23,7 +23,7 @@ public class MON_Bat extends Entity {
         attack = 1;
         defence = 0;
         exp = 2;
-        coin = 2;
+        coin = 3;
 
         solidArea.x = 4;
         solidArea.y = 4;
