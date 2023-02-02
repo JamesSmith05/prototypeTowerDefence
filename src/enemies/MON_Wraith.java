@@ -16,7 +16,7 @@ public class MON_Wraith extends Entity {
         name = "Wraith";
         elementID = 3;
         monsterRank = 2;
-        originalSpeed = 3;
+        originalSpeed = 2;
         speed = originalSpeed;
         maxLife = 12;
         life = maxLife;

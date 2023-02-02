@@ -456,7 +456,7 @@ public class UI {
             tempImage = titleImage7;
         }else if (titleCounter<36){
             tempImage = titleImage8;
-        }if (titleCounter==35){
+        }if (titleCounter==36){
             titleCounter=0;
         }
 
@@ -699,8 +699,13 @@ public class UI {
         g2.setColor(Color.WHITE);
 //        g2.setStroke(new BasicStroke(5));
         for (int i = 1; i < 10; i++) {
-            g2.setColor(new Color(240,190,90));
-            g2.fillRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
+            if(gp.towerOptions[i].buyPrice > gp.userCurrency) {
+                g2.setColor(new Color(95, 90, 77));
+                g2.fillRoundRect(X - offset, Y - offset, gp.tileSize + 2 * offset, gp.tileSize + 2 * offset, 10, 10);
+            }else {
+                g2.setColor(new Color(240,190,90));
+                g2.fillRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
+            }
             g2.drawImage(gp.towerOptions[i].image,X,Y,null);
 
             if(i == gp.selectedTowerIndex){
@@ -723,8 +728,14 @@ public class UI {
             Y += gp.tileSize/2;
         }
 
-        g2.setColor(new Color(240,190,90));
-        g2.fillRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
+        if(gp.towerOptions[0].buyPrice > gp.userCurrency) {
+            g2.setColor(new Color(95, 90, 77));
+            g2.fillRoundRect(X - offset, Y - offset, gp.tileSize + 2 * offset, gp.tileSize + 2 * offset, 10, 10);
+        }else{
+            g2.setColor(new Color(240,190,90));
+            g2.fillRoundRect(X-offset,Y-offset,gp.tileSize+2*offset,gp.tileSize+2*offset,10,10);
+        }
+
         g2.drawImage(gp.towerOptions[0].image,X,Y,null);
 
         if(gp.selectedTowerIndex == 0){

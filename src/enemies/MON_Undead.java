@@ -17,9 +17,9 @@ public class MON_Undead extends Entity {
         name = "Undead";
         elementID = 6;
         monsterRank = 4;
-        originalSpeed = 2;
+        originalSpeed = 1;
         speed = originalSpeed;
-        maxLife = 15;
+        maxLife = 30;
         life = maxLife;
         attack = 5;
         defence = 0;
